@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root _id="0">
+	<spiders _id="3f07e8fb-97e4-11ea-8659-a0510b3d46fd" exec="顺企网">
+<!--		<website _id="3f080e17-97e4-11ea-960d-a0510b3d46fd" webName="1顺企网" start_url="1http://b2b.11467.com/search/-6da47eb6-pn1.htm" allowed_domains="11111467.com" name="11_pySpider"/>-->
+		<website _id="3f080e18-97e4-11ea-8b32-a0510b3d46fd" webName="顺企网" start_url="https://b2b.11467.com/search/-540a88c55e26-pn1.htm" allowed_domains="11467.com">
+			<rules _id="3f080e19-97e4-11ea-943b-a0510b3d46fd">
+				<rule _id="3f080e1a-97e4-11ea-a3ea-a0510b3d46fd" follow="True" allow=".*//b2b\.11467\.com/search/-540a88c55e26-pn[\d+]+\.htm"/>
+				<rule _id="3f080e1b-97e4-11ea-8bee-a0510b3d46fd" follow="False" allow="(.+(www.11467.com)/\w+/)(co/)?\d+(\.htm)$" callback="parse_item"/>
+			</rules>
+			<dataCatch _id="3f080e1c-97e4-11ea-ae6f-a0510b3d46fd" testUrl="https://www.11467.com/jinan/co/159221.htm">
+				<data _id="3f080e1d-97e4-11ea-9f22-a0510b3d46fd" name="公司名" select="#logoco &gt; h1 &gt; span" refererUrl=""/>
+				<data _id="3f080e1e-97e4-11ea-80cc-a0510b3d46fd" name="地址" select="#contact &gt; div &gt; dl &gt; dd:nth-child(2)" refererUrl=""/>
+				<data _id="3f080e1f-97e4-11ea-9e15-a0510b3d46fd" name="固定电话" select="#contact &gt; div &gt; dl &gt; dd:nth-child(4)" refererUrl=""/>
+				<data _id="3f080e20-97e4-11ea-9d23-a0510b3d46fd" name="主营产品" select="#gongshang &gt; div &gt; table &gt;  tr:nth-child(2) &gt; td:nth-child(2)" refererUrl=""/>
+				<data _id="3f080e21-97e4-11ea-8c3b-a0510b3d46fd" name="客户" select="#contact &gt; div &gt; dl &gt; dd:nth-child(6)" refererUrl=""/>
+				<data _id="3f080e22-97e4-11ea-8573-a0510b3d46fd" name="手机号" select="#contact &gt; div &gt; dl &gt; dd:nth-child(8)" refererUrl=""/>
+				<data _id="3f080e23-97e4-11ea-909c-a0510b3d46fd" name="公司网站" select="" refererUrl=""/>
+				<data _id="3f080e24-97e4-11ea-adc8-a0510b3d46fd" name="公司简介" select="" refererUrl=""/>
+				<data _id="3f080e25-97e4-11ea-b005-a0510b3d46fd" name="电子邮箱" select="#contact &gt; div &gt; dl &gt; dd:nth-child(10)" refererUrl=""/>
+				<data _id="3f083488-97e4-11ea-8f75-a0510b3d46fd" name="经营模式" select="#gongshang  tr:nth-child(8) &gt; td:nth-child(2)" refererUrl=""/>
+				<data _id="3f083489-97e4-11ea-a683-a0510b3d46fd" name="企业类型" select="" refererUrl=""/>
+				<data _id="3f08348a-97e4-11ea-823e-a0510b3d46fd" name="城市" select="" refererUrl=""/>
+				<data _id="3f08348b-97e4-11ea-82de-a0510b3d46fd" name="公司规模" select="" refererUrl=""/>
+				<data _id="3f08348c-97e4-11ea-bc79-a0510b3d46fd" name="注册资本" select="#gongshang  tr:nth-child(12) > td:nth-child(2)" refererUrl=""/>
+				<data _id="3f08348c-97e4-11ea-bc78-a0510b3d46fd" name="详细信息" select="#gongshang  .boxcontent .codl" refererUrl=""/>
+				<data _id="3f08348d-97e4-11ea-8ba2-a0510b3d46fd" name="来源网站" select="" refererUrl=""/>
+				<data _id="3f08348e-97e4-11ea-a0ad-a0510b3d46fd" name="记录时间" select="" refererUrl=""/>
+			</dataCatch>
+			<dataSave _id="3f08348f-97e4-11ea-ad9a-a0510b3d46fd">
+				<file _id="3f083490-97e4-11ea-8d28-a0510b3d46fd" path="C:\Users\1234567\Desktop\爬虫文件\顺企网_key=吊装带.csv" encoding="ANSI"/>
+			</dataSave>
+		</website>
+	</spiders>
+</root>
