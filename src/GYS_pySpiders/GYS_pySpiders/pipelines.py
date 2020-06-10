@@ -9,12 +9,14 @@ import time
 import csv
 
 from src.GYS_pySpiders.utils.ConfigUtils_spider import SpidersConfigUitls
+from src.GYS_pySpiders.utils.RR_Comments import PrintTool
 from src.GYS_pySpiders.utils.xmlUtils.configUtils import XmlConfigUtils
 class GysPyspidersPipeline(object):
     def __init__(self):
         print(dir(self))
         x = SpidersConfigUitls()#####此处以后最好修改一下
         file=x.getFile()
+        # PrintTool.print(fileName,fontColor='red')
         self.fileName=file['path']
         self.unicode=file['encoding']
     def open_spider(self, spider):
@@ -45,6 +47,7 @@ class GysPyspidersPipeline(object):
             writer.writeheader()
         self.fp.close()
         # 打开添加的流
+
         self.fp=open(fileName, "a", encoding=unicode,newline="")
     def process_item(self, item, spider):
         writer = csv.DictWriter(self.fp, self.headers)

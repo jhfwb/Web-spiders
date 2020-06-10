@@ -1,6 +1,7 @@
 from scrapy.spiders import Rule
 
 from src.GYS_pySpiders.utils.CommonUtils import CommonUtils
+from src.GYS_pySpiders.utils.RR_Comments import PrintTool
 from src.GYS_pySpiders.utils.xmlUtils.configUtils import XmlConfigUtils
 from scrapy.linkextractors import LinkExtractor
 
@@ -47,4 +48,7 @@ class SpidersConfigUitls:
     def getFile(self):
         file = self.website.getElementsByTagName(
             "dataSave")[0].getElementsByTagName("file")[0]
+
+
+        PrintTool.print(file.getAttribute("path"),fontColor='red')
         return {'path': file.getAttribute("path"), 'encoding': file.getAttribute("encoding")}

@@ -5,6 +5,10 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 import csv
 from scrapy import signals
+
+from src.GYS_pySpiders.utils.RR_Comments import PrintTool
+
+
 class GysPyspidersSpiderMiddleware(object):
     @classmethod
     def from_crawler(cls, crawler):
@@ -36,11 +40,11 @@ class GysPyspidersDownloaderMiddleware(object):
         return s
 
     def process_request(self, request, spider):
-
+        PrintTool.print('我运行了！！！！',fontColor='green')
         if len(self.scrapy_urls) != 0:
             for scrapy_url in self.scrapy_urls:
                 if scrapy_url == request.url:
-                    self.scrapy_urls.remove(scrapy_url)
+                    # self.scrapy_urls.remove(scrapy_url)
                     print("这条爬虫是重复的！！！！！！！！！！！！！！！！")
                     print(len(self.scrapy_urls))
                     return request
