@@ -7,7 +7,7 @@
 import os
 import time
 import csv
-
+import unicodedata
 from src.GYS_pySpiders.utils.ConfigUtils_spider import SpidersConfigUitls
 from src.GYS_pySpiders.utils.RR_Comments import PrintTool
 from src.GYS_pySpiders.utils.xmlUtils.configUtils import XmlConfigUtils
@@ -20,9 +20,11 @@ class GysPyspidersPipeline(object):
         self.fileName=file['path']
         self.unicode=file['encoding']
     def open_spider(self, spider):
+
         print("爬虫"+spider.name+"已经开始，开始时间:"+str(time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())))
         spider.startTime=time.time()
         spider.fileName=self.fileName
+
         spider.unicode = self.unicode
         fileName=self.fileName
         unicode=self.unicode
@@ -42,6 +44,7 @@ class GysPyspidersPipeline(object):
         self.fp = open(fileName, "r", encoding=unicode)
         if self.fp.readline()=="":
             self.fp.close()
+
             self.fp = open(fileName, "w", encoding=unicode,newline="")
             writer = csv.DictWriter(self.fp, self.headers)
             writer.writeheader()
@@ -51,7 +54,14 @@ class GysPyspidersPipeline(object):
         self.fp=open(fileName, "a", encoding=unicode,newline="")
     def process_item(self, item, spider):
         writer = csv.DictWriter(self.fp, self.headers)
-        writer.writerow(item)
+        try:
+            writer.writerow(item)
+        except:
+            for key in item.keys():
+                item[key]=unicodedata.normalize('NFKC', item[key])
+
+            PrintTool.print(item,fontColor='pink')
+            writer.writerow(item)
         self.fp.flush()
     def close_spider(self, spider):
         writer = csv.DictWriter(self.fp, self.headers)

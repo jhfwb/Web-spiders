@@ -1,11 +1,14 @@
 import csv
 #去除掉相同属性的字符串
+import os
+
 from src.GYS_pySpiders.utils.dataReadArr import csvFileTool
 
 if __name__ == '__main__':
      #读取配置文件
-    path="C:/Users/1234567/Desktop/git库存储/Web-spiders/src/GYS_pySpiders/顺企网_key=吊装带.csv"
-    newPath="C:/Users/1234567/Desktop/git库存储/Web-spiders/src/GYS_pySpiders/顺企网_key=吊装带.csv"
+    print(os.getcwd())
+    path="../../../Include/scripyData/顺企网_key=吊装带.csv"
+    newPath="../../../Include/scripyData/顺企网_key=吊装带.csv"
     attr="公司名"
     csvtool=csvFileTool()
     readArr=csvtool.readCsvData_arrDict(path,encoding='ANSI')

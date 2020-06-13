@@ -27,7 +27,7 @@
 				<data _id="3f08348e-97e4-11ea-a0ad-a0510b3d46fd" name="记录时间" select="" refererUrl=""/>
 			</dataCatch>
 			<dataSave _id="3f08348f-97e4-11ea-ad9a-a0510b3d46fd">
-				<file _id="3f083490-97e4-11ea-8d28-a0510b3d46fd" path="Include/scripyData/顺企网_key=吊装带.csv" encoding="ANSI"/>
+				<file _id="3f083490-97e4-11ea-8d28-a0510b3d46fd" path="../../Include/scripyData/顺企网_key=吊装带.csv" encoding="ANSI"/>
 			</dataSave>
 		</website>
 	</spiders>

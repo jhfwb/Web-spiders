@@ -1,3 +1,5 @@
+import os
+
 from scrapy.spiders import Rule
 
 from src.GYS_pySpiders.utils.CommonUtils import CommonUtils

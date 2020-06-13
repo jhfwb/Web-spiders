@@ -1,5 +1,6 @@
 #_*_encoding:utf-8_*_
 import configparser
+import sys
 import uuid
 from xml.dom.minicompat import NodeList
 
@@ -17,10 +18,11 @@ class IniConfigUtils:
         # cf.read("setting.ini", encoding="utf-8")
         # self.功能 = cf.get("4life", "功能")
         pass
+import os
 
 class XmlConfigUtils:
     def __init__(self):
-        self.path= 'C:/Users/1234567/Desktop/python-env/Web-spiders/src/GYS_pySpiders/config.xml'
+        self.path= 'config.xml'
         self.document = parse(self.path)#
         self.configDocument = self.document.documentElement
         self.configDocumentObj=self.loadObjectByTag("root")
