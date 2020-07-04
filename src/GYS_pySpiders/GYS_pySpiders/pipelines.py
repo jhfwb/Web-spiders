@@ -8,19 +8,21 @@ import os
 import time
 import csv
 import unicodedata
+
 from src.GYS_pySpiders.utils.ConfigUtils_spider import SpidersConfigUitls
 from src.GYS_pySpiders.utils.RR_Comments import PrintTool
 from src.GYS_pySpiders.utils.xmlUtils.configUtils import XmlConfigUtils
 class GysPyspidersPipeline(object):
     def __init__(self):
-        print(dir(self))
-        x = SpidersConfigUitls()#####此处以后最好修改一下
-        file=x.getFile()
-        # PrintTool.print(fileName,fontColor='red')
-        self.fileName=file['path']
-        self.unicode=file['encoding']
+        # print("我运行了，但是我只运行一次！！！！！！！！！！！！！！！！！！！！！！！！！")
+        pass
     def open_spider(self, spider):
-
+        # x = Action.configUtils[spider.name]  # 如果只运行一次就不好了
+        x=spider.config
+        file = x.getFile()
+        # PrintTool.print(fileName,fontColor='red')
+        self.fileName = file['path']
+        self.unicode = file['encoding']
         print("爬虫"+spider.name+"已经开始，开始时间:"+str(time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())))
         spider.startTime=time.time()
         spider.fileName=self.fileName

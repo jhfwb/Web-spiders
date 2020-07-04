@@ -11,12 +11,11 @@ from src.GYS_pySpiders.utils.xmlUtils.configUtils import XmlConfigUtils
 
 class GysPyspidersItem(scrapy.Item):
     xconf=SpidersConfigUitls()
+    # Action.configUtils
     datas=xconf.getDataCatch()
     for data in datas:
         exec(data['name']+"=scrapy.Field()")
     _url=scrapy.Field()
-
-
     # 公司名 = scrapy.Field()
     # 地址 = scrapy.Field()
     # 固定电话 = scrapy.Field()

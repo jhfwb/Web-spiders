@@ -6,10 +6,8 @@
 	</variables>
 <!--	http://search.zhaoshang100.com/scp-%E5%90%8A%E8%A3%85%E5%B8%A6/2-->
 	<spiders>
-<!--		当要执行的时候，在exec中添加True。其他任意字符串都不会执行-->
-		<website exec="True" webName="顺企网" start_url="https://b2b.11467.com/search/-9ad85f3a6da47eb6-pn1.htm" allowed_domains="11467.com">
+		<website  webName="顺企网" start_url="https://b2b.11467.com/search/-9ad85f3a6da47eb6-pn1.htm" allowed_domains="11467.com">
 			<rules _id="3f080e19-97e4-11ea-943b-a0510b3d46fd">
-
 				<rule _id="3f080e1a-97e4-11ea-a3ea-a0510b3d46fd" follow="True" allow=".*//b2b\.11467\.com/search/-9ad85f3a6da47eb6-pn[\d+]+\.htm"/>
 				<rule _id="3f080e1b-97e4-11ea-8bee-a0510b3d46fd" follow="False" allow="(.+(www.11467.com)/\w+/)(co/)?\d+(\.htm)$" callback="parse_item"/>
 			</rules>
@@ -33,35 +31,35 @@
 				<data _id="3f08348e-97e4-11ea-a0ad-a0510b3d46fd" name="记录时间" select="" refererUrl=""/>
 			</dataCatch>
 			<dataSave _id="3f08348f-97e4-11ea-ad9a-a0510b3d46fd">
-				<file _id="3f083490-97e4-11ea-8d28-a0510b3d46fd" path="../../Include/scripyData/顺企网test.csv" encoding="ANSI"/>
+				<file _id="3f083490-97e4-11ea-8d28-a0510b3d46fd" path="../../Include/scripyData/顺企网_key=涤纶.csv" encoding="ANSI"/>
 			</dataSave>
 		</website>
-		<website exec="True" webName="招商100" start_url="http://search.zhaoshang100.com/scp-%E5%90%8A%E8%A3%85%E5%B8%A6/1" allowed_domains="zhaoshang100.com">
+		<website  webName="招商100" start_url="http://search.zhaoshang100.com/scp-%E5%90%8A%E8%A3%85%E5%B8%A6/1" allowed_domains="zhaoshang100.com">
 			<rules >
 				<rule  follow="True" allow="http://search.zhaoshang100.com/scp-.*/\d"/>
-				<rule  follow="False" allow="http://www.zhaoshang100.com/p\d+" callback="parse_item"/>
+				<rule  follow="False" allow="http://www.zhaoshang100.com/.*" callback="parse_item"/>
 			</rules>
 			<dataCatch testUrl="https://www.11467.com/jinan/co/159221.htm">
-				<data  name="公司名" select="div.column_box.vip_big > div.column_xx > p > a" refererUrl=""/>
-				<data  name="地址" select="#product-detail > div.fl-clr.mt_10.column_div > div.column_left > div.column_box.vip_big > ul > li:nth-child(5)::text" refererUrl=""/>
-				<data  name="固定电话" select="#product-detail > div.fl-clr.mt_10.column_div > div.column_left > div.column_box.vip_big > ul > li:nth-child(2)::text" refererUrl=""/>
-				<data  name="主营产品" select="#product-detail > div.fl-clr.mt_10.column_div > div.column_left > div.column_box.vip_big > ul > li:nth-child(4)::text" refererUrl=""/>
-				<data  name="客户" select="#product-detail > div.fl-clr.mt_10.column_div > div.column_left > div.column_box.vip_big > ul > li:nth-child(1)::text" refererUrl=""/>
-				<data  name="手机号" select="#product-detail > div.fl-clr.mt_10.column_div > div.column_left > div.column_box.vip_big > ul > li:nth-child(3)::text" refererUrl=""/>
+				<data  name="公司名" select="#logoco &gt; h1 &gt; span" refererUrl=""/>
+				<data  name="地址" select="#contact &gt; div &gt; dl &gt; dd:nth-child(2)" refererUrl=""/>
+				<data  name="固定电话" select="#contact &gt; div &gt; dl &gt; dd:nth-child(4)" refererUrl=""/>
+				<data  name="主营产品" select="#gongshang &gt; div &gt; table &gt;  tr:nth-child(2) &gt; td:nth-child(2)" refererUrl=""/>
+				<data  name="客户" select="#contact &gt; div &gt; dl &gt; dd:nth-child(6)" refererUrl=""/>
+				<data  name="手机号" select="#contact &gt; div &gt; dl &gt; dd:nth-child(8)" refererUrl=""/>
 				<data  name="公司网站" select="" refererUrl=""/>
 				<data  name="公司简介" select="" refererUrl=""/>
-				<data  name="电子邮箱" select="" refererUrl=""/>
-				<data  name="经营模式" select="" refererUrl=""/>
+				<data  name="电子邮箱" select="#contact &gt; div &gt; dl &gt; dd:nth-child(10)" refererUrl=""/>
+				<data  name="经营模式" select="#gongshang  tr:nth-child(8) &gt; td:nth-child(2)" refererUrl=""/>
 				<data  name="企业类型" select="" refererUrl=""/>
 				<data  name="城市" select="" refererUrl=""/>
 				<data  name="公司规模" select="" refererUrl=""/>
-				<data  name="注册资本" select="" refererUrl=""/>
-				<data  name="详细信息" select="" refererUrl=""/>
+				<data  name="注册资本" select="#gongshang  tr:nth-child(12) &gt; td:nth-child(2)" refererUrl=""/>
+				<data  name="详细信息" select="#gongshang  .boxcontent .codl" refererUrl=""/>
 				<data  name="来源网站" select="" refererUrl=""/>
 				<data  name="记录时间" select="" refererUrl=""/>
 			</dataCatch>
 			<dataSave >
-				<file  path="../../Include/scripyData/招商100test.csv" encoding="ANSI"/>
+				<file  path="../../Include/scripyData/顺企网_key=涤纶.csv" encoding="ANSI"/>
 			</dataSave>
 		</website>
 	</spiders>

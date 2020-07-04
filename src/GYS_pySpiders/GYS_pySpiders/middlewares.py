@@ -27,18 +27,17 @@ class GysPyspidersSpiderMiddleware(object):
         for r in start_requests:
             yield r
     def spider_opened(self, spider):
+
         print("爬虫机器人开始！！！！！！！！！！！！！！！！")
         # 爬虫机器人开始的时候，
         spider.logger.info('Spider opened: %s' % spider.name)
 class GysPyspidersDownloaderMiddleware(object):
     scrapy_urls = []
-
     @classmethod
     def from_crawler(cls, crawler):
         s = cls()
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
-
     def process_request(self, request, spider):
         PrintTool.print('我运行了！！！！',fontColor='green')
         if len(self.scrapy_urls) != 0:
@@ -51,13 +50,11 @@ class GysPyspidersDownloaderMiddleware(object):
                 else:
                     pass
         return None
-
     def process_response(self, request, response, spider):
         return response
     def process_exception(self, request, exception, spider):
         pass
     def spider_opened(self, spider):
-
         spider.logger.info('Spider opened: %s' % spider.name)
         fileName = spider.fileName
         unicode = spider.unicode
