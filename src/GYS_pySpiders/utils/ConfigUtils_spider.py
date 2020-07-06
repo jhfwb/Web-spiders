@@ -55,13 +55,18 @@ class SpidersConfigUitls:
                 pass
             else:
                 callback=""
+            dont_filter=rule.get("dont_filter")
+            if not dont_filter:
+                dont_filter=False
             getRules.append(
                 Rule(
                     LinkExtractor(
-                        allow=rule["allow"]
+                        allow=rule["allow"],
+
                     ),
                     follow=CommonUtils.changeStrToBool(rule["follow"]),
-                    callback=callback
+                    callback=callback,
+                    # dont_filter=bool(dont_filter),
                 )
             )
         return getRules
@@ -79,9 +84,13 @@ class SpidersConfigUitls:
         """
 
         """
-        return [
-            self.website['start_url']
-        ]
+        if type(self.website['start_url'])==type([]):
+            return self.website['start_url']
+        if type(self.website['start_url']) == type(""):
+            return [self.website['start_url']]
+        else:
+            raise ValueError('start_url格式错误！既不是字符串，也不是数组')
+
     def getFile(self):
         file=self.xmlConfig.get(documentObj=self.website, _name='file')
         # file = self.website.getElementsByTagName(

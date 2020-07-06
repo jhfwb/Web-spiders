@@ -17,8 +17,10 @@ class GysPyspidersSpiderMiddleware(object):
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
     def process_spider_input(self, response, spider):
+
         return None
     def process_spider_output(self, response, result, spider):
+
         for i in result:
             yield i
     def process_spider_exception(self, response, exception, spider):
@@ -28,7 +30,6 @@ class GysPyspidersSpiderMiddleware(object):
             yield r
     def spider_opened(self, spider):
 
-        print("爬虫机器人开始！！！！！！！！！！！！！！！！")
         # 爬虫机器人开始的时候，
         spider.logger.info('Spider opened: %s' % spider.name)
 class GysPyspidersDownloaderMiddleware(object):
@@ -39,23 +40,28 @@ class GysPyspidersDownloaderMiddleware(object):
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
     def process_request(self, request, spider):
-        PrintTool.print('我运行了！！！！',fontColor='green')
+        # PrintTool.print("1_process_request！！！！"+spider.name, fontColor='pink')
         if len(self.scrapy_urls) != 0:
             for scrapy_url in self.scrapy_urls:
                 if scrapy_url == request.url:
                     # self.scrapy_urls.remove(scrapy_url)
-                    print("这条爬虫是重复的！！！！！！！！！！！！！！！！")
-                    print(len(self.scrapy_urls))
+                    # print("这条爬虫是重复的！！！！！！！！！！！！！！！！")
+                    # print(len(self.scrapy_urls))
                     return request
                 else:
                     pass
         return None
     def process_response(self, request, response, spider):
+        # PrintTool.print("2_process_response！！！！" + spider.name, fontColor='pink')
         return response
     def process_exception(self, request, exception, spider):
+
         pass
     def spider_opened(self, spider):
-        spider.logger.info('Spider opened: %s' % spider.name)
+        """
+        当次spider打开的时候运行
+        """
+        # PrintTool.print("spider_opened！！！！" + spider.name, fontColor='pink')
         fileName = spider.fileName
         unicode = spider.unicode
         fp=open(fileName, 'r', encoding=unicode)

@@ -11,6 +11,8 @@ class XmlConfigUtils:
         self.document = parse(self.path)
         self.configDocument = self.document.documentElement
         self.configDocumentObj=self._loadObjectByTag("root")#读取的虚拟对象属性
+
+
     def getDocumentObj(self):
         """
         返回当前文档的虚拟对象。
@@ -214,9 +216,14 @@ class XmlConfigUtils:
             obj.setdefault('_name',tag.tagName)
             #获得这个标签所有的属性
             attrs=tag.attributes
-            # print(childrenTag)
             for item in attrs.items():
-                obj.setdefault(item[0], item[1])
+                if item[1].startswith('[') and item[1].endswith(']'):
+                    itemValue=item[1]
+                    itemValue = itemValue[1:len(itemValue) - 1].split(',')
+                    itemValue = list(map(lambda x: x.strip().replace('\'', ''), itemValue))
+                    obj.setdefault(item[0], itemValue)
+                else:
+                    obj.setdefault(item[0], item[1])
             #获得这个标签所有的子类对象
             childrenTags=tag.childNodes
             for childrenTag in childrenTags:

@@ -12,10 +12,12 @@ from scrapy.cmdline import execute
 # for line in lines:
 #     re.sub(r'\{\{.*\}\}',line)
 # print(lines)
-#
-#
 # assert 1/0
 execute("scrapy crawlall".split())
-execute(['scrapy', 'crawl', '_pySpider'])
+
+# execute(['scrapy', 'crawl', '_pySpider'])
+# print('23333')
+# execute("scrapy crawlall".split())
+# execute(['scrapy', 'crawl', '_pySpider'])
 
 

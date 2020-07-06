@@ -5,9 +5,11 @@ class Store:
         """
         核心方法。从load中取出数据，如果该数据不存在则创建一个新数据
         """
+
         if Store.load.get(key)!=None:
             if value!=Store.load.get(key):
-                Store[key]=value
+
+                Store.load[key]=value
                 return value
             else:
                 return value

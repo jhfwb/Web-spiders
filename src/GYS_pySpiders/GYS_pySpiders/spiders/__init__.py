@@ -44,19 +44,24 @@ for i in range(len(actionConfigUtils.execs)):
     #检索这个包里面有没有name为spiderName的蜘蛛
 
 if not len(creatFies)==0:
+    print("????????")
+    assert 1/0
     createFilesLinses=[]
     #提取模板
     fp=open(mode='r',file='template/spider_template.py',encoding='utf-8')
     templateLines=fp.readlines()
+    print(len(creatFies))
+    for creatFie in creatFies:
+        createFilesLinses.append((creatFie,templateLines.copy()))
+
     for i in range(len(templateLines)):
-        if templateLines[i].find('{{此处需要被替换:请勿修改否则提取不到}}')!=-1:
-            for creatFie in creatFies:
-                templateLines_copy=templateLines.copy()
-                templateLines_copy[i]=templateLines[i].replace('{{此处需要被替换:请勿修改否则提取不到}}',creatFie)
-                createFilesLinses.append((creatFie,templateLines_copy))
+        if templateLines[i].find('{{spiderName}}')!=-1:
+            for j in range(len(createFilesLinses)):
+                createFilesLinses[j][1][i]=templateLines[i].replace('{{spiderName}}',createFilesLinses[j][0])
     fp.close()
     #写入文档
     for name,lines in createFilesLinses:
         fp=open(mode='w',file='GYS_pySpiders/spiders/Spider_'+name+'.py',encoding='utf-8')
+
         fp.writelines(lines)
         fp.close()

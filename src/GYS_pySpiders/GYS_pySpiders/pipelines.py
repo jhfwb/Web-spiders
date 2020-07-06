@@ -9,7 +9,10 @@ import time
 import csv
 import unicodedata
 
+from scrapy.cmdline import execute
+
 from src.GYS_pySpiders.utils.ConfigUtils_spider import SpidersConfigUitls
+from src.GYS_pySpiders.utils.FileUtils import FileUtils
 from src.GYS_pySpiders.utils.RR_Comments import PrintTool
 from src.GYS_pySpiders.utils.xmlUtils.configUtils import XmlConfigUtils
 class GysPyspidersPipeline(object):
@@ -67,7 +70,7 @@ class GysPyspidersPipeline(object):
         self.fp.flush()
     def close_spider(self, spider):
         writer = csv.DictWriter(self.fp, self.headers)
-        print("爬虫pipieline已经关闭，结束时间"+str(time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())))
+        print(spider.name+"已经关闭，结束时间"+str(time.strftime("%Y-%m-%d-%H:%M:%S", time.localtime())))
         spider.endTime = time.time()
         longtime=spider.endTime-spider.startTime
         print("程序一共运行了"+str(longtime)+"秒")

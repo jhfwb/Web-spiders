@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root _id="0">
-<!--	<variables _id="4f231904-bb9d-11e1-9cc6-a0510b3d46fd">-->
-<!--		<variable _id="4f231905-bb9d-11ea-9af9-a0510b3d46fd" name="keyWord" values="['6da47eb6']" notes="['涤纶']"/>-->
-<!--		<variable _id="4f231905-bb9d-112a-9af9-a0510b3d46fd" name="fileName" values="['涤纶']" notes="['文件名称']"/>-->
-<!--	</variables>-->
+	<variables _id="4f231904-bb9d-11e1-9cc6-a0510b3d46fd">
+		<variable _id="4f231905-bb9d-11ea-9af9-a0510b3d46fd" name="keyWord" values="['你好']" notes="['涤纶']"/>
+		<variable _id="4f231905-bb9d-112a-9af9-a0510b3d46fd" name="fileName" values="['涤纶']" notes="['文件名称']"/>
+	</variables>
 <!--	http://search.zhaoshang100.com/scp-%E5%90%8A%E8%A3%85%E5%B8%A6/2-->
 	<spiders>
 <!--		当要执行的时候，在exec中添加True。其他任意字符串都不会执行-->
-		<website exec="True" webName="顺企网" start_url="['https://b2b.11467.com/search/-6da47eb6-pn1.htm','https://b2b.11467.com/search/-540a88c55e26-pn1.htm']" allowed_domains="11467.com">
+		<website exec="True" webName="顺企网" start_url="https://b2b.11467.com/search/-你好-pn1.htm" allowed_domains="11467.com">
 			<rules _id="3f080e19-97e4-11ea-943b-a0510b3d46fd">
 <!--				[\d+]+-->
-				<rule _id="3f080e1a-97e4-11ea-a2ea-a0510b3d46fd" follow="True" allow=".*//b2b\.11467\.com/search/-6da47eb6-pn1\.htm" dont_filter='True'/>
-				<rule _id="3f080e1a-97e4-11ea-a3ea-a0510b3d46fd" follow="True" allow=".*//b2b\.11467\.com/search/-540a88c55e26-pn1\.htm"/>
+				<rule _id="3f080e1a-97e4-11ea-a3ea-a0510b3d46fd" follow="True" allow=".*//b2b\.11467\.com/search/-你好-pn1\.htm"/>
 				<rule _id="3f080e1b-97e4-11ea-8bee-a0510b3d46fd" follow="False" allow="(.+(www.11467.com)/\w+/)(co/)?\d+(\.htm)$" callback="parse_item"/>
 			</rules>
 			<dataCatch _id="3f080e1c-97e4-11ea-ae6f-a0510b3d46fd" testUrl="https://www.11467.com/jinan/co/159221.htm">
@@ -34,12 +33,12 @@
 				<data _id="3f08348e-97e4-11ea-a0ad-a0510b3d46fd" name="记录时间" select="" refererUrl=""/>
 			</dataCatch>
 			<dataSave _id="3f08348f-97e4-11ea-ad9a-a0510b3d46fd">
-				<file _id="3f083490-97e4-11ea-8d28-a0510b3d46fd" path="../../Include/scripyData/顺企网test1.csv" encoding="ANSI"/>
+				<file _id="3f083490-97e4-11ea-8d28-a0510b3d46fd" path="../../Include/scripyData/顺企网test.csv" encoding="ANSI"/>
 			</dataSave>
 		</website>
 		<website exec="True" webName="招商100" start_url="http://search.zhaoshang100.com/scp-%E5%90%8A%E8%A3%85%E5%B8%A6/1" allowed_domains="zhaoshang100.com">
 			<rules >
-				<rule  follow="True" allow="http://search.zhaoshang100.com/scp-.*/\d" dont_filter='True'/>
+				<rule  follow="True" allow="http://search.zhaoshang100.com/scp-.*/\d"/>
 				<rule  follow="False" allow="http://www.zhaoshang100.com/p\d+" callback="parse_item"/>
 			</rules>
 			<dataCatch testUrl="https://www.11467.com/jinan/co/159221.htm">
