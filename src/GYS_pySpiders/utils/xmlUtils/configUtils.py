@@ -2,6 +2,10 @@
 import uuid
 from xml.dom.minicompat import NodeList
 from xml.dom.minidom import parse
+
+from src.GYS_pySpiders.utils.CommonUtils import CommonUtils
+
+
 class XmlConfigUtils:
     """
     xml处理工具。将xml文档转化成一个虚拟对象。方便存取
@@ -216,14 +220,21 @@ class XmlConfigUtils:
             obj.setdefault('_name',tag.tagName)
             #获得这个标签所有的属性
             attrs=tag.attributes
+
             for item in attrs.items():
-                if item[1].startswith('[') and item[1].endswith(']'):
-                    itemValue=item[1]
-                    itemValue = itemValue[1:len(itemValue) - 1].split(',')
-                    itemValue = list(map(lambda x: x.strip().replace('\'', ''), itemValue))
-                    obj.setdefault(item[0], itemValue)
+                lis=CommonUtils.changeStrToList(item[1])
+                if not lis==None:
+                    obj.setdefault(item[0],lis)
                 else:
                     obj.setdefault(item[0], item[1])
+                # if item[1].startswith('[') and item[1].endswith(']'):
+                #     itemValue=item[1]
+                #     itemValue = itemValue[1:len(itemValue) - 1].split(',')
+                #     itemValue = list(map(lambda x: x.strip().replace('\'', ''), itemValue))
+                #
+                # else:
+                #     obj.setdefault(item[0], item[1])
+
             #获得这个标签所有的子类对象
             childrenTags=tag.childNodes
             for childrenTag in childrenTags:

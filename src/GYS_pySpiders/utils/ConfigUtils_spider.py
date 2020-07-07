@@ -11,6 +11,7 @@ class SpidersConfigUitls:
         self.xmlConfig=XmlConfigUtils()
         self.xmlConfig.getDocumentObj()
         #获取执行数组。
+        self.websites=self.xmlConfig.get(documentObj= self.xmlConfig.getDocumentObj(),_name='website')
         self.execs=self._getExecArr(self.xmlConfig.get(documentObj=self.xmlConfig.getDocumentObj(),_name='spiders'))
         self.website=""
         #取得指定的weisite
@@ -48,33 +49,57 @@ class SpidersConfigUitls:
         rules = self.xmlConfig.get(documentObj=self.website, _name='rule')
         # rules = self.website.getElementsByTagName("rules")[0].getElementsByTagName("rule")
         getRules = []
-        for rule in rules:
-            # CheckUtils.checkObje([bool(rule.getAttribute("follow"))],sleepTime=3,stop=True)
-            callback=rule.get("callback")
+        if not type(rules) == type([]):
+            callback = rules.get("callback")
             if callback:
                 pass
             else:
-                callback=""
-            dont_filter=rule.get("dont_filter")
+                callback = ""
+            dont_filter = rules.get("dont_filter")
             if not dont_filter:
-                dont_filter=False
+                dont_filter = False
             getRules.append(
                 Rule(
                     LinkExtractor(
-                        allow=rule["allow"],
+                        allow=rules["allow"],
 
                     ),
-                    follow=CommonUtils.changeStrToBool(rule["follow"]),
+                    follow=CommonUtils.changeStrToBool(rules["follow"]),
                     callback=callback,
                     # dont_filter=bool(dont_filter),
                 )
             )
+        else:
+            for rule in rules:
+                # CheckUtils.checkObje([bool(rule.getAttribute("follow"))],sleepTime=3,stop=True)
+                callback=rule.get("callback")
+                if callback:
+                    pass
+                else:
+                    callback=""
+                dont_filter=rule.get("dont_filter")
+                if not dont_filter:
+                    dont_filter=False
+                getRules.append(
+                    Rule(
+                        LinkExtractor(
+                            allow=rule["allow"],
+
+                        ),
+                        follow=CommonUtils.changeStrToBool(rule["follow"]),
+                        callback=callback,
+                        # dont_filter=bool(dont_filter),
+                    )
+                )
         return getRules
     def getDataCatch(self):
         datas=self.xmlConfig.get(documentObj=self.website,_name='data')
-        arr=[]
-        for data in datas:
-            arr.append({"name":data['name'],"select":data["select"]})
+        arr = []
+        if not type(datas)==type([]):
+            arr.append({"name": datas['name'], "select": datas["select"],"mode":datas.get("mode")})
+        else:
+            for data in datas:
+                arr.append({"name":data['name'],"select":data["select"],"mode":data.get("mode")})
         return arr
     def getAllowed_domains(self):
         return [

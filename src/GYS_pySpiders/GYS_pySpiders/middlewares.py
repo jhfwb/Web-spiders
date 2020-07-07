@@ -17,7 +17,6 @@ class GysPyspidersSpiderMiddleware(object):
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
     def process_spider_input(self, response, spider):
-
         return None
     def process_spider_output(self, response, result, spider):
 
@@ -53,6 +52,7 @@ class GysPyspidersDownloaderMiddleware(object):
         return None
     def process_response(self, request, response, spider):
         # PrintTool.print("2_process_response！！！！" + spider.name, fontColor='pink')
+        # print(response.text) 测试用的！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
         return response
     def process_exception(self, request, exception, spider):
 

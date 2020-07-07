@@ -12,6 +12,7 @@ class {{spiderName}}Item(scrapy.Item):
     for data in datas:
         exec(data['name']+"=scrapy.Field()")
     _url=scrapy.Field()
+    _catchTime=scrapy.Field()
     # 公司名 = scrapy.Field()
     # 地址 = scrapy.Field()
     # 固定电话 = scrapy.Field()

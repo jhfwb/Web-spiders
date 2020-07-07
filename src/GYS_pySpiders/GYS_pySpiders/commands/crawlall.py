@@ -5,6 +5,8 @@ from scrapy.commands import ScrapyCommand
 from scrapy.utils.conf import arglist_to_dict
 from scrapy.utils.python import without_none_values
 from scrapy.exceptions import UsageError
+
+from src.GYS_pySpiders import Action
 from src.GYS_pySpiders.Action import Store
 
 from src.GYS_pySpiders.utils.ConfigUtils_spider import SpidersConfigUitls
@@ -49,13 +51,18 @@ class Command(ScrapyCommand):
             self.settings.set('FEED_FORMAT', opts.output_format, priority='cmdline')
     def run(self, args, opts):
         # 获取爬虫列表
-        spd_loader_list = self.crawler_process.spider_loader.list()  # 获取所有的爬虫文件。
-        # 获取爬虫信息。
-        for spname in spd_loader_list or args:
-            #运行第一次爬虫
-            # configUtils=Store.get(spname)
-            # opts.spargs.setdefault(spname,configUtils)#给spider传递参数
-            self.crawler_process.crawl(spname, **opts.spargs)
+        # spd_loader_list = self.crawler_process.spider_loader.list()  # 获取所有的爬虫文件。
+        # 获取config.xml中的爬虫信息。
+        actionConfigUtils=Store.take("actionConfigUtils",SpidersConfigUitls())
+        for spname in actionConfigUtils.execs:
+            self.crawler_process.crawl(spname['webName'], **opts.spargs)
+
+
+        # for spname in spd_loader_list or args:
+        #     #运行第一次爬虫
+        #     # configUtils=Store.get(spname)
+        #     # opts.spargs.setdefault(spname,configUtils)#给spider传递参数
+        #     self.crawler_process.crawl(spname, **opts.spargs)
 
         self.crawler_process.start()
         # self.crawler_process.start()

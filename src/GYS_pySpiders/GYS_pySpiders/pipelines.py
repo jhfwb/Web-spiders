@@ -39,6 +39,7 @@ class GysPyspidersPipeline(object):
         for data in datas:
             self.headers.append(data['name'])
         self.headers.append('_url')
+        self.headers.append('_catchTime')
 
 
         # 如果不存在就创建一个新的文件

@@ -13,7 +13,6 @@ from src.GYS_pySpiders.utils.ConfigUtils_spider import SpidersConfigUitls
 import os
 #获取其初始化配置文件(如果没有，则创建一个新的配置文件)
 actionConfigUtils=Store.take("actionConfigUtils",SpidersConfigUitls())
-
 #获取当前目录下(spider文件)所有的文件的工作路径。并保存在filePaths这个数组中 e.g['GYS_pySpiders/spiders/Spider_招商100.py', 'GYS_pySpiders/spiders/Spider_顺企网.py', 'GYS_pySpiders/spiders/__init__.py']
 filePaths=[]
 #获取当前目录下(spider文件)所有spider的name属性名 e.g:['招商100', '顺企网']
@@ -33,7 +32,6 @@ for filePath in filePaths:
                 spiderNameFiles.append(re.findall(r'\'(.*)\'',newLine)[0])
                 break
     files.close()##
-
 # 通过对比spiderNameFiles(上面有)与从配置文件config.xml中的webName。得到一个数组:creatFies。用来之后创建新的.py文件
 creatFies=[]
 for i in range(len(actionConfigUtils.execs)):
@@ -42,10 +40,7 @@ for i in range(len(actionConfigUtils.execs)):
         #根据模板创建一个新的py对象。
         creatFies.append(spiderName)
     #检索这个包里面有没有name为spiderName的蜘蛛
-
 if not len(creatFies)==0:
-    print("????????")
-    assert 1/0
     createFilesLinses=[]
     #提取模板
     fp=open(mode='r',file='template/spider_template.py',encoding='utf-8')

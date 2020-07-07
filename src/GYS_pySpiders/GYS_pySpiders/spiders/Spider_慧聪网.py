@@ -4,12 +4,12 @@ import time
 import re
 from src.GYS_pySpiders.Action import Store
 from src.GYS_pySpiders.utils.CommonUtils import CommonUtils
-from src.GYS_pySpiders.GYS_pySpiders.items import  {{spiderName}}Item
+from src.GYS_pySpiders.GYS_pySpiders.items import  慧聪网Item
 from src.GYS_pySpiders.utils.ConfigUtils_spider import SpidersConfigUitls
 from src.GYS_pySpiders.utils.RR_Comments import PrintTool
 from src.GYS_pySpiders.utils.xmlUtils.configUtils import XmlConfigUtils
 class APyspiderSpider(CrawlSpider):
-    name = '{{spiderName}}'
+    name = '慧聪网'
     config = Store.take(name, SpidersConfigUitls(webName=name))  # 在Stroue中创建一个对象。如果有就创建，没有就
     rules = config.getRules()
     allowed_domains = config.getAllowed_domains()
@@ -24,7 +24,7 @@ class APyspiderSpider(CrawlSpider):
     #
     #         ##下面这串代码比较难理解。实际上是拼出了字符串。"GysPyspidersItem(公司名=self.公司名,地址=self.地址,固定电话=self.固定电话,主营产品=self.主营产品,客户=self.客户,手机号=self.手机号,公司网站 = self.公司网站,公司简介 =self.公司简介,电子邮箱 = self.电子邮箱,经营模式 = self.经营模式,企业类型 = self.企业类型,城市 = self.城市,公司规模 =self.公司规模,注册资本 = self.注册资本,来源网站= self.来源网站,信息获取的来源url= self.信息获取的来源url,记录时间= self.记录时间,)"
     #         ##并且这些字符串的获取都是从config配置文件中获取的。
-    #         line="{{spiderName}}Item(_url=response.url,"
+    #         line="慧聪网Item(_url=response.url,"
     #         for data in datas:
     #             line+=data['name']+"=self.selectElementStr('"+data['select']+"'),"
     #         line+=')'
@@ -38,7 +38,7 @@ class APyspiderSpider(CrawlSpider):
             datas=self.config.getDataCatch()
             ##下面这串代码比较难理解。实际上是拼出了字符串。"GysPyspidersItem(公司名=self.公司名,地址=self.地址,固定电话=self.固定电话,主营产品=self.主营产品,客户=self.客户,手机号=self.手机号,公司网站 = self.公司网站,公司简介 =self.公司简介,电子邮箱 = self.电子邮箱,经营模式 = self.经营模式,企业类型 = self.企业类型,城市 = self.城市,公司规模 =self.公司规模,注册资本 = self.注册资本,来源网站= self.来源网站,信息获取的来源url= self.信息获取的来源url,记录时间= self.记录时间,)"
             ##并且这些字符串的获取都是从config配置文件中获取的。
-            line="{{spiderName}}Item(_url=response.url,_catchTime=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),"
+            line="慧聪网Item(_url=response.url,_catchTime=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())),"
             mode=""
             mutiplateArrs=[]
             for data in datas:

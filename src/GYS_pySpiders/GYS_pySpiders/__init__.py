@@ -7,23 +7,26 @@ from src.GYS_pySpiders.utils.ConfigUtils_spider import SpidersConfigUitls
 #读取环境配置
 actionConfigUtils=Store.take("actionConfigUtils",SpidersConfigUitls())
 spiderNames=[]
-for i in range(len(actionConfigUtils.execs)):
-    spiderName=actionConfigUtils.execs[i]['webName']
+for i in range(len(actionConfigUtils.websites)):
+    spiderName=actionConfigUtils.websites[i]['webName']
     spiderNames.append(spiderName)
 
-
-# 读取item.py文件。判断是否已经存在。存在的话就不处理了。
-print(os.getcwd())
-fp=open(mode='r',file='GYS_pySpiders/items.py',encoding='utf-8')
-itemLines=fp.readlines()
 classNames=[]
-for itemLine in itemLines:
-    if itemLine.find('class')!=-1:
-        itemLine=itemLine.replace(' ','')
-        className=re.findall(r'class(.*)Item\(scrapy\.Item\):',itemLine)[0]
-        classNames.append(className)
-fp.close()
-if not classNames.sort()==spiderNames.sort():
+#先判断item.py文件存在不存在，
+
+if os.path.exists('GYS_pySpiders/items.py'):
+    # 读取item.py文件。判断是否已经存在。存在的话就不处理了。
+    fp=open(mode='r',file='GYS_pySpiders/items.py',encoding='utf-8')
+    itemLines=fp.readlines()
+    for itemLine in itemLines:
+        if itemLine.find('class')!=-1:
+            itemLine=itemLine.replace(' ','')
+            className=re.findall(r'class(.*)Item\(scrapy\.Item\):',itemLine)[0]
+            classNames.append(className)
+    fp.close()
+
+
+if not classNames==spiderNames:
     #读取模板文件
     fp_template=open(mode='r',file='template/items_template.py',encoding='utf-8')
     lines=fp_template.readlines()

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root _id="0">
+<!--	说明：当要获得特定选择器下面的选择器文本时候，请在后面加上::text-->
 <!--	<variables _id="4f231904-bb9d-11e1-9cc6-a0510b3d46fd">-->
 <!--		<variable _id="4f231905-bb9d-11ea-9af9-a0510b3d46fd" name="keyWord" values="['6da47eb6']" notes="['涤纶']"/>-->
 <!--		<variable _id="4f231905-bb9d-112a-9af9-a0510b3d46fd" name="fileName" values="['涤纶']" notes="['文件名称']"/>-->
@@ -37,8 +38,8 @@
 				<file _id="3f083490-97e4-11ea-8d28-a0510b3d46fd" path="../../Include/scripyData/顺企网test1.csv" encoding="ANSI"/>
 			</dataSave>
 		</website>
-		<website exec="True" webName="招商100" start_url="http://search.zhaoshang100.com/scp-%E5%90%8A%E8%A3%85%E5%B8%A6/1" allowed_domains="zhaoshang100.com">
-			<rules >
+		<website exec="False" webName="招商100" start_url="http://search.zhaoshang100.com/scp-%E5%90%8A%E8%A3%85%E5%B8%A6/1" allowed_domains="zhaoshang100.com">
+			<rules>
 				<rule  follow="True" allow="http://search.zhaoshang100.com/scp-.*/\d" dont_filter='True'/>
 				<rule  follow="False" allow="http://www.zhaoshang100.com/p\d+" callback="parse_item"/>
 			</rules>
@@ -61,8 +62,21 @@
 				<data  name="来源网站" select="" refererUrl=""/>
 				<data  name="记录时间" select="" refererUrl=""/>
 			</dataCatch>
-			<dataSave >
-				<file  path="../../Include/scripyData/招商100test.csv" encoding="ANSI"/>
+			<dataSave>
+				<file path="../../Include/scripyData/招商100test.csv" encoding="ANSI"/>
+			</dataSave>
+		</website>
+		<website exec="True" webName="慧聪网" start_url="['https://s.hc360.com/seller/search.html?kwd=%E5%90%8A%E8%A3%85%E5%B8%A6&amp;pnum=1&amp;ee=1']" allowed_domains="s.hc360.com">
+			<rules >
+<!--//s.hc360.com/seller/search.html?kwd=%E5%90%8A%E8%A3%85%E5%B8%A6&pnum=2&ee=2-->
+				<rule  follow="True" allow="seller/search.html\?kwd=%E5%90%8A%E8%A3%85%E5%B8%A6&amp;pnum=\d+&amp;ee=\d+" callback="parse_item"/>
+			</rules>
+			<dataCatch testUrl="">
+				<data  name="公司名" select=".newCname" refererUrl="" mode="mutiplate"/>
+				<data  name="地址" select=".newBotBox" refererUrl="" mode="mutiplate"/>
+			</dataCatch>
+			<dataSave>
+				<file  path="../../Include/scripyData/慧聪网test.csv" encoding="ANSI"/>
 			</dataSave>
 		</website>
 	</spiders>
