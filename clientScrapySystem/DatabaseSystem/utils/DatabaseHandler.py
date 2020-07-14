@@ -1,5 +1,5 @@
 import os
-from utils.RR_Comments import ArrTool
+from utils.RR_Comments import ArrTool, JudgeType, ReflexTool
 from utils.excelTool.ExcelTool import ExcelTool
 class DatabaseHandler:
     """
@@ -22,7 +22,7 @@ class DatabaseHandler:
             if newData[key]==None or newData[key]=="":
                 newData[key]=data[key]
             if key!=self.indexKey:
-                if newData[key]!=None and data[key]!=None:
+                if data[key]!=None:
                     if newData[key].strip()!=data[key].strip():
                         newData[key]= str(newData[key])+"|||"+str(data[key])
 
@@ -66,7 +66,24 @@ class DatabaseHandler:
                 datas = datas+self.pop(databseName=databseName,num=popNum)
             self.initDatabase(databseName=databseName)
             return datas
-    def putDatas(self,databseName="",datas=[]):#在末尾添加数据。推荐使用，比较省时间。
+    # def filterData(self,datas=[],filterFunction='',option={}):
+    #     if JudgeType.getType(filterFunction)!='method' or JudgeType.getType(filterFunction)!='function':
+    #         raise ValueError("参数错误，filterFunction必须是可执行函数。")
+    #     for
+    #     ReflexTool.execute(filterFunction, option)
+    #
+
+    def backRollFunction(self,function="",option={},errorFunction="",errorOption={}):
+        if JudgeType.getType(function)!='method' or JudgeType.getType(function)!='function':
+            raise ValueError("参数错误，function必须是可执行函数。")
+        if JudgeType.getType(errorFunction)!='method' or JudgeType.getType(function)!='function':
+            raise ValueError("参数错误，errorFunction必须是可执行函数。")
+        try:
+            ReflexTool.execute(function,option)
+        except:
+            ReflexTool.execute(errorFunction,errorOption)
+        pass
+    def putDatas(self,databseName="",datas=[],filter=None):#在末尾添加数据。推荐使用，比较省时间。
         """
         将数据数据保存到数据库中。
         1.将需要存入的数据进行排序，并根据关键词去重。
