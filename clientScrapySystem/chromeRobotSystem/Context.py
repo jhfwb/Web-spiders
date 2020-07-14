@@ -13,9 +13,9 @@ class Context:
         self.saveThread = MyDataSaveThread(driver)
         self.saveThread.context=self
         #后期要改
-        robot2 = 天眼查()
-        robot2.run(self.robotThread)
-        pass
+        # robot2 = 天眼查()
+        # robot2.run(self.robotThread)
+        # pass
 
     def main(self):
         self.robotThread.start()

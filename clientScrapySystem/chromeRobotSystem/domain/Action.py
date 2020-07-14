@@ -16,6 +16,18 @@ class Action:
         """
         self.acts.put({'way': 'init','memo':memo,'ignoreErr':ignoreErr})#初始化
         return self
+    def get_current_url(self,key="",memo="",ignoreErr=False):
+        """
+                :param web: 访问的网站地址
+                :return: 返回action丢向
+                """
+        if memo == "":
+            memo = "正在获取当前网页网址:..."
+        self.acts.put({'way': 'current_url',
+                       "key": key,
+                       'memo': memo, 'ignoreErr': ignoreErr
+                       })
+        return self
     def get(self,web="",memo="",ignoreErr=False):
         """
 

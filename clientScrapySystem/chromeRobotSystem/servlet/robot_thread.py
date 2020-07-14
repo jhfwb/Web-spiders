@@ -12,6 +12,7 @@ class MyPipelineThread(threading.Thread):
         self.readyExcute=Queue()
         self.queue=Queue()
         self.driver=driver
+        self.itemsQueue=Queue()
     def put(self,obj):
         self.queue.put(obj)
         return obj
@@ -50,7 +51,8 @@ class MyPipelineThread(threading.Thread):
             for message in messages:
                 item.setdefault(message[0],message[1])
             PrintTool.print("成功爬取信息:" +str(item), fontColor='gray')
-            self.context.saveThread.queue.put(item)
+            self.itemsQueue.put(item)
+            # self.context.saveThread.queue.put(item)
 
 
 

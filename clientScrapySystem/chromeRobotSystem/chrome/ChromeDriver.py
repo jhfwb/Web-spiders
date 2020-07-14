@@ -12,8 +12,10 @@ class my_diver:
         #打开浏览器，并监听窗口，阻塞-+
         chrome_options = Options()
         chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")#使用chrome的调试模式
-        chrome_driver = "resoure/chromedriver.exe"#用chrome的驱动
+        print(os.getcwd())
+        chrome_driver = "C:\\Users\\1234567\\Desktop\\git库存储\\Web-spiders\\clientScrapySystem\\chromeRobotSystem\\resoure\\chromedriver.exe"#用chrome的驱动
         driver = webdriver.Chrome(chrome_driver, chrome_options=chrome_options)
+
 
         self.driver=driver
     def get_driver(self):

@@ -12,6 +12,10 @@ class MyOption:
     #操作方法的汇总
     @staticmethod
     def option(driver,options):
+        """
+        信息查找类。
+        必须返回一个元组(key,value)
+        """
         if options["way"]=="click":#点击
             return MyOption.check_tag_status(driver=driver,method=MyOption.click_element_apparent,args={'driver':driver,'cssStr':options["css"],'ignoreErr':options["ignoreErr"]})
         elif options["way"]=="key_input":#键入信息
@@ -34,6 +38,8 @@ class MyOption:
             return MyOption._shot(driver,options["path"])
         elif options["way"]=="callback":
             return MyOption._callback(driver,options["method"])
+        elif options["way"]=="current_url":
+            return (options['key'],driver.current_url)
 
     @staticmethod
     def _callback(driver,method):
