@@ -1,12 +1,15 @@
 import os
 import re
 import sys
+import time
+
+
 class PrintTool:
     """
     存放打印工具。
     """
     @staticmethod
-    def print(s,fontColor='red',backgroundColor='white',displayWay=0,site=""):
+    def print(s,fontColor='red',backgroundColor='white',displayWay=0):
         """
         默认字体为红色。背景色为白色
         能够按照颜色在控制台打印出来。可以自定义背景色和字体颜色。下划线等
@@ -19,6 +22,7 @@ class PrintTool:
                                  4 下划线 |
         :return: None
         """
+        s = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" | " + s
         fontColorArr=[('red',31),('green',32),('yellow',33),('pink',35),('blue',34),('gray',37),('black',30)]
         backgroundColorArr=[('red',41),('green',42),('yellow',43),('blue',44),('black',40),('pink',45),('gray',47)]
         backgroundColorNUM = "init"
@@ -200,5 +204,40 @@ class ReflexTool:
         else:
             raise ValueError("该文件不存在"+pythonFilePath)
         return None
-if __name__ == '__main__':
-    PrintTool.print("我很好")
+import pinyin
+class ChinaWordTool:
+
+    @staticmethod
+    def getStrAllAplha(str):
+        return pinyin.get_initial(str, delimiter="").upper()
+
+    @staticmethod
+    def getStrFirstAplha(str):
+        str = ChinaWordTool.getStrAllAplha(str)
+        str = str[0:1]
+        return str.upper()
+class StringTool:
+
+
+    #判断字符串是不是数字。
+    @staticmethod
+    def is_number(s):
+        try:
+            float(s)
+            return True
+        except ValueError:
+            pass
+
+        try:
+            import unicodedata
+            unicodedata.numeric(s)
+            return True
+        except (TypeError, ValueError):
+            pass
+
+        return False
+
+
+if __name__ == "__main__":
+    str_input = u'暴风雪3'
+    print(ChinaWordTool.multi_get_letter(str_input))

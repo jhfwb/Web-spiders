@@ -1,8 +1,9 @@
 import threading
 from queue import Queue
 
-from clientScrapySystem.chromeRobotSystem.utils.RR_Comments import PrintTool
+
 from clientScrapySystem.chromeRobotSystem.innerUtils.web_option_methond import MyOption
+from utils.RR_Comments import PrintTool
 
 
 class MyPipelineThread(threading.Thread):
@@ -17,11 +18,19 @@ class MyPipelineThread(threading.Thread):
         self.queue.put(obj)
         return obj
     def run(self):#这个元组放3个位置，执行方法，css选择器，文本内容
+        reStartSign=False #重启标志
+        reStartTime = 0
         while True:
-            acts=self.readyExcute.get()
+            if reStartSign==False:
+                acts=self.readyExcute.get()
+            else:
+                acts=storeActs
+            storeActs = Queue(acts.qsize() + 1)
             messages=[]
+            reStartSign=False
             while acts.empty()==False:
                 act=acts.get()
+                storeActs.put(act)
                 try:
                     PrintTool.print("chromeRobotSystem:"+act['memo'],fontColor="blue")
                     # time.sleep(1)
@@ -35,10 +44,23 @@ class MyPipelineThread(threading.Thread):
                             PrintTool.print("seleniumRobot_exception:该动作失败，正在回调失败方法", fontColor='green')
                             method(act.get('action'))
                         # 动作错误，将动作链条，全部清除
-                        if act.get("ignoreErr")==True:
+                        break
+                    elif message=="reStart_action":
+                        reStartTime=reStartTime+1
+                        if reStartTime<=2:
+                            PrintTool.print("chromeRobotSystem:发生异常:无法找到对应css选择器_执行方案:reStart_action。正在重新调用动作链", fontColor="red")
+                            while acts.empty()==False:
+                                act = acts.get()
+                                storeActs.put(act)
+                            reStartSign=True
+                            break
+                        else:
+                            reStartSign = False
+                            reStartTime=0
                             break
                     else:#动作执行成功
                         method = act.get('success')
+                        print(method)
                         if method:
                             PrintTool.print("seleniumRobot_success:该动作成功，正在回调成功方法", fontColor='green')
                             method(act.get('action'))
@@ -47,12 +69,13 @@ class MyPipelineThread(threading.Thread):
                         else:# 当没有数据的时候则通过
                             pass
             #一次爬虫完毕：之后保存信息。创建一个专门保存的线程。
-            item={}
-            for message in messages:
-                item.setdefault(message[0],message[1])
-            PrintTool.print("成功爬取信息:" +str(item), fontColor='gray')
-            self.itemsQueue.put(item)
-            # self.context.saveThread.queue.put(item)
+            if reStartSign==False:
+                item={}
+                for message in messages:
+                    item.setdefault(message[0],message[1])
+                PrintTool.print("成功爬取信息:" +str(item), fontColor='gray')
+                self.itemsQueue.put(item)
+
 
 
 

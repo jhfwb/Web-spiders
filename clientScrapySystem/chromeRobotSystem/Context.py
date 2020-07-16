@@ -1,7 +1,7 @@
 from clientScrapySystem.chromeRobotSystem.chrome.ChromeDriver import my_diver
 from clientScrapySystem.chromeRobotSystem.servlet.pipeline_thread import MyDataSaveThread
 from clientScrapySystem.chromeRobotSystem.servlet.robot_thread import MyPipelineThread
-from clientScrapySystem.chromeRobotSystem.天眼查 import 天眼查
+
 
 class Context:
     def __init__(self):

@@ -1,6 +1,9 @@
+import time
 from queue import Queue
 
 from selenium.webdriver.common.keys import Keys
+
+from clientScrapySystem.chromeRobotSystem.Context import Context
 from clientScrapySystem.chromeRobotSystem.domain.Action import Action
 
 
@@ -17,10 +20,10 @@ class 天眼查:
             click(cssStr=".modal-dialog .close")
         Action("天眼查搜寻公司信息").initWeb().\
             get("https://www.tianyancha.com/?jsid=SEM-BAIDU-PZ2006-SY-000001").\
-            key_input(cssStr="[type='search']",text=company,isClear=True).\
-            key_input(cssStr="[type='search']",text=Keys.ENTER,isClear=False).\
-            click(cssStr="div.result-list.sv-search-container > div:nth-child(1) a.name").\
-            find(cssStr=".name",key="公司名").\
+            key_input(cssStr="[type='search']",text=company,isClear=True,timeOut=5,errProcessCase="combine").\
+            key_input(cssStr="[type='search']",text=Keys.ENTER,isClear=False,timeOut=5,errProcessCase="combine").\
+            click(cssStr="div.result-list.sv-search-container > div:nth-child(1) a.name",timeOut=5,errProcessCase="combine"). \
+            find(cssStr=".name",key="公司名",timeOut=5,errProcessCase="combine").\
             find(cssStr=".name>.link-click", key="客户"). \
             find(cssStr=".auto-folder", key="地址"). \
             find(cssStr="tbody > tr:nth-child(11) > td:nth-child(2) > span", key="产品"). \
@@ -29,5 +32,16 @@ class 天眼查:
             find(cssStr=".-breakall  tr:nth-child(5) > td:nth-child(4)", key="模式"). \
             get_current_url(key="_url2"). \
             find(cssStr=".tag-list", key="经营状况"). \
-            click(cssStr="span.link-click.link-spacing",exception=exception,success=success).\
+            click(cssStr="span.link-click.link-spacing",exception=exception,success=success,timeOut=2).\
             excute(myThread.readyExcute)
+if __name__ == '__main__':
+    con=Context()
+    con.main()
+    天眼查 = 天眼查()
+    天眼查.run(con.robotThread, "天眼查")
+    items = con.robotThread.itemsQueue.get()  # 爬取的信息
+
+    #解决方案：
+    #1.调成可以自己手动调整等待时间，这样每一步都能精准控制等待时间。
+    #2.当出现超时等待的时候，并且该操作相对重要，这时候，就触发重新动作的机制。
+    #3.设置不可忽略错误的动作。一旦该动作无法执行，只能重新启动，或者等待。

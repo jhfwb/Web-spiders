@@ -1,10 +1,13 @@
 import sys
+import time
+
+
 class PrintTool:
     """
     存放打印工具。
     """
     @staticmethod
-    def print(s,fontColor='red',backgroundColor='white',displayWay=0,site=""):
+    def print(s,fontColor='red',backgroundColor='white',displayWay=0,logPath=""):
         """
         默认字体为红色。背景色为白色
         能够按照颜色在控制台打印出来。可以自定义背景色和字体颜色。下划线等

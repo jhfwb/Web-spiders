@@ -17,21 +17,22 @@ class MyOption:
         必须返回一个元组(key,value)
         """
         if options["way"]=="click":#点击
-            return MyOption.check_tag_status(driver=driver,method=MyOption.click_element_apparent,args={'driver':driver,'cssStr':options["css"],'ignoreErr':options["ignoreErr"]})
+            return MyOption.check_tag_status(driver=driver,method=MyOption.click_element_apparent,args={'driver':driver,'cssStr':options["css"],'ignoreErr':options["ignoreErr"],"timeOut":options["timeOut"],'errProcessCase': options["errProcessCase"]})
         elif options["way"]=="key_input":#键入信息
-            return MyOption.input_words_element_apparent(driver, options["css"], options['text'],options['isClear'])
+            return MyOption.input_words_element_apparent(driver, options["css"], options['text'],options['isClear'],options["timeOut"],options["errProcessCase"])
         elif options["way"] =="select_option":#选择select
-            return MyOption.select_option_apparent(driver, options["css"], options['text'])
+            return MyOption.select_option_apparent(driver, options["css"], options['text'],options["timeOut"],options["errProcessCase"])
         elif options["way"] =="wait":#选择select
             return MyOption.wait_util_key_press(driver)
         elif options["way"] == "is_continue":  # 选择select
-            return MyOption.is_continue(driver)
+            pass
         elif options["way"]=="find":
-            return MyOption._find_message_apparent(driver,options["css"],options["key"],options["ignoreErr"],mode=options['mode'])
+            return MyOption._find_message_apparent(driver,options["css"],options["key"],options["ignoreErr"],options['mode'],options['timeOut'],options["errProcessCase"])
         elif options["way"]=="get":
             return MyOption._get_url(driver,options["text"])
         elif options["way"]=="close":
-            return MyOption.closeTage(driver)
+            # return MyOption.closeTage(driver)
+            pass
         elif options["way"] == "init":
             return MyOption.initWeb(driver)
         elif options["way"]=="screenshot":
@@ -87,7 +88,7 @@ class MyOption:
         driver.get(url)
     # 根据选择器，获得页面信息.text为key值
     @staticmethod
-    def _find_message_apparent(driver, cssStr,key,ignoreErr,mode='single'):
+    def _find_message_apparent(driver, cssStr,key,ignoreErr,mode='single',timeOut=3,errProcessCase='ignore',executeTime=3):
         """
         爬取网站信息
         :param driver:谷歌驱动
@@ -102,7 +103,7 @@ class MyOption:
         2.没有找到关键字(或者超时获取)：return actionFalse  中断操作
         3.没有找到关键字(或者超时获取)__忽略错误：return None   无视错误，继续下一步。
         """
-        command=MyOption.my_wait(driver, cssStr)
+        command=MyOption.my_wait(driver, cssStr,timeOut,errProcessCase)
         if command==True:
             item=MyOption.my_find_element_by_css_selector(driver, cssStr,mode)#此处存入方法
             if type(item)==type([]):
@@ -115,9 +116,21 @@ class MyOption:
             else:
                 pass
         elif command=="actionFalse":
-            if ignoreErr == True:
-                return None
-            return "actionFalse"
+            if errProcessCase == 'ignore':
+                return "actionFalse"
+            elif errProcessCase == 'reStart_method':
+
+                MyOption._find_message_apparent(driver, cssStr,key,ignoreErr,mode,timeOut,errProcessCase)
+            elif errProcessCase == 'reStart_action':
+                return "reStart_action"
+            elif errProcessCase == 'combine':
+                executeTime=executeTime-1
+                if executeTime>0:
+                    return MyOption._find_message_apparent(driver, cssStr,key,ignoreErr,mode,timeOut,errProcessCase,executeTime)
+                else:
+                    return "reStart_action"
+
+
 
 
     @staticmethod
@@ -153,12 +166,10 @@ class MyOption:
 
     #根据选择器，点击。点击完毕后，如果有添加新的页面，则会切换到新的页面
     @staticmethod
-    def click_element_apparent(options):
+    def click_element_apparent(options,executeTime=3):
         """
         根据css选择器，点击元素。点击完毕后，如果有添加或者删除新的页面，则会将句柄切换到新的页面。
         每次执行完这个方法，必定会把句柄切换到最后一个-1
-        :param driver: 浏览器驱动
-        :param cssStr: 字符串类型。css选择器
         :return: str 标签状态。
             标签状态：
             "doNothing",啥都没做
@@ -167,43 +178,69 @@ class MyOption:
             "removeOldTag"关闭了原来的页面
 
         """
-        command=MyOption.my_wait(options['driver'],options['cssStr'])
+        command=MyOption.my_wait(options['driver'],options['cssStr'],options['timeOut'])
         if command==True:
             MyOption.my_find_element_by_css_selector(options['driver'], options['cssStr']).click()
         elif command=="actionFalse":
-            if options['ignoreErr']==True:
-                return None
-            return "actionFalse"
+            if options['errProcessCase']=='ignore':
+                return "actionFalse"
+            elif options['errProcessCase']=='reStart_method':
+                MyOption.click_element_apparent(options)
+            elif options['errProcessCase']=='reStart_action':
+                return "reStart_action"
+            elif options['errProcessCase'] == 'combine':
+                executeTime=executeTime-1
+                if executeTime>0:
+                    return MyOption.click_element_apparent(options,executeTime)
+                else:
+                    return "reStart_action"
+
+
+
+
 
     #根据选择器，在文本框中键入text内容
     @staticmethod
-    def input_words_element_apparent(driver,cssStr,text,isClear=True):
-        command =MyOption.my_wait(driver,cssStr)
+    def input_words_element_apparent(driver,cssStr,text,isClear=True,timeOut=3,errProcessCase='ignore',executeTime=3):
+        command =MyOption.my_wait(driver,cssStr,timeOut)
         if command==True:
             if isClear==True:
-                MyOption.my_find_element_by_css_selector(driver,cssStr).clear()
+                MyOption.my_find_element_by_css_selector(driver,cssStr,timeOut).clear()
             driver.find_element_by_css_selector(cssStr).send_keys(text)
         elif command=="actionFalse":
-            return "actionFalse"
+            if errProcessCase=='ignore':
+                return "actionFalse"
+            elif errProcessCase=='reStart_method':
+                MyOption.input_words_element_apparent(driver,cssStr,text,isClear,timeOut,errProcessCase)
+            elif errProcessCase=='reStart_action':
+                return "reStart_action"
+            elif errProcessCase == 'combine':
+                executeTime=executeTime-1
+                if executeTime>0:
+                    return MyOption.input_words_element_apparent(driver, cssStr, text, isClear, timeOut, errProcessCase,executeTime)
+                else:
+                    return "reStart_action"
     #根据选择器，在select选框中，选择可视文本option属性
     @staticmethod
-    def my_wait(driver, cssStr):
+    def my_wait(driver, cssStr,timeOut=3):
         """
         未找寻到css。则会返回false。
         :param driver:
         :param cssStr:
         :return:
         """
-        wait = WebDriverWait(driver,5, 2)
+        wait = WebDriverWait(driver,timeOut, 2)#
         try:
             wait.until(lambda driver: True if driver.execute_script("return document.querySelector(\"" + cssStr + "\")") else False)
             return True
         except TimeoutException:
             return "actionFalse"
 
+
+
     @staticmethod
-    def my_find_element_by_css_selector(driver,cssStr,mode='single'):
-        if MyOption.my_wait(driver, cssStr):
+    def my_find_element_by_css_selector(driver,cssStr,mode='single',timeOut=3):
+        if MyOption.my_wait(driver, cssStr,timeOut):
             if mode=='single':
                 return driver.find_element_by_css_selector(cssStr)
             elif mode=='multiple':
@@ -211,10 +248,24 @@ class MyOption:
             else:
                 return driver.find_element_by_css_selector(cssStr)
     @staticmethod
-    def select_option_apparent(driver,cssStr,text):
-        MyOption.my_wait(driver,cssStr)
-        s1 = Select(MyOption.my_find_element_by_css_selector(driver, cssStr))
-        s1.select_by_visible_text(text)
+    def select_option_apparent(driver,cssStr,text,timeOut=3,errProcessCase='ignore',executeTime=3):
+        command=MyOption.my_wait(driver,cssStr,timeOut)
+        if command==True:
+            s1 = Select(MyOption.my_find_element_by_css_selector(driver, cssStr))
+            s1.select_by_visible_text(text)
+        elif command=="actionFalse":
+            if errProcessCase=='ignore':
+                return "actionFalse"
+            elif errProcessCase=='reStart_method':
+                MyOption.select_option_apparent(driver,cssStr,text,timeOut,errProcessCase)
+            elif errProcessCase=='reStart_action':
+                return "reStart_action"
+            elif errProcessCase == 'combine':
+                executeTime=executeTime-1
+                if executeTime>0:
+                    return MyOption.select_option_apparent(driver, cssStr, text, timeOut, errProcessCase,executeTime)
+                else:
+                    return "reStart_action"
     #组合键等待
     @staticmethod
     def wait_util_key_press(driver):

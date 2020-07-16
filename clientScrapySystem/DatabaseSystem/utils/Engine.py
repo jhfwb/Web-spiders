@@ -2,7 +2,7 @@ import threading
 from queue import Queue
 from types import MethodType,FunctionType
 import time
-from utils.RR_Comments import ReflexTool, JudgeType
+from utils.RR_Comments import ReflexTool, JudgeType, PrintTool
 
 
 class Engine:
@@ -28,7 +28,7 @@ class Engine:
     def getExecuteTask(self,name=""):
         return self.executeTasks.get(name)
     def start(self):#启动引擎
-        print('引擎启动....')
+        PrintTool.print('引擎启动中...',fontColor='gray')
         self.thread=threading.Thread(target=self._run,args=[]).start()
         return self
     def _run(self):
@@ -79,13 +79,13 @@ class Engine:
                 task.store['isExecute'] = False
                 return
             if starSign==1:
-                for functionsAndOption in task['functionsAndOptions']:
+                for functionsAndOption in task.store['functionsAndOptions']:
                     self._executeImmediately(functionsAndOption[0], functionsAndOption[1])
             if starSign==0:
                 executeNum = executeNum + 1
             starSign=1
             executeNum = executeNum - 1
-            threading.Timer(task['interval'], self._executeTiming,args=[task,starSign,executeNum]).start()
+            threading.Timer(task.store['interval'], self._executeTiming,args=[task,starSign,executeNum]).start()
     def _executeImmediately(self,functions,options={}):
         if self._judgeFunction(functions) == 'method' or self._judgeFunction(functions) == 'function':
             self.q.put((functions,options))
@@ -117,7 +117,6 @@ class Engine:
     def close(self):
         #清除所有的计时器任务
         for key in self.executeTasks.keys():
-            print(1)
             if  self.executeTasks[key].store['isExecute']:
                 self.clearTimingTask(key)
         # self.clearTimingTask()
