@@ -1,4 +1,6 @@
+import os
 import re
+import time
 
 import openpyxl
 from openpyxl.styles import Font
@@ -65,27 +67,34 @@ class ExcelTool:
         cell.font = Font(size=fontStyle['size']|100, bold=True, italic=True, underline="single", color='0000FF')
         return cell
     def optionExecl(self,path='',sheetName='',datas=[],mode="",styleRemain=True):
+        if not path.endswith('.xlsx'):
+            raise NameError('命名错误,该execal文件必选以xlsx结尾')
         if mode=='w':
             wb=self._createNewWorkbook()
             sheet=self._createNewSheet(wb,sheetName)
             #表头的写入
+            if len(datas)==0:
+                del wb['Sheet']  # 删除默认表单
+                wb.save(path)
+                wb.close()
+                return
             firstArr=list(datas[0].keys())
             for i in range(0,len(firstArr)):
                 sheet.cell(row=1,column=i+1,value=firstArr[i])
             #表体的写入
             for j in range(0,len(datas)):
                 for i in range(0,len(firstArr)):
-
                     cell=sheet.cell(row=j + 2, column=i + 1, value=datas[j].get(firstArr[i]))
                     #对value进行处理
                     if type(cell.value)==str:
                         cell=self._changeStrToCell(cell)
             del wb['Sheet']#删除默认表单
             wb.save(path)
+            wb.close()
         elif mode=='r':
             wb = openpyxl.load_workbook(path)
             if sheetName=="":
-                sh = wb[wb.get_sheet_names()[0]]
+                sh = wb[wb.sheetnames[0]]
             else:
                 sh = wb[sheetName]
             rows_data = list(sh.rows)
@@ -101,11 +110,20 @@ class ExcelTool:
                     else:
                         data.setdefault(headLine[i],row[i].value)
                 datas.append(data)
+            wb.close()
             return datas
         elif mode=='a':
-            oldDatas=self.optionExecl(path=path, sheetName=sheetName, mode="r", styleRemain=True)
-            newDatas=oldDatas+datas
-            self.optionExecl(path=path, sheetName=sheetName,datas=newDatas, mode="w")
+            if not os.path.exists(path):
+                self.optionExecl(path=path, sheetName=sheetName, datas=datas, mode="w")
+                return
+            oldDatas=[]
+            try:
+                oldDatas=self.optionExecl(path=path, sheetName=sheetName, mode="r", styleRemain=True)
+            except IndexError:
+                self.optionExecl(path=path, sheetName=sheetName, datas=datas, mode="w")
+                return
+            newDatas = oldDatas + datas
+            self.optionExecl(path=path, sheetName=sheetName, datas=newDatas, mode="w")
     def getHeader(self,path='',sheetName=''):
         wb = openpyxl.load_workbook(path)
         if sheetName == "":
@@ -139,21 +157,23 @@ class ExcelTool:
         return filterItems
 
 if __name__ == '__main__':
-    def test(item):
-        citys=["广东","深圳","珠海","汕头","佛山","韶关市","湛江","肇庆","江门","茂名","惠州","梅州","汕尾","河源","阳江","清远","东莞","中山","潮州","揭阳","云浮",
-              "福建","福州","厦门","宁德","莆田","泉州","漳州","龙岩","三明","南平"
-              "江西","南昌","景德","萍乡","九江","新余","鹰潭","赣州","吉安","宜春","抚州","上饶",
-               "湖南",""
-              ]
-        for city in citys:
-            if city.strip() != "":
-                if city in item:
-                    return True
-        return False
+
+        # citys=["广东","深圳","珠海","汕头","佛山","韶关市","湛江","肇庆","江门","茂名","惠州","梅州","汕尾","河源","阳江","清远","东莞","中山","潮州","揭阳","云浮",
+        #       "福建","福州","厦门","宁德","莆田","泉州","漳州","龙岩","三明","南平"
+        #       "江西","南昌","景德","萍乡","九江","新余","鹰潭","赣州","吉安","宜春","抚州","上饶",
+        #        "湖南",""
+        #       ]
+        # for city in citys:
+        #     if city.strip() != "":
+        #         if city in item:
+        #             return True
+        # return False
     tool=ExcelTool()
-    tool.chageCsvToExcelFile('resouse/顺企网_key=高强涤纶.csv', encoding='ANSI')
-    arr=tool.filter(path='resouse/顺企网_key=高强涤纶.xlsx', attr="地址", conditionFunction=test)
-    data = tool.optionExecl(path='resouse/顺企网_key=高强涤纶_广东福建江西.xlsx', datas=arr, mode='w')
+    datas=tool.optionExecl(path='test.xlsx',mode='w',datas=[{'公司1':'1江山'}])
+    print(datas)
+    # tool.chageCsvToExcelFile('resouse/顺企网_key=高强涤纶.csv', encoding='ANSI')
+    # arr=tool.filter(path='resouse/顺企网_key=高强涤纶.xlsx', attr="地址", conditionFunction=test)
+    # data = tool.optionExecl(path='resouse/test.xlsx', datas=arr, mode='w')
 
 
 

@@ -4,9 +4,8 @@ from queue import Queue
 
 from clientScrapySystem.chromeRobotSystem.innerUtils.web_option_methond import MyOption
 from utils.RR_Comments import PrintTool
-
-
 class MyPipelineThread(threading.Thread):
+    cutMessages=[('',0)]
     queue=[]
     def __init__(self,driver):
         super().__init__()
@@ -25,10 +24,11 @@ class MyPipelineThread(threading.Thread):
                 acts=self.readyExcute.get()
             else:
                 acts=storeActs
-            storeActs = Queue(acts.qsize() + 1)
+            storeActs = Queue()
             messages=[]
             reStartSign=False
             while acts.empty()==False:
+                cutMessage="异常终止ACTION"#1.正常终止。2.异常中止
                 act=acts.get()
                 storeActs.put(act)
                 try:
@@ -37,6 +37,9 @@ class MyPipelineThread(threading.Thread):
                 except:
                     print("无法找到该memo请确保,memo有被添加。在Action中寻找！！！"+str(act))
                 message = MyOption.option(self.driver, options=act)
+                if act.get("monitor")!=None and act.get("monitor")!="":
+                    PrintTool.print("seleniumRobot_monitor:正在监听此方法", fontColor='green')
+                    act.get("monitor")(self.driver)
                 if message:
                     if message == "actionFalse":#动作执行失败
                         method=act.get('exception')
@@ -44,6 +47,9 @@ class MyPipelineThread(threading.Thread):
                             PrintTool.print("seleniumRobot_exception:该动作失败，正在回调失败方法", fontColor='green')
                             method(act.get('action'))
                         # 动作错误，将动作链条，全部清除
+                        break
+                    elif message=='clear_action':
+                        cutMessage='正常终止ACTION'
                         break
                     elif message=="reStart_action":
                         reStartTime=reStartTime+1
@@ -60,7 +66,6 @@ class MyPipelineThread(threading.Thread):
                             break
                     else:#动作执行成功
                         method = act.get('success')
-                        print(method)
                         if method:
                             PrintTool.print("seleniumRobot_success:该动作成功，正在回调成功方法", fontColor='green')
                             method(act.get('action'))
@@ -73,8 +78,15 @@ class MyPipelineThread(threading.Thread):
                 item={}
                 for message in messages:
                     item.setdefault(message[0],message[1])
-                PrintTool.print("成功爬取信息:" +str(item), fontColor='gray')
-                self.itemsQueue.put(item)
+                if len(item)==0:
+                    PrintTool.print("该信息爬取失败", fontColor='gray')
+                    if cutMessage=="正常终止ACTION":
+                        self.itemsQueue.put("正常终止ACTION")
+                    else:
+                        self.itemsQueue.put("异常终止ACTION")
+                else:
+                    PrintTool.print("成功爬取信息:" +str(item), fontColor='gray', LogPath=PrintTool.LogPath)
+                    self.itemsQueue.put(item)
 
 
 

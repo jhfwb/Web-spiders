@@ -5,11 +5,16 @@ import time
 
 
 class PrintTool:
+    # @staticmethod
+    # def writeLog(path='',mode='a'):
+    #     pass
     """
     存放打印工具。
     """
+    Day=str(time.strftime("%Y-%m-%d-"))
+    LogPath='C:/Users/1234567/Desktop/git库存储/Web-spiders/log/'+Day+'LOG.txt'
     @staticmethod
-    def print(s,fontColor='red',backgroundColor='white',displayWay=0):
+    def print(s,fontColor='red',backgroundColor='white',displayWay=0,LogPath=''):
         """
         默认字体为红色。背景色为白色
         能够按照颜色在控制台打印出来。可以自定义背景色和字体颜色。下划线等
@@ -47,7 +52,25 @@ class PrintTool:
         else:
             print('\033['+str(displayWay)+';'+str(fontColorNUM) + ';' + str(backgroundColorNUM) + 'm', s,line)
         print('\033[0m',end="")
+        if LogPath!='':
+            if os.path.exists(LogPath)==None:
+                fp=open(mode='w',file=LogPath,encoding='ANSI')
+            else:
+                fp = open(mode='a', file=LogPath, encoding='ANSI')
+            fp.write(s+line+'\n')
+            fp.close()
+
 class ArrTool:
+    @staticmethod
+    def getNoneLen(arr):
+        """
+        获得一个数组中None的个数
+        """
+        index=0
+        for a in arr:
+            if a==None:
+                index=index+1
+        return index
     @staticmethod
     def removeRepeat(arr, keyFunction=""):
         """
@@ -216,8 +239,15 @@ class ChinaWordTool:
         str = ChinaWordTool.getStrAllAplha(str)
         str = str[0:1]
         return str.upper()
+import difflib
 class StringTool:
-
+    @staticmethod
+    def getSameLevel(str1,str2):#获得两个字符串的相似等级。
+        """
+        获取字符串的相似等级。0~1  1为完全相同。0为完全不相同
+        """
+        SimilarityDegree = difflib.SequenceMatcher(None, str1, str2).quick_ratio()
+        return SimilarityDegree
 
     #判断字符串是不是数字。
     @staticmethod
@@ -239,5 +269,7 @@ class StringTool:
 
 
 if __name__ == "__main__":
-    str_input = u'暴风雪3'
-    print(ChinaWordTool.multi_get_letter(str_input))
+
+    print(StringTool.getSameLevel("223","11"))
+
+

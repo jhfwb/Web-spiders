@@ -16,6 +16,15 @@ class Action:
         """
         self.acts.put({'way': 'init','memo':memo,'ignoreErr':ignoreErr})#初始化
         return self
+    def select(self,cssStr="",text="",memo="",ignoreErr=False,timeOut=3,errProcessCase='ignore'):
+        if memo == "":
+            memo = "正在选择选择器:..."
+        self.acts.put({'way': 'select_option',
+                       "cssStr": cssStr,'text':text,
+                       'memo': memo, 'ignoreErr': ignoreErr,'timeOut':timeOut,
+                       'errProcessCase': errProcessCase
+                       })
+        return self
     def get_current_url(self,key="",memo="",ignoreErr=False,timeOut=3):
         """
                 @param web: 访问的网站地址
@@ -72,7 +81,7 @@ class Action:
                             'errProcessCase':errProcessCase
                        })
         return self
-    def click(self,cssStr="",memo="",ignoreErr=False,success=lambda x:x,exception=lambda x:x,timeOut=3,errProcessCase="ignore"):
+    def click(self,cssStr="",memo="",ignoreErr=False,success="",exception="",timeOut=3,errProcessCase="ignore",monitor=''):
         """
         根据css点击css的位置
 
@@ -88,7 +97,7 @@ class Action:
 
          @param timeOut: {int} 默认3秒。当超过3秒后，该方法如果还没能成功执行，则默认失败
 
-         @param errProcessCase: {str ('ignore' | 'reStart_method' | 'reStart_action'|'combine') }
+         @param errProcessCase: {str ('ignore' | 'reStart_method' | 'reStart_action'|'combine'|'clear_action') }
         当发生错误的时候的执行方案:
         ignore: 无视错误，继续执行。
         reStart_method: 重新开始本方法
@@ -105,7 +114,8 @@ class Action:
                        'exception':exception,
                        'action':self,
                        'timeOut': timeOut,
-                       'errProcessCase': errProcessCase
+                       'errProcessCase': errProcessCase,
+                       'monitor':monitor
                             })  # 点
         return self
     def find(self,cssStr="",key="",memo="",ignoreErr=False,mode="",timeOut=3,errProcessCase="ignore"):

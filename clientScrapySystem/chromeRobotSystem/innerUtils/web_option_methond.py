@@ -103,7 +103,7 @@ class MyOption:
         2.没有找到关键字(或者超时获取)：return actionFalse  中断操作
         3.没有找到关键字(或者超时获取)__忽略错误：return None   无视错误，继续下一步。
         """
-        command=MyOption.my_wait(driver, cssStr,timeOut,errProcessCase)
+        command=MyOption.my_wait(driver, cssStr,timeOut)
         if command==True:
             item=MyOption.my_find_element_by_css_selector(driver, cssStr,mode)#此处存入方法
             if type(item)==type([]):
@@ -144,6 +144,8 @@ class MyOption:
         windowsNum = len(driver.window_handles)
         oldCurrentHandle = driver.current_window_handle
         message=method(args)
+        if message=='clear_action':
+            return 'clear_action'
         if message=="actionFalse":
             return "actionFalse"
         windowsNumAfter = len(driver.window_handles)
@@ -188,6 +190,8 @@ class MyOption:
                 MyOption.click_element_apparent(options)
             elif options['errProcessCase']=='reStart_action':
                 return "reStart_action"
+            elif options['errProcessCase']=='clear_action':
+                return 'clear_action'
             elif options['errProcessCase'] == 'combine':
                 executeTime=executeTime-1
                 if executeTime>0:
@@ -214,6 +218,8 @@ class MyOption:
                 MyOption.input_words_element_apparent(driver,cssStr,text,isClear,timeOut,errProcessCase)
             elif errProcessCase=='reStart_action':
                 return "reStart_action"
+            elif errProcessCase=='clear_action':
+                return 'clear_action'
             elif errProcessCase == 'combine':
                 executeTime=executeTime-1
                 if executeTime>0:
@@ -260,6 +266,8 @@ class MyOption:
                 MyOption.select_option_apparent(driver,cssStr,text,timeOut,errProcessCase)
             elif errProcessCase=='reStart_action':
                 return "reStart_action"
+            elif errProcessCase == 'clear_action':
+                return 'clear_action'
             elif errProcessCase == 'combine':
                 executeTime=executeTime-1
                 if executeTime>0:

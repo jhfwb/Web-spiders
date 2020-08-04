@@ -13,21 +13,34 @@ class indexObject:
         self.A=0
         self.lines=[]
         self.letterSite={}
-    def getDatasByLetter(self,letter=''):
-        index1=self.letterSite.get(letter)
-        index2=self.letterSite.get(self._getNextLetter(letter))
-        if index1+1==index2:
+    def getDatasByLetter(self,letter=''):#获得字母所在数组。返回一个迭代器。
+        datas=self.getDatasAndStatusByLetter(letter=letter)
+        if datas==None:
             return None
-        return list(map(lambda x:x[:len(x)-1],self.lines[index1+1:index2]))
+        return list(map(lambda x:x[0],datas))
+    def getDatasAndStatusByLetter(self,letter=''):
+        index1 = self.letterSite.get(letter)
+        index2 = self.letterSite.get(self._getNextLetter(letter))
+        if index1 + 1 == index2:
+            return None
+        newLines=[]
+        for line in self.lines[index1+1:index2]:
+            entry=line.split('=')
+            key = entry[0].replace('\n','')
+            if len(entry)==2:
+                value=entry[1].replace('\n','')
+            elif len(entry)==1:
+                value=None
+            else:
+                raise ValueError("存在多个等号。有且只允许每行只有一个等号"+line)
+            newLines.append((key,value))
+        return newLines
     def _getNextLetter(self,letter=""):
         if letter=="OTHERS":
             return None
         for i in range(len(self.letterTable)):
             if self.letterTable[i]==letter:
                 return self.letterTable[i+1]
-
-
-
 class IndexDatabase:
     def __init__(self,path=""):
         self.path=path
@@ -53,10 +66,6 @@ class IndexDatabase:
                     break
             if needReload:
                 self._reBuildIndexFile()
-    # def filterData(self,datas):
-    #     newData=[]
-    #     for data in datas:
-    #         if not self.isContainKeyName(data):
     def _reBuildIndexFile(self):
         datas = []
         # 获取datas
@@ -81,7 +90,6 @@ class IndexDatabase:
         self.indexObject = self._loadIndexObject()
         for data in datas:
             self.addKeys(data)
-
     def _saveIndexObjectToFile(self):
         self.indexObject.letterSite
         self.indexObject.lines
@@ -106,7 +114,6 @@ class IndexDatabase:
             indexObj.letterSite.setdefault(keys[0],int(keys[1]))
         return indexObj
     # def _saveIndexObject(self):
-
     def isContainKeyName(self,keyName):
         """
         判断是否包含某个索引
@@ -115,22 +122,32 @@ class IndexDatabase:
         if datas==None:
             return False
         return keyName in datas
+    def setStatuses(self,keyNames,status):
+        for keyName in keyNames:
+            self._setSingleStatus(keyName,status)
+    def _setSingleStatus(self,keyName,status):
+        if not self.isContainKeyName(keyName):
+            raise ValueError("不存在该keyName:"+keyName)
+        self.deleteKeys(keyName)
+        if not status=="":
+            self.addKeys(keyName + "=" + str(status))
+        else:
+            self.addKeys(keyName)
     def _deleteSingleKey(self,keyName):
         """
         删除索引
         """
         if not self.isContainKeyName(keyName):
-            return None
+            raise  ValueError("无法删除数据:keyName。因为,不存在该数据")
         letter=self._getFirstLetter(keyName)
         startIndex=self._getFirstLetterSite(letter)
         deleteInde=-1
         for i in range(startIndex,len(self.indexObject.lines)):
-            # print(self.indexObject.lines[i])
-            if self.indexObject.lines[i]==keyName+'\n':
+            if self.indexObject.lines[i].split('=')[0].replace('\n','')==keyName:
                 deleteInde=i
                 break
         deleteData=self.indexObject.lines[i][:len(self.indexObject.lines[i])-1]
-        del self.indexObject.lines[i]
+        del self.indexObject.lines[deleteInde]
         # 后移所有数据
         removeSign = 0
         for key in self.indexObject.letterSite.keys():
@@ -139,13 +156,6 @@ class IndexDatabase:
             if key == letter:
                 removeSign = 1
         return deleteData
-
-        # print( self.indexObject.lines)
-        # self._updataLetterLines()
-        # fp = open(mode='w', encoding='utf-8', file=self.path)
-        # self.indexObject.lines[1] = 'IndexDatabase:' + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '\n'
-        # fp.writelines(self.indexObject.lines)
-        # fp.close()
     def deleteKeys(self,keyNames):
         if type(keyNames) == type(""):
             keyNames = [keyNames]
@@ -175,32 +185,66 @@ class IndexDatabase:
         @param letter |str letter的可选参数：A,B,C.....X,Y,Z,OHTERS (务必注意必须是大写)
         """
         return self.indexObject.getDatasByLetter(letter)
-    def getAllKeyNames(self):
+
+    def getKeyNamesAndStatusByLetters(self, letter="A"):
+        """
+        e.g:getKeyNamesByLetters(letter="A")
+        获得所有以A为首拼音的数据集合
+        @param letter |str letter的可选参数：A,B,C.....X,Y,Z,OHTERS (务必注意必须是大写)
+        """
+        return self.indexObject.getDatasAndStatusByLetter(letter)
+    def getAllKeyNamesAndStatus(self):
+        datas = []
+        for letter in self.indexObject.letterTable:
+            letterDatas = self.getKeyNamesAndStatusByLetters(letter)
+            if letterDatas != None:
+                datas = datas + letterDatas
+        return datas
+    def getAllKeyNames(self):#???????
         """
         获得所有索引
         """
-        datas=[]
+        datas = []
         for letter in self.indexObject.letterTable:
-            letterDatas=self.getKeyNamesByLetters(letter)
-            if letterDatas!=None:
-                datas=datas+letterDatas
+            letterDatas = self.getKeyNamesByLetters(letter)
+            if letterDatas != None:
+                datas = datas + letterDatas
         return datas
-
-    def addKeys(self,keyNames):
+    def getStatusByKeyNames(self,keyName):
         """
-        添加索引
+        获得关键字的状态。
+        """
+        if self.isContainKeyName(keyName):
+            items=self.getKeyNamesAndStatusByLetters(self._getFirstLetter(keyName))
+            for item  in items:
+                if item[0]==keyName:
+                    return item[1]
+        else:
+            raise ValueError('keyName:'+keyName+'不存在')
+    def addKeys(self,keyNames,status=""):
+        """
+        添加索引。如果成功添加，则会返回该keyNames数组。当然，如果keyNames只有一个数据，则只会返回一个数据
+        如果添加失败。则会返回None
+
         """
         if type(keyNames) == type(""):
             keyNames = [keyNames]
         if type(keyNames) != type([]):
             raise ValueError("KeyName必须是list类型," + str(keyNames) + "不是list类型")
+        bos=[]
         for keyName in keyNames:
-            self._addSingleKey(keyName)
-        self._updataLetterLines()
-        fp = open(mode='w', encoding='utf-8', file=self.path)
-        self.indexObject.lines[1]='IndexDatabase:'+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+'\n'
-        fp.writelines(self.indexObject.lines)
-        fp.close()
+            bo=self._addSingleKey(keyName,status)
+            if bo:
+                bos.append(keyName)
+        if len(bos)>0:
+            self._updataLetterLines()
+            fp = open(mode='w', encoding='utf-8', file=self.path)
+            self.indexObject.lines[1]='IndexDatabase:'+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+'\n'
+            fp.writelines(self.indexObject.lines)
+            fp.close()
+            return bos
+        else:
+            return None#
     def _getFirstLetter(self,keyName):
         letter = ChinaWordTool.getStrFirstAplha(keyName)  # 获得首字母
         try:
@@ -208,7 +252,9 @@ class IndexDatabase:
         except:
             letter = 'OTHERS'
         return letter
-    def _addSingleKey(self,keyName):
+    def _addSingleKey(self,keyName,status=""):
+        if self.isContainKeyName(keyName):
+            return False
         if '\n' in keyName:
             raise ValueError("KeyName不可以包含\\n")
         if keyName==None:
@@ -217,6 +263,8 @@ class IndexDatabase:
             raise ValueError("KeyName的长度不可以为0")
         if type(keyName)!=type(""):
             raise ValueError("KeyName必须是字符串类型,"+str(keyName)+"不是字符串类型")
+        if str(status)!="":
+            keyName=keyName+'='+str(status)
         letter=self._getFirstLetter(keyName)
         letterDataArr=self.indexObject.getDatasByLetter(letter)#获得该字母对应的数组
         if letterDataArr==None:
@@ -234,15 +282,17 @@ class IndexDatabase:
                     self.indexObject.letterSite[key] = self.indexObject.letterSite[key]+1#后期可以改成多个
                 if key==letter:
                     addSign=1
-        # self.indexObject.lines.insert(index=a,object=keyName+'\n')
-    # def isContainKey(self,keyName):
-    #     pass
+        return True
 
 if __name__ == '__main__':
     # arr=[1,2,3]
     # arr.insert(2,233)
     # print(arr)
     a=IndexDatabase(
-        'C:\\Users\\1234567\\Desktop\\git库存储\\Web-spiders\\clientScrapySystem\\DatabaseSystem\\database\\indexData.txt').\
-        deleteKeys("dw88_af纷纷为分割啊非12_田fewf艳艳")
-    print(a)
+        'C:\\Users\\1234567\\Desktop\\git库存储\\Web-spiders\\clientScrapySystem\\DatabaseSystem\\database\\indexData.txt')
+    # a.addKeys(['我1','我2'],-1)
+    # a.addKeys('你好1')
+    # a.addKeys('你好2','132132112321')
+    c=a.addKeys(['你好23211','21321'])
+    print(c)
+    print(a.getAllKeyNamesAndStatus())

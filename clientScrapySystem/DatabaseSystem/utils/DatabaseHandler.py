@@ -3,7 +3,7 @@ import os
 import re
 
 from utils.IndexTool import IndexDatabase
-from utils.RR_Comments import ArrTool, JudgeType, ReflexTool
+from utils.RR_Comments import ArrTool, JudgeType, ReflexTool, PrintTool
 from utils.excelTool.ExcelTool import ExcelTool
 class DatabaseHandler:
     """
@@ -15,12 +15,24 @@ class DatabaseHandler:
     获得数据库所有数据:getAll
     """
     def __init__(self):
+        #创建一个总的
+        self.datasCenter=IndexDatabase(path='../database/datasCenter.txt')
+        #初始化数据中心数据。
         self.indexDatabase=IndexDatabase(path='../database/indexData.txt')
         self.excelTool=ExcelTool()
         self.indexKey="公司名"#数据库唯一标识码
         self.re_不允许仅有特殊字符=re.compile(r'[\u4e00-\u9fa5_a-zA-Z0-9_]+')
         self.processedDataRecorder={}
+        self.processOrder=['smelter','0_初始客户群','1_已验客户群','2_已发客户群']
         pass
+    def isEmpty(self,databaseName=""):
+        datas=self.getAll(databaseName=databaseName)
+        if len(datas) == 0:
+            return True
+        else:
+            return False
+
+
     def datasZip(self,keyData,data):
         keyData=self._makeStandard(keyData)[0]
         data=self._makeStandard(data)[0]
@@ -52,6 +64,9 @@ class DatabaseHandler:
                 @return: 返回弹出的数据。
                 """
         # 获取数据库大小。判断数据库大小是否小于取出数量。如果小于则报错
+        if self.isEmpty(databaseName=databaseName):
+            PrintTool.print("数据库(database): ["+databaseName+"] 为空,无法取出数据...")
+            return None
         if num==1:
             path=self._getLastFENQUname(databaseName=databaseName)
             if path==None:
@@ -125,16 +140,26 @@ class DatabaseHandler:
         检查data数据在目标数据库中是否存在。可以放行返回True（不存在重复），不可放行返回False（存在重复）
         return True | False
         """
+        if databaseName=="":
+            if self.datasCenter.isContainKeyName(data[self.indexKey]):
+                return True
+            return False
         processedDataRecorder=self._getProcessedDataRecorder(databaseName=databaseName)
         if not processedDataRecorder.isContainKeyName(data[self.indexKey]):
             return True
         return False
     def checkDatas(self,databaseName="",datas=[]):
         """
-        检查datas数据在目标数据库中是否存在。剔除掉存在的数据，只保存不存在的数据
+        检查datas数据在目标数据库中是否存在。剔除掉存在的数据，返回不存在的key
         """
+        newData = []
+        if databaseName == "":
+            for data in datas:
+                if self.datasCenter.isContainKeyName(data[self.indexKey]):
+                    newData.append(data)
+            return newData
+
         processedDataRecorder=self._getProcessedDataRecorder(databaseName=databaseName)
-        newData=[]
         for data in datas:
             if not processedDataRecorder.isContainKeyName(data[self.indexKey]):
                 newData.append(data)
@@ -149,11 +174,15 @@ class DatabaseHandler:
                 path='../database/' + databaseName + '/ processedDataIndex.txt'))
             processedDataRecorder = self.processedDataRecorder.get(databaseName)
         return processedDataRecorder
+    # def checkRepeatData(self,keyName):
+    #     self.datasCenter.
+    #     pass
     def putDatas_setProcessedSign(self,databaseName="",datas=[]):#???
         processedDataRecorder=self._getProcessedDataRecorder(databaseName=databaseName)
         datakeyNames=list(map(lambda x:x[self.indexKey],datas))
         self.putDatas(databaseName=databaseName,datas=datas)
         processedDataRecorder.addKeys(datakeyNames)
+
     def putDatas(self,databaseName="",datas=[]):#在末尾添加数据。推荐使用，比较省时间。
         """
         将数据数据保存到数据库中。
@@ -165,8 +194,6 @@ class DatabaseHandler:
         @param:datas| [] 需要存入数据库的数据组
         @param:key| str 存入时候的键值
         """
-        #去除到公司名为None的数据
-
         if len(datas)==0:
             return None
         datas = self._makeStandard(datas=datas)  # 数据标准化。
@@ -188,10 +215,10 @@ class DatabaseHandler:
                 cycle = int(lens / 2000) + 1
                 num = 1
                 # self.excelTool.optionExecl(mode='w', datas=databseDatas,
-                #                            path='../database/' + databaseName + '/分区' + str(++num) + '.xlsx')
+                #                            path='../database/' + databaseName + '/分区' + str(++num) + '.xls')
                 for i in range(cycle):
                     self.excelTool.optionExecl(mode='w', datas=datas[2000 * i:(2000 * i + 2000)],
-                                               path='../database/' + databaseName + '/分区' + str(num) + '.xlsx')
+                                               path='../database/' + databaseName + '/分区' + str(num) + '.xls')
                     num += 1
             else:
                 oldDatas = self.excelTool.optionExecl(mode='r', path=FENQU)
@@ -204,10 +231,10 @@ class DatabaseHandler:
                     cycle = int(len(datas) / 2000) + 1
                     num = int(FENQU[len(FENQU) - 6])+1
                     # self.excelTool.optionExecl(mode='w', datas=databseDatas,
-                    #                            path='../database/' + databaseName + '/分区' + str(++num) + '.xlsx')
+                    #                            path='../database/' + databaseName + '/分区' + str(++num) + '.xls')
                     for i in range(cycle):
                         self.excelTool.optionExecl(mode='w', datas=datas[2000 * i:(2000 * i + 2000)],
-                                                   path='../database/' + databaseName + '/分区' + str(num) + '.xlsx')
+                                                   path='../database/' + databaseName + '/分区' + str(num) + '.xls')
                         num += 1
     def _getLastFENQUname(self,databaseName=""):
         excels=self._getExcelFileNameList(dirPath=self._getDatabasePath(databaseName=databaseName))
@@ -218,7 +245,7 @@ class DatabaseHandler:
             mun=int(excel[len(excel) - 6])
             if mun>mid:
                 mid=mun
-        return '../database/'+databaseName+'/分区'+str(mid)+".xlsx"
+        return '../database/'+databaseName+'/分区'+str(mid)+".xls"
     def initDatabase(self, databaseName=""):
         """
         初始化数据库。
@@ -260,13 +287,82 @@ class DatabaseHandler:
         #     raise ValueError("参数databseName与参数dirPath不可以同时赋值，或者同时不赋值，会产生冲突。只允许其中一个赋值")
         xlsxFiles = self._getExcelFileNameList(dirPath='../database/'+databaseName)
         datas=[]
+        print(xlsxFiles)
         for xlsxFile in xlsxFiles:
             data=self.excelTool.optionExecl(path=xlsxFile,mode='r')
             datas=datas+data
         return datas
-    def transfer(self,FromDatabseName="",ToDatabaseName="",num=1):
-        self.putDatas(databaseName=ToDatabaseName,datas=self.falsePop(databaseName=FromDatabseName,num=num))
-        return self.pop(databaseName=FromDatabseName, num=num)
+    def initDatasCenter(self):
+        """
+       根据各个数据库。 初始化数据中心文件。具体文件路径为：../database/indexData.txt
+        """
+        pass
+    def dataIsLegal(self,data,databaseName):
+        """
+        判断这个数据执行请求是否合法。
+        当这个数据不存在的时候，合法。
+        当这个数据的状态与数据库名称对应的时候，合法。
+        其余情况不合法
+        """
+        try:
+            return self.datasCenter.getStatusByKeyNames(keyName=data[self.indexKey]) == databaseName
+        except ValueError:
+            return True
+    def _addDataToDataCenter(self,datas,FromDatabaseName,ToDatabaseName):
+        #将数据添加到数据中心。并把没有添加过的数据返回出来
+        existArr = []  # 已经存在数据中心
+        existArr_datas = []  # 已经存在数据中心
+        notExistArr = []  # 目前数据中心还美欧存在
+        notExistArr_datas = []
+        for fromData in datas:
+            if not self.datasCenter.isContainKeyName(fromData[self.indexKey]):
+                notExistArr.append(fromData[self.indexKey])
+                notExistArr_datas.append(fromData)
+                # self.datasCenter.addKeys(keyNames=fromData[self.indexKey],status=ToDatabaseName)
+            else:
+                if self.dataIsLegal(fromData, FromDatabaseName):
+                    existArr.append(fromData[self.indexKey])
+                    existArr_datas.append(fromData)
+                else:
+                    PrintTool.print("DatabaseCenter:丢弃已处理过的重复数据:[" + str(fromData) + "]   这条数据已经存在数据库,并被处理过。keyName为:[" + str(
+                        fromData[self.indexKey]) + ']')
+                # self.datasCenter.setStatuses()
+
+        if len(notExistArr) != 0:
+            self.datasCenter.addKeys(keyNames=notExistArr, status=ToDatabaseName)
+        if len(existArr) != 0:
+            self.datasCenter.setStatuses(keyNames=existArr, status=ToDatabaseName)
+        arr = notExistArr_datas + existArr_datas
+        return arr
+    def transfer(self,FromDatabaseName="",ToDatabaseName="",num=1,dataFunction=""):
+        """
+        该方法自动过滤掉重复信息
+        数据库之间数据进行转移。
+        这里我们称：第一个数据库为 数据库A（FromDatabseName）。
+                    第二个数据库为 数据库B（ToDatabaseName）。
+                    数据为         数据C
+        以下几种情况，会转移失败:
+        1.数据库A为空
+        2.数据库A中的 数据C 与数据中心中的数据的位置不一致
+        比如：数据中心的配置文件是这样的: 南县茅草街龙腾渔网加工厂=1_已验客户群
+            当你调用本方法：transfer(FromDatabseName="1_已验客户群",ToDatabaseName="2_发送短信数据库"):
+            此时可以转移成功。
+            但是当你调用方法：transfer(FromDatabseName="0_初始数据库",ToDatabaseName="1_已验客户群"):
+            则会发生数据丢失。因为该数据的FromDatabseName参数与配置文件中1_已验客户群不相同
+        """
+        #1.假弹出数据。
+        if self.isEmpty(FromDatabaseName):
+            PrintTool.print("DatabaseCenter:数据库["+FromDatabaseName+"]为空,无法转移数据")
+            return None
+        fromDatas = self.falsePop(databaseName=FromDatabaseName, num=num)
+        arr=self._addDataToDataCenter(fromDatas, FromDatabaseName, ToDatabaseName)
+        self.putDatas(databaseName=ToDatabaseName, datas=arr)
+        PrintTool.print('DatabaseCenter:成功转移数据'+str(len(arr))+'条:从['+FromDatabaseName+']到['+ToDatabaseName+']。以下是转移的数据:'+str(arr),fontColor='green')
+        return self.pop(databaseName=FromDatabaseName, num=num)
+        # #2.判断中央数据库中是不是已经存在了这条数据
+        # self.datasCenter.addKeys()
+        # self.putDatas(databaseName=ToDatabaseName,datas=self.falsePop(databaseName=FromDatabseName,num=num))
+        # return self.pop(databaseName=FromDatabseName, num=num)
     #次要方法
     #X
     # def setDatas(self,databaseName="",datas=[],key="公司名"):#Gengg修改数据库。最好不要用，否则有风险哦！！
@@ -384,7 +480,7 @@ class DatabaseHandler:
     def _makeStandard(self,datas=[]):
         if len(datas)==0:
             return
-        excel_standard_hands = self.excelTool.getHeader(path="../template/customerData_template.xlsx")
+        excel_standard_hands = self.excelTool.getHeader(path="../template/customerData_template.xls")
         if not type(datas)==type([]):
             datas=[datas]
         ks=list(datas[0].keys())
@@ -434,15 +530,15 @@ class DatabaseHandler:
         fileNames=[]
         for root, dirs, files in os.walk(dirPath):
             for file in files:
-                if  file.endswith('.xlsx'):
+                if  file.endswith('.xls'):
                     fileNames.append(dirPath+'/'+file)
         return fileNames
 
 
 if __name__ == '__main__':
-    # save(databaseName='allCustomer', filePath='../smelter/顺企网_key=吊装带.xlsx')
+    # save(databaseName='allCustomer', filePath='../smelter/顺企网_key=吊装带.xls')
     # datas=DatabaseHandler().pop(databaseName='allCustomer',num=3)
-    a=DatabaseHandler().transfer(FromDatabseName='allCustomer',ToDatabaseName='0_初始客户群',num=1)
+    a=DatabaseHandler().transfer(FromDatabseName='smelter',ToDatabaseName='0_初始客户群',num=-1)
     print(a)
     #增
     #删
