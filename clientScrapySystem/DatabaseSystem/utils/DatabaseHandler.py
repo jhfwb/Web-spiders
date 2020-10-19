@@ -2,9 +2,10 @@
 import os
 import re
 
-from utils.IndexTool import IndexDatabase
-from utils.RR_Comments import ArrTool, JudgeType, ReflexTool, PrintTool
-from utils.excelTool.ExcelTool import ExcelTool
+from _utils.CsvTool import CsvTool
+from _utils.IndexTool import IndexDatabase
+from _utils.RR_Comments import ArrTool, JudgeType, ReflexTool, PrintTool
+from _utils.excelTool.ExcelTool import ExcelTool
 class DatabaseHandler:
     """
     主要实现对数据的增删改查取。
@@ -15,10 +16,13 @@ class DatabaseHandler:
     获得数据库所有数据:getAll
     """
     def __init__(self):
+        self.p=''#这个是文件所在位置 非常关键。是运行环境的位置可能是..。/也可能是其他
+        self.BeforePath=self.p+'database/' #  前缀路径
         #创建一个总的
-        self.datasCenter=IndexDatabase(path='../database/datasCenter.txt')
+        self.csvTool=CsvTool()
+        self.datasCenter=IndexDatabase(path=self.BeforePath+'datasCenter.txt')
         #初始化数据中心数据。
-        self.indexDatabase=IndexDatabase(path='../database/indexData.txt')
+        self.indexDatabase=IndexDatabase(path=self.BeforePath+'indexData.txt')
         self.excelTool=ExcelTool()
         self.indexKey="公司名"#数据库唯一标识码
         self.re_不允许仅有特殊字符=re.compile(r'[\u4e00-\u9fa5_a-zA-Z0-9_]+')
@@ -31,8 +35,6 @@ class DatabaseHandler:
             return True
         else:
             return False
-
-
     def datasZip(self,keyData,data):
         keyData=self._makeStandard(keyData)[0]
         data=self._makeStandard(data)[0]
@@ -71,7 +73,7 @@ class DatabaseHandler:
             path=self._getLastFENQUname(databaseName=databaseName)
             if path==None:
                 return []
-            datas=self.excelTool.optionExecl(mode='r',path=path)
+            datas=self.csvTool.optionCsv(mode='r',path=path)
             return [datas[len(datas)-1]]
         else:
             allDatas = self.getAll(databaseName=databaseName)
@@ -89,21 +91,24 @@ class DatabaseHandler:
         @param: num int 弹出的数量
         @return: 返回弹出的数据。
         """
+
         #获取数据库大小。判断数据库大小是否小于取出数量。如果小于则报错
         if num==-1:
             datas=self.getAll(databaseName=databaseName)
-            excels=self._getExcelFileNameList(dirPath='../database/'+databaseName)
+            excels=self._getCsvFileNameList(dirPath=self.BeforePath +databaseName)
             for excel in excels:
                 os.remove(excel)
             return datas
         lastFENQU=self._getLastFENQUname(databaseName=databaseName)
-        datas=self.excelTool.optionExecl(mode='r',path=lastFENQU)
+        datas=self.csvTool.optionCsv(mode='r',path=lastFENQU)
+        # datas=self.excelTool.optionExecl(mode='r',path=lastFENQU)
         if len(datas)>=num:
             dataspop=datas[len(datas)-num:len(datas)]
             if len(datas)==num:#删除这个分区
                 os.remove(lastFENQU)
             else:
-                self.excelTool.optionExecl(mode='w',path=lastFENQU,datas=datas[0:len(datas) - num])
+                self.csvTool.optionCsv(mode='w',path=lastFENQU,datas=datas[0:len(datas) - num])
+                # self.excelTool.optionExecl(mode='w',path=lastFENQU,datas=datas[0:len(datas) - num])
             self.initDatabase(databaseName=databaseName)
             return dataspop
         else:
@@ -124,7 +129,6 @@ class DatabaseHandler:
     #     for
     #     ReflexTool.execute(filterFunction, option)
     #
-
     def backRollFunction(self,function="",option={},errorFunction="",errorOption={}):
         if JudgeType.getType(function)!='method' and JudgeType.getType(function)!='function':
             raise ValueError("参数错误，function必须是可执行函数。")
@@ -171,7 +175,7 @@ class DatabaseHandler:
         processedDataRecorder= self.processedDataRecorder.get(databaseName)
         if processedDataRecorder == None:
             self.processedDataRecorder.setdefault(databaseName, IndexDatabase(
-                path='../database/' + databaseName + '/ processedDataIndex.txt'))
+                path=self.BeforePath + databaseName + '/ processedDataIndex.txt'))
             processedDataRecorder = self.processedDataRecorder.get(databaseName)
         return processedDataRecorder
     # def checkRepeatData(self,keyName):
@@ -182,7 +186,6 @@ class DatabaseHandler:
         datakeyNames=list(map(lambda x:x[self.indexKey],datas))
         self.putDatas(databaseName=databaseName,datas=datas)
         processedDataRecorder.addKeys(datakeyNames)
-
     def putDatas(self,databaseName="",datas=[]):#在末尾添加数据。推荐使用，比较省时间。
         """
         将数据数据保存到数据库中。
@@ -217,35 +220,40 @@ class DatabaseHandler:
                 # self.excelTool.optionExecl(mode='w', datas=databseDatas,
                 #                            path='../database/' + databaseName + '/分区' + str(++num) + '.xls')
                 for i in range(cycle):
-                    self.excelTool.optionExecl(mode='w', datas=datas[2000 * i:(2000 * i + 2000)],
-                                               path='../database/' + databaseName + '/分区' + str(num) + '.xls')
+                    self.csvTool.optionCsv(mode='w', datas=datas[2000 * i:(2000 * i + 2000)],
+                                               path=self.BeforePath + databaseName + '/分区' + str(num) + '.csv')
+                    # self.excelTool.optionExecl(mode='w', datas=datas[2000 * i:(2000 * i + 2000)],
+                    #                            path='../database/' + databaseName + '/分区' + str(num) + '.xls')
                     num += 1
             else:
-                oldDatas = self.excelTool.optionExecl(mode='r', path=FENQU)
+                oldDatas = self.csvTool.optionCsv(mode='r', path=FENQU)
                 shengyu = 2000 - len(oldDatas)
                 if shengyu - len(datas) >= 0:  # 刚刚好，直接加进去
-                    self.excelTool.optionExecl(mode='w', path=FENQU, datas=oldDatas + datas)
+                    self.csvTool.optionCsv(mode='w', path=FENQU, datas=oldDatas + datas)
                 else:
-                    self.excelTool.optionExecl(mode='w', path=FENQU, datas=oldDatas + datas[0:shengyu])
+                    self.csvTool.optionCsv(mode='w', path=FENQU, datas=oldDatas + datas[0:shengyu])
                     datas=datas[shengyu:len(datas)]
                     cycle = int(len(datas) / 2000) + 1
                     num = int(FENQU[len(FENQU) - 6])+1
                     # self.excelTool.optionExecl(mode='w', datas=databseDatas,
                     #                            path='../database/' + databaseName + '/分区' + str(++num) + '.xls')
                     for i in range(cycle):
-                        self.excelTool.optionExecl(mode='w', datas=datas[2000 * i:(2000 * i + 2000)],
-                                                   path='../database/' + databaseName + '/分区' + str(num) + '.xls')
+                        self.csvTool.optionCsv(mode='w', datas=datas[2000 * i:(2000 * i + 2000)],
+                                                   path=self.BeforePath+ databaseName + '/分区' + str(num) + '.xls')
                         num += 1
     def _getLastFENQUname(self,databaseName=""):
-        excels=self._getExcelFileNameList(dirPath=self._getDatabasePath(databaseName=databaseName))
-        if len(excels)==0:
+        """
+        获得数据库中最后一个分区的名称。如果没有，则返回None
+        """
+        csvs=self._getCsvFileNameList(dirPath=self._getDatabasePath(databaseName=databaseName))
+        if len(csvs)==0:
             return None
         mid=-1
-        for excel in excels:
-            mun=int(excel[len(excel) - 6])
+        for excel in csvs:
+            mun=int(excel[len(excel) - 5])
             if mun>mid:
                 mid=mun
-        return '../database/'+databaseName+'/分区'+str(mid)+".xls"
+        return self.BeforePath+databaseName+'/分区'+str(mid)+".csv"
     def initDatabase(self, databaseName=""):
         """
         初始化数据库。
@@ -285,11 +293,10 @@ class DatabaseHandler:
         #     xlsxFiles=self._getExcelFileNameList(dirPath="../database/"+databaseName)
         # else:
         #     raise ValueError("参数databseName与参数dirPath不可以同时赋值，或者同时不赋值，会产生冲突。只允许其中一个赋值")
-        xlsxFiles = self._getExcelFileNameList(dirPath='../database/'+databaseName)
+        csvFiles = self._getCsvFileNameList(dirPath='database/'+databaseName)
         datas=[]
-        print(xlsxFiles)
-        for xlsxFile in xlsxFiles:
-            data=self.excelTool.optionExecl(path=xlsxFile,mode='r')
+        for csvFile in csvFiles:
+            data=self.csvTool.optionCsv(path=csvFile,mode='r')
             datas=datas+data
         return datas
     def initDatasCenter(self):
@@ -447,7 +454,7 @@ class DatabaseHandler:
     # def _cutDataByIndexkey(self,datas=[],indexkeys=[],key=""):
     #     return list(filter(lambda data:data[key] not in indexkeys,datas))
     def _getDatabasePath(self,databaseName=""):
-        return '../database/'+databaseName
+        return self.BeforePath+databaseName
     def _getDatabaseIndexs(self,databaseName=""):
         """
         获得数据库索引。如果没有这个索引，则会自动创建一个索引文件。
@@ -478,9 +485,12 @@ class DatabaseHandler:
     #             newDatas.append(data)
     #     return newDatas
     def _makeStandard(self,datas=[]):
+        """
+        将datas数据标准化。根据csv中的数据
+        """
         if len(datas)==0:
             return
-        excel_standard_hands = self.excelTool.getHeader(path="../template/customerData_template.xls")
+        excel_standard_hands = self.csvTool.getHeader(path=self.p+"template/customerData_template.csv")
         if not type(datas)==type([]):
             datas=[datas]
         ks=list(datas[0].keys())
@@ -514,6 +524,7 @@ class DatabaseHandler:
                 return None
         return ""
     def _change_standard_key(self,key,excel_standard_hands,data):
+
         for excel_standard_hand in excel_standard_hands:
             try:
                 if data[excel_standard_hand]==None:
@@ -522,7 +533,7 @@ class DatabaseHandler:
             except:
                 return None
         return ""
-    def _getExcelFileNameList(self,dirPath=""):
+    def _getCsvFileNameList(self,dirPath=""):
         """
         获得文件夹中所有的excel文件名称列表，并返回它。
         @param: path:需要查找的文件夹路径
@@ -530,7 +541,7 @@ class DatabaseHandler:
         fileNames=[]
         for root, dirs, files in os.walk(dirPath):
             for file in files:
-                if  file.endswith('.xls'):
+                if  file.endswith('.csv'):
                     fileNames.append(dirPath+'/'+file)
         return fileNames
 

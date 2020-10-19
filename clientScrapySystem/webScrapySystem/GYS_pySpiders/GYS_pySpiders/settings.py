@@ -26,7 +26,8 @@ COMMANDS_MODULE = 'clientScrapySystem.webScrapySystem.GYS_pySpiders.GYS_pySpider
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 10
+# 下载器延迟。不能太快，否则可能被服务器封停。单位秒
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16

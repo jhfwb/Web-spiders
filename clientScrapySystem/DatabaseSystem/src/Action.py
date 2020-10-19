@@ -9,7 +9,7 @@ from clientScrapySystem.DatabaseSystem.utils.DatabaseHandler import DatabaseHand
 from clientScrapySystem.DatabaseSystem.utils.Engine import Engine, Task
 from clientScrapySystem.chromeRobotSystem.Context import Context
 from clientScrapySystem.chromeRobotSystem.天眼查 import 天眼查
-from utils.RR_Comments import PrintTool, StringTool
+from _utils.RR_Comments import PrintTool, StringTool
 
 
 class Action:
@@ -22,14 +22,20 @@ class Action:
                           toDatabases=['0_初始客户群','其他产品客户群','其他区域客户群'],num=1)
 
         def first_():# 监听smelter中有没有数据。将smelter中的csv文件转成xlsx文件。并转存到0_初始客户群的数据库中
-            PrintTool.print('=============================程序开始运行====================', fontColor='gray', LogPath=PrintTool.LogPath)
+            PrintTool.print('=========================程序开始运行====================', fontColor='gray', LogPath=PrintTool.LogPath)
             PrintTool.print('first_方法开始执行!',fontColor='gray', LogPath=PrintTool.LogPath)
-            bol=CsvToXlsx().working()
+            bol=CsvToXlsx().working2()
             # 将semlter所有数据转移过去。如果在中央数据库已经存在的数据，则不会被转移过去。
-            self.datesTransfer.transferFilter(DatesTransfer.fun_template)
             DatesTransfer(databaseHandler=self.hander,fromDatabse='smelter',
-                          toDatabases=['0_初始客户群','其他产品客户群','其他区域客户群'],num=1).\
+                          toDatabases=['0_初始客户群','其他产品客户群','其他区域客户群'],num=-1).\
                         transferFilter(DatesTransfer.fun_template)
+            #bug测试中........
+            ##测试任务
+            # 1.数据能否达到其功能
+            # 2.能否正常转移数据。
+            # 3.能否能够按照过滤器转移数据
+            # 4. 重复数据是否会剔除
+            assert 1/0 
         #启动机器人吧。可以开始验证了。
         def secound_():#将数据从0中取出来，并
             def use天眼查Robot(data):#经过天眼查处理，获得的天眼查数据

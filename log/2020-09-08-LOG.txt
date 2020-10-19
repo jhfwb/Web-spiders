@@ -1,0 +1,4 @@
+2020-09-08 21:51:08 | DatabaseCenter:数据库[smelter]为空,无法转移数据------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\clientScrapySystem\DatabaseSystem\src\DatesTransfer.py_____MODULE:transferFilter_____LINE:89
+2020-09-08 21:51:29 | DatabaseCenter:数据库[smelter]为空,无法转移数据------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\clientScrapySystem\DatabaseSystem\src\DatesTransfer.py_____MODULE:transferFilter_____LINE:89
+2020-09-08 21:52:32 | DatabaseCenter:数据库[smelter]为空,无法转移数据------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\clientScrapySystem\DatabaseSystem\src\DatesTransfer.py_____MODULE:transferFilter_____LINE:90
+2020-09-08 21:53:11 | DatabaseCenter:数据库[smelter]为空,无法转移数据------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\clientScrapySystem\DatabaseSystem\src\DatesTransfer.py_____MODULE:transferFilter_____LINE:89

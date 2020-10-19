@@ -4,7 +4,7 @@ import time
 
 import pinyin
 
-from utils.RR_Comments import ChinaWordTool
+from _utils.RR_Comments import ChinaWordTool
 
 #索引库
 class indexObject:
@@ -227,12 +227,15 @@ class IndexDatabase:
         如果添加失败。则会返回None
 
         """
+        if keyNames=="":
+            return
         if type(keyNames) == type(""):
             keyNames = [keyNames]
         if type(keyNames) != type([]):
             raise ValueError("KeyName必须是list类型," + str(keyNames) + "不是list类型")
         bos=[]
         for keyName in keyNames:
+
             bo=self._addSingleKey(keyName,status)
             if bo:
                 bos.append(keyName)

@@ -8,11 +8,12 @@ from scrapy.cmdline import execute
 # obj={'keyName':[]}
 #
 # file=open(file='config.xml',mode='r',encoding='utf-8')
-# lines=file.readlines()
+# lines=file.readli           nes()
 # for line in lines:
 #     re.sub(r'\{\{.*\}\}',line)
 # print(lines)
 # assert 1/0
+# 运行cmd代码，运行爬虫文件
 execute("scrapy crawlall".split())
 
 # execute(['scrapy', 'crawl', '_pySpider'])

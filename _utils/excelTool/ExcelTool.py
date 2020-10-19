@@ -5,7 +5,8 @@ import time
 import openpyxl
 from openpyxl.styles import Font
 
-from utils.excelTool.dataReadArr import csvFileTool
+from _utils.CsvTool import CsvTool
+from _utils.excelTool.dataReadArr import csvFileTool
 
 
 class ExcelTool:
@@ -135,6 +136,16 @@ class ExcelTool:
         for hc in rows_data.pop(0):
             headLine.append(hc.value)
         return headLine
+    def changeExeclToCsvFile(self,path="",encoding='utf-8'):
+        """
+        #将csv文件转成excel文件。目前只能转换第一个表格
+        :param path:
+        :param encoding:
+        :return:
+        """
+        datas=self.optionExecl(path=path, mode='r', )
+        tool = CsvTool()
+        tool.optionCsv(path=path.replace('.xlsx','.csv'), encoding=encoding, mode='w',datas=datas)
     def chageCsvToExcelFile(self,path="",encoding='utf-8',sheetName="Sheet1"):
         """
         #将csv文件转成excel文件

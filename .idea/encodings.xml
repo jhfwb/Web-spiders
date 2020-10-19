@@ -2,8 +2,11 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Include/scripyData/慧聪网test.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Include/scripyData/顺企网2020-10-12.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/Include/scripyData/顺企网test.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/Include/scripyData/顺企网test1.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/clientScrapySystem/DatabaseSystem/database/smelter/顺企网_key=吊装带_r.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/clientScrapySystem/DatabaseSystem/garbage/顺企网_key=吊装带.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/clientScrapySystem/DatabaseSystem/src/test.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/log/2020-07-30-LOG.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/GYS_pySpiders/顺企网_key=涤纶.csv" charset="GBK" />

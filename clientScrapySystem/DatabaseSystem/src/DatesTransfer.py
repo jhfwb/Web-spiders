@@ -1,5 +1,5 @@
 from clientScrapySystem.DatabaseSystem.src.FilterData import FilterData
-from utils.RR_Comments import PrintTool, ArrTool
+from _utils.RR_Comments import PrintTool, ArrTool
 
 
 class DatesTransfer:
@@ -57,6 +57,9 @@ class DatesTransfer:
         for data in datas:
             #判断这个数据的键值个数
             #获得数组
+            #将数据标准化。
+            if data[self.databaseHandler.indexKey]=="":
+                continue
             NoneLen=ArrTool.getNoneLen(list(data.values()))
             if NoneLen/len(list(data.values()))>=2:
                 status=0
@@ -79,10 +82,16 @@ class DatesTransfer:
                                     key] + ']。以下是转移的数据:' + str(statusAndDatas[key]),
                                 fontColor='green',LogPath=PrintTool.LogPath)
     def transferFilter(self,function):#经过过滤的transger。转移的时候必须判断
+        """
+        过滤性转移。
+        """
         if self.databaseHandler.isEmpty(self.fromDatabse):
             PrintTool.print("DatabaseCenter:数据库[" + self.fromDatabse + "]为空,无法转移数据",LogPath=PrintTool.LogPath)
             return None
-        datas =  self.databaseHandler.falsePop(databaseName=self.fromDatabse, num=self.num)#取出数据
+        datas =  self.databaseHandler.falsePop(databaseName=self.fromDatabse, num=self.num)#1.取出数据
+
+        print(datas)
+        datas = self.databaseHandler._makeStandard(datas)#2.将数据标准化
         self.putDataFilter(function, datas,self.toDatabases)
         return self.databaseHandler.pop(databaseName=self.fromDatabse, num=self.num)
 

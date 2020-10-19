@@ -1,0 +1,56 @@
+2020-10-12 11:55:37 [scrapy.core.scraper] ERROR: Error processing {'_catchTime': '2020-10-12 11:55:37',
+ '_time': '',
+ '_url': 'https://www.11467.com/qiye/21217599.htm',
+ '产品': '长期大量收购库存成品手袋 , 箱包。手袋面料 , 尼龙材料 , 纯棉布料 , 箱包面料 , 里料 , 薄料 , 里布。PVC , PU , '
+       'PE , EVA材料 , 840D , 1680D , 210D , 600D , 300D , 900D , 190D , 150D , '
+       '1800D , 1200D , 70D , 800D等。拉链 , 拉链头 , 拉链布 , 五金配件 , 塑料扣具。PP织带 , 纯棉织带 , '
+       '丝带 , 缎带 , 人字织带 , 尼龙织带 , 弹力松紧带 , PP绳 , 棉绳 , 尼龙绳 , 涤纶纱 , 尼龙纱 , 丙纶纱 , 棉纱 '
+       ', 尼龙线 , 棉线 , 绣花线。玩具布料 , 鞋材布料 , 服装布料等厂家一切库存货清仓 , 转厂 库存热线➡13662876745  '
+       '陈生:欢迎来电咨询......是尾货剩下来的要 , 如果是公司出售就不要',
+ '信息': '法人名称:东莞市中堂鸿华皮革布料经营部主要经营产品:长期大量收购库存成品手袋 , 箱包。手袋面料 , 尼龙材料 , 纯棉布料 , 箱包面料 '
+       ', 里料 , 薄料 , 里布。PVC , PU , PE , EVA材料 , 840D , 1680D , 210D , 600D , '
+       '300D , 900D , 190D , 150D , 1800D , 1200D , 70D , 800D等。拉链 , 拉链头 , 拉链布 '
+       ', 五金配件 , 塑料扣具。PP织带 , 纯棉织带 , 丝带 , 缎带 , 人字织带 , 尼龙织带 , 弹力松紧带 , PP绳 , 棉绳 , '
+       '尼龙绳 , 涤纶纱 , 尼龙纱 , 丙纶纱 , 棉纱 , 尼龙线 , 棉线 , 绣花线。玩具布料 , 鞋材布料 , '
+       '服装布料等厂家一切库存货清仓 , 转厂 库存热线➡13662876745  陈生:欢迎来电咨询......是尾货剩下来的要 , '
+       '如果是公司出售就不要 '
+       '营业执照号码:92441900MA4YAWULXF经营状态:在业经营模式:经销批发职员人数:51人所属分类:纱线公司所属城市:东莞企业网顺企编码:21217599商铺:http://21217599.b2b.11467.com/',
+ '公司名': '东莞市中堂鸿华皮革布料经营部',
+ '地址': '东莞 东莞市中堂镇蕉利东坊新村佳美百货旁',
+ '城市': '',
+ '客户': '陈东',
+ '手机': '13662876745',
+ '来源': '',
+ '模式': '',
+ '电话': '13662876745',
+ '经营状况': '东莞企业网',
+ '网址': '',
+ '规模': '',
+ '资本': '',
+ '邮箱': '3151386554@qq.com'}
+Traceback (most recent call last):
+  File "C:\Users\1234567\Desktop\git库存储\Web-spiders\clientScrapySystem\webScrapySystem\GYS_pySpiders\GYS_pySpiders\pipelines.py", line 61, in process_item
+    writer.writerow(item)
+  File "C:\Users\1234567\AppData\Local\Programs\Python\Python38-32\lib\csv.py", line 154, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+  File "C:\Users\1234567\AppData\Local\Programs\Python\Python38-32\lib\encodings\mbcs.py", line 25, in encode
+    return mbcs_encode(input, self.errors)[0]
+UnicodeEncodeError: 'mbcs' codec can't encode characters in position 0--1: invalid character
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\1234567\Desktop\git库存储\Web-spiders\lib\site-packages\twisted\internet\defer.py", line 654, in _runCallbacks
+    current.result = callback(current.result, *args, **kw)
+  File "C:\Users\1234567\Desktop\git库存储\Web-spiders\clientScrapySystem\webScrapySystem\GYS_pySpiders\GYS_pySpiders\pipelines.py", line 67, in process_item
+    writer.writerow(item)
+  File "C:\Users\1234567\AppData\Local\Programs\Python\Python38-32\lib\csv.py", line 154, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+  File "C:\Users\1234567\AppData\Local\Programs\Python\Python38-32\lib\encodings\mbcs.py", line 25, in encode
+    return mbcs_encode(input, self.errors)[0]
+UnicodeEncodeError: 'mbcs' codec can't encode characters in position 0--1: invalid character
+2020-10-12 11:55:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://b2b.11467.com/search/-6da47eb6-pn2.htm> (referer: https://b2b.11467.com/search/-6da47eb6-pn1.htm)
+2020-10-12 11:55:41 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (301) to <GET http://www.11467.com/zhongshan/co/172876.htm> from <GET https://www.11467.com/qiye/20035765.htm>
+2020-10-12 11:55:44 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://b2b.11467.com/search/-6da47eb6-pn20.htm> (referer: https://b2b.11467.com/search/-6da47eb6-pn1.htm)
+2020-10-12 11:55:44 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.11467.com/wuxi/co/243453.htm> (referer: https://b2b.11467.com/search/-6da47eb6-pn2.htm)
+顺企网_爬虫 成功获得以下数据！！2020-10-12-11:55:45
