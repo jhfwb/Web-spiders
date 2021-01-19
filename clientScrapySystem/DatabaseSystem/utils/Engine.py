@@ -2,7 +2,7 @@ import threading
 from queue import Queue
 from types import MethodType,FunctionType
 import time
-from _utils.RR_Comments import ReflexTool, JudgeType, PrintTool
+from _xhr_tool._utils.RR_Comments import ReflexTool, JudgeType, PrintTool
 
 
 class Engine:

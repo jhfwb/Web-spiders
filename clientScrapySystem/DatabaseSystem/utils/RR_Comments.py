@@ -2,8 +2,6 @@ import os
 import re
 import sys
 import time
-
-
 class PrintTool:
     # @staticmethod
     # def writeLog(path='',mode='a'):

@@ -1,12 +1,7 @@
-import threading
-import time
 from queue import Queue
-
-from selenium.webdriver.common.keys import Keys
 
 from clientScrapySystem.chromeRobotSystem.Context import Context
 from clientScrapySystem.chromeRobotSystem.domain.Action import Action
-from _utils.excelTool.ExcelTool import ExcelTool
 
 
 class CCCF水带爬虫:

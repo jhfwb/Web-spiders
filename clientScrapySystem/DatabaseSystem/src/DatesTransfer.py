@@ -1,5 +1,5 @@
 from clientScrapySystem.DatabaseSystem.src.FilterData import FilterData
-from _utils.RR_Comments import PrintTool, ArrTool
+from _xhr_tool._utils.RR_Comments import PrintTool, ArrTool
 
 
 class DatesTransfer:

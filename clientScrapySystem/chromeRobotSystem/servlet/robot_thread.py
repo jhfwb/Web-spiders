@@ -3,7 +3,7 @@ from queue import Queue
 
 
 from clientScrapySystem.chromeRobotSystem.innerUtils.web_option_methond import MyOption
-from _utils.RR_Comments import PrintTool
+from _xhr_tool._utils.RR_Comments import PrintTool
 class MyPipelineThread(threading.Thread):
     cutMessages=[('',0)]
     queue=[]

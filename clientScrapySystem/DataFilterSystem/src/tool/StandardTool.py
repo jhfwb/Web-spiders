@@ -1,4 +1,4 @@
-from _utils.CsvTool import CsvTool
+from _xhr_tool._utils.CsvTool import CsvTool
 class StandardTool:
     """
     标准化工具，由于爬取的客户资源不尽相同，因此需要将爬取的信息进行标准化处理。
