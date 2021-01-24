@@ -1,6 +1,5 @@
-from _xhr_tool import Device
 from _xhr_tool._utils.CsvTool import CsvTool
-from clientScrapySystem.phoneMessageRobot.dataHandle.DataHandle import DataHandle
+from clientScrapySystem.phoneMessageRobot.dataHandle.engine.DataHandle import DataHandle
 
 
 class Action:
@@ -18,20 +17,18 @@ class Action:
         # fpWriter = open(mode='a', file='sendedPhone/sendedPhone.txt')
         # tool.print("运行cmd代码:正在连接手机中...", fontColor='blue')
         # 1.处理数据,并获得数据集。
-        datas = DataHandle().dataHandle(inputPath='dataHandle/handleDatas/test.csv', keys=['phone', 'message'], idkey='phone',
-                             outputPath='dataHandle/handleDatas/send.csv')
-        # 1.加载csv文件，获得已发送短信的集合。
-        sendedDatas = CsvTool().optionCsv(path='dataHandle/disk/sendedPhone.csv', mode='r', isCreateFile=True)
-        print(sendedDatas)
-        # 2.加载csv文件，获得需要发送的短信集合。
-        print(datas)
+        DataHandle().dataHandle(filePath='dataHandle/test_2.csv')
+        # 2.获得待发送数据。
+        data()=CsvTool().popLastData(path='test.csv', isPop=False)
 
-        # 3.筛选，去掉重复的数据。获得待发送数据。将该数据保存起来。
-
-
-
-
-
+        """
+        1. 从数据中取出末尾数据
+        2. 发送数据
+            成功:在仓库中取出数据
+            失败:不取出数据
+        3. 
+        """
+        # 出一个数据，保存一个数据
 
         # # #循环执行脚本
         # robot = Robot()

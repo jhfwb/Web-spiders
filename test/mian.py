@@ -1,10 +1,15 @@
+import os
 
-def foo(*args, **kwargs):
-    print('args =', args)
-    print('kwargs = ', kwargs)
+from test.你好.haha import haha
 
 if __name__ == '__main__':
-    foo(3,a=1,b=2)
-    a={}
-    print(a.get('note'))
-
+    print(1)
+    haha
+    print(os.getcwd())
+    os.chdir("C:/Users/1234567/Desktop/git库存储/Web-spiders")
+    print(os.getcwd())
+    print(os.path.exists('test/你好/test'))
+    #
+    # print(os.getcwd())
+    # print(os.path.exists('你好/test'))
+    # print(dir)
