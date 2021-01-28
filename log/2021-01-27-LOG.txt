@@ -1,0 +1,112 @@
+2021-01-27 11:16:56 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:92
+2021-01-27 14:45:55 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:91
+2021-01-27 14:47:50 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:91
+2021-01-27 15:12:12 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:91
+2021-01-27 15:39:26 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:91
+2021-01-27 15:44:55 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 15:45:56 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 15:55:38 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 15:56:44 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 15:57:28 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 15:57:59 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:00:09 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:00:39 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:00:59 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:01:35 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:01:41 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:02:20 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:02:33 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:03:47 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:05:53 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:09:51 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:10:32 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:12:06 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:13:55 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:14:21 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:18:55 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:19:08 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:19:36 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:20:02 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:20:19 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:20:32 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:21:05 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:21:24 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:21:47 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:22:25 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:23:15 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:23:29 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:24:25 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:24:46 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:25:44 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:26:31 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:27:08 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:28:13 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:30:29 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:30:53 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:31:33 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:31:57 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:32:22 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:32:53 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:34:49 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:35:39 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:36:23 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:37:10 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:37:54 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:38:07 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:39:46 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:40:32 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:41:23 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:42:42 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:43:50 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:44:06 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 16:44:50 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 17:39:22 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 17:44:56 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 17:45:19 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 17:47:22 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 17:50:43 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 17:51:06 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 17:53:51 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 17:54:38 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 17:55:48 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 18:02:10 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 18:02:25 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 18:02:44 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 18:03:20 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 18:03:33 | 成功爬取信息:{'': '31省区市新增确诊75例 本土55例'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 18:07:05 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 18:07:32 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:07:13 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:07:41 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:08:05 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:09:22 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:12:49 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:13:27 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:13:47 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:16:12 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:23:39 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:28:19 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:28:38 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:35:05 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:37:00 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:39:01 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:40:26 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:42:36 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:43:14 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:43:34 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:44:52 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:45:41 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:45:51 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:46:44 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:46:55 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:47:29 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:52:24 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:53:55 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 21:59:28 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 22:12:11 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 22:15:22 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 22:37:39 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 22:39:28 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 22:40:20 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 22:41:10 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93
+2021-01-27 22:45:03 | 成功爬取信息:{'': '春运期间持核酸阴性证明不需隔离'}------------FILE:C:\Users\1234567\Desktop\git库存储\Web-spiders\_xhr_tool\chromeRobot\servlet\robot_thread.py_____MODULE:run_____LINE:93

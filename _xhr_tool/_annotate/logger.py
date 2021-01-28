@@ -13,3 +13,5 @@ def log(func):
             kwargs.pop('note')
         func(*args, **kwargs)
     return log1 # 返回需要执行的新的方法
+
+

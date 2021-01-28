@@ -1,9 +1,10 @@
 import threading
 from queue import Queue
 
-
-from clientScrapySystem.chromeRobotSystem.innerUtils.web_option_methond import MyOption
 from _xhr_tool._utils.RR_Comments import PrintTool
+from _xhr_tool.chromeRobot.web_option_methond import MyOption
+
+
 class MyPipelineThread(threading.Thread):
     cutMessages=[('',0)]
     queue=[]
@@ -88,6 +89,7 @@ class MyPipelineThread(threading.Thread):
                     PrintTool.print("成功爬取信息:" +str(item), fontColor='gray', LogPath=PrintTool.LogPath)
                     self.itemsQueue.put(item)
 
-
+if __name__ == '__main__':
+    pass
 
 

@@ -3,7 +3,8 @@
 rem ±ÍÃ‚
 title   Git Working
 cls 
-
+echo git’Àªß:  jhfwb
+echo git√‹¬Î:  jhfwb512.
 goto selectAll
 
 pause

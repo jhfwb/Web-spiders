@@ -1,5 +1,12 @@
 def relpath(file):
-    """ 将相对路径转成绝对路径，并且该相对路径不随着入口函数变化而变化"""
+    """
+    将相对路径转成绝对路径，并且该相对路径不随着入口函数变化而变化
+    :param str file : 相对路径
+
+    usage:
+        >>> from _xhr_tool._utils import relpath
+        >>> relpath('../rest.csv')
+    """
     from sys import _getframe
     from pathlib import Path
     frame = _getframe(1) #获的调用该relpath()方法，的栈
