@@ -32,11 +32,14 @@ class tool:
         :param end: 末尾的字符。(一般是\n或者空字符)
         :return: 返回s的值
         """
+        glock=threading.Lock()
+        glock.acquire()
         fontColorArr = { 'black': 30,'red': 31, 'green': 32, 'yellow': 33, 'blue': 34, 'pink': 35, 'cyan':36 ,'gray': 37}
         line=str(fontColorArr.get(fontColor))
         if fontColorArr.get(fontColor) == None:
             raise ValueError("传入的fontColor有问题！找不到该字体颜色:" + fontColor)
         print('\033[0;' + line + 'm', s,end=end)
+        glock.release()
         return line
     def print(self,s,fontColor='blue',timeStrColor="red",siteColor="pink",):
         """
@@ -132,6 +135,11 @@ class tool:
         else:
             return "text"
 if __name__ == '__main__':
+    tool().print("你好哦")
+    print(222)
+    tool().print("你好哦")
+    tool().print("你好哦")
+    print(111)
     tool().print("你好哦")
 
 

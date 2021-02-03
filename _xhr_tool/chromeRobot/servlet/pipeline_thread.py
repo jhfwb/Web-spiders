@@ -1,11 +1,8 @@
-import time
-from queue import Queue
 from _xhr_tool._annotate import threadingRun
-from _xhr_tool.chromeRobot._decorator.decoratorUtils import DecoratorEngine
+from _xhr_tool.chromeRobot._chromeRobot_tool.decoratorUtils import DecoratorEngine
 
 
 class MyDataSaveThread:
-
     @threadingRun
     def run(self):
         from _xhr_tool.chromeRobot.domain.ChromeFactory import ChromeFactory

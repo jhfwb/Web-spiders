@@ -2,24 +2,19 @@ class Test2:
     pass
 class Test:
     """这是一个测试类
-
     Usage::
 
         >>> import 范本.python注释范本
         >>> Test().test(s='为了掩饰跨行语法，我特地被'+
         ... '劈成两断')
-
     """
-
     name="张三"
     """我是属性注解"""
-
     def test2(self,a,b,c):
         # type: (str,int,Test) -> str
         pass
     def test3(self,s,fontColor,end):
         """打印出有颜色的字体。默认为黑色。打印后返回打印的值。
-
         :param str s: 需要打印的内容
         :param str fontColor: 颜色可以是以下几种 red | green | yellow | pink | blue | gray | black | cyan
         :param end: 末尾的字符。

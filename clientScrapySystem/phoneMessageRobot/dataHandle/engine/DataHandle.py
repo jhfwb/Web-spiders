@@ -200,7 +200,6 @@ class DataHandle:
         self.dataHandler.writeData_arrArr(outputPath, header=header, datas=datas)
         self.dataHandler.writeData_arrArr(err_outputPath, header=srcDatas[0], datas=datasErro)
         return outputPath
-
     def csv_pickDataByKey(self, inputPath='', outputPath='', keys=[]):
         arr = self.dataHandler.readCsvData_arrDict(inputPath)
         newArr = []
@@ -216,7 +215,6 @@ class DataHandle:
             outputPath = inputPath.replace('.csv', '_picked.csv')
         self.dataHandler.writeCsvData_arrDict(path=outputPath, arr=newArr)
         return outputPath
-
     def csv_removeRepeatByKey(self, inputPath='', outputPath='', key=''):
         if key=='':
             raise ValueError('key值为空，则无法去重。。请写入参数key的值')
@@ -235,7 +233,6 @@ class DataHandle:
                 newArr.append(o)
         self.dataHandler.writeCsvData_arrDict(path=outputPath, arr=newArr)
         return outputPath
-
     def _removeStrip(self, line):
         line=line.strip()
         li1=re1.findall(self.re_2,line)

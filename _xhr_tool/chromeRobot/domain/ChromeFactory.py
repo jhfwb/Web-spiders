@@ -1,13 +1,10 @@
-import inspect
-import threading
 from queue import Queue
 
 from _xhr_tool._annotate import singleObj
-from _xhr_tool._utils import ReflexUtils
-from _xhr_tool.chromeRobot._decorator.decoratorUtils import DecoratorEngine
+from _xhr_tool.chromeRobot._chromeRobot_tool.decoratorUtils import DecoratorEngine
 from _xhr_tool.chromeRobot.chromeConncet import ChormeDiver
 from _xhr_tool.chromeRobot.servlet.pipeline_thread import MyDataSaveThread
-from _xhr_tool.chromeRobot.servlet.robot_thread import MyPipelineThread
+
 
 
 @singleObj
@@ -18,6 +15,7 @@ class ChromeFactory:
     3. 启动数据引擎。
     """
     def __init__(self):
+        from _xhr_tool.chromeRobot.servlet.robot_thread import MyPipelineThread
         self._passageway=Queue()
         driver = ChormeDiver().get_driver()
         self.driver=driver
