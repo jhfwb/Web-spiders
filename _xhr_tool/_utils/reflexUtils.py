@@ -19,6 +19,33 @@ class ReflexUtils:
             raise SyntaxError('语法错误:该类:' + str(obj.__class__) + ':的方法中缺少' + decoratorName + '注解,无法指'
                                                                                                      '定执行' + decoratorName + '下的方法。建议在该类中创建一个方法，该方法需要被装饰器' + decoratorName + '注解')
         return result
+    def _removeNotes(self,s):
+        """
+        去除掉字符串中的注解
+        e.g:
+            s='
+            @threadingRun # 我是注解
+            def haha(self,s,dd):
+                print('你好'+s)
+                 # 我是注解
+            '
+            去除后:
+            s='
+            @threadingRun
+            def haha(self,s,dd):
+                print('你好'+s)
+            '
+        :param s: 字符串
+        :return:
+        """
+        arr=s.split('\n')
+        notes=[]
+        for i in range(len(arr)):
+            startInt=arr[i].find('#')
+            if startInt!=-1:
+                arr[i]=arr[i][0:startInt]
+        s="\n".join(arr)
+        return s
     def getFuncByDecoratorName(self,className,decoratorName=""):
         """
         根据装饰器名称，获得被该装饰器修饰的方法。
@@ -29,10 +56,13 @@ class ReflexUtils:
             if hasattr(self,'_'+str(className)+'_src'):
                 pass
             else:
-                setattr(self, '_'+str(className) + '_src',inspect.getsource(className))
+                # 将注释去除掉
+                s=inspect.getsource(className)
+                s=self._removeNotes(s)
+                setattr(self, '_'+str(className) + '_src',s)
             s=getattr(self,'_'+str(className)+'_src')
         except TypeError:
-            raise TypeError('类型错误:'+str(className)+"必须是实例对象")
+            raise TypeError('类型错误:'+str(className)+"必须是类对象")
         arr=[]
         _index=0
         while(_index!=-1):
@@ -48,11 +78,10 @@ class A:
     @threadingRun
     def haha(self,s,dd):
         print('你好'+s)
-
     @threadingRun
     def haha2(self):
         print('你好')
 
 if __name__ == '__main__':
-    # print(ReflexUtils().getFuncByDecoratorName(A(),'@threadingRun'))
-    print(ReflexUtils().excuteDecorator(A(),'@threadingRun','我不好','woow'))
+    print(ReflexUtils().getFuncByDecoratorName(A,'@threadingRun'))
+    # print(ReflexUtils().getFuncByDecoratorName(A(),'@threadingRun','我不好','woow'))

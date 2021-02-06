@@ -1,17 +1,12 @@
-import time
-from queue import Queue
-
 from _xhr_tool._utils import relpath
 from _xhr_tool._utils.CsvTool import CsvTool
-from _xhr_tool._utils.RUtils import tool
-from _xhr_tool.chromeRobot._chromeRobot_tool.dataUtils import DataUtils
-from _xhr_tool.chromeRobot._decorator._decorator import chrome_robot_excute, chrome_datas_catch
-from _xhr_tool.chromeRobot.domain.Action import Action
-from _xhr_tool.chromeRobot.domain.ChromeFactory import ChromeFactory
-import inspect
+from _xhr_tool.chromeRobot.src._chromeRobot_tool import DataUtils
+from _xhr_tool.chromeRobot.src._decorator._decorator import chrome_robot_excute, chrome_datas_catch
+from _xhr_tool.chromeRobot.src.domain.Action import Action
+from _xhr_tool.chromeRobot.src.domain.ChromeFactory import ChromeFactory
 
-from _xhr_tool.chromeRobot.domain.ExcuteResponse import ExcuteResponse
-from _xhr_tool.chromeRobot.domain.HighterAction import HigherAction
+from _xhr_tool.chromeRobot.src.domain.ExcuteResponse import ExcuteResponse
+from _xhr_tool.chromeRobot.src.domain.HighterAction import HigherAction
 
 
 class TestC:

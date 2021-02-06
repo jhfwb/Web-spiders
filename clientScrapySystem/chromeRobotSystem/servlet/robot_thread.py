@@ -2,7 +2,7 @@ import threading
 from queue import Queue
 
 from _xhr_tool._utils.RR_Comments import PrintTool
-from _xhr_tool.chromeRobot.web_option_methond import MyOption
+from _xhr_tool.chromeRobot.src.web_option_methond import MyOption
 
 
 class MyPipelineThread(threading.Thread):

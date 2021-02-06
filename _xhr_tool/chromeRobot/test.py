@@ -1,10 +1,8 @@
-import time
-from queue import Queue
+from _xhr_tool.chromeRobot.src._decorator._decorator import chrome_robot_excute, chrome_datas_catch
+from _xhr_tool.chromeRobot.src.domain.Action import Action
+from _xhr_tool.chromeRobot.src.domain.ChromeFactory import ChromeFactory
 
-from _xhr_tool.chromeRobot._decorator._decorator import chrome_robot_excute, chrome_datas_catch
-from _xhr_tool.chromeRobot.domain.Action import Action
-from _xhr_tool.chromeRobot.domain.ChromeFactory import ChromeFactory
-import inspect
+
 class TestC:
     @chrome_robot_excute
     def run(self):
