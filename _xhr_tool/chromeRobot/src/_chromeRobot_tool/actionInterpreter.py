@@ -14,6 +14,8 @@ class ActionControlInterpreter:
     def judge(self,act):
         if act.get('way')=='connectLastBackFunction':
             return 'control'
+        elif act.get('way')=='save':
+            return 'save'
         else:
             return 'excute'
     def putControlState(self,act={},result=None):

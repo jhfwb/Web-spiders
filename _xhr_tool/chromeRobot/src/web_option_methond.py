@@ -1,6 +1,6 @@
 import sys
 
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
@@ -34,9 +34,14 @@ class MyOption:
             return self.inputwords_element_apparent(cssStr=options["cssStr"],text= options['text'],isClear=options['isClear'],option=options)
         elif options["way"]=="jumpBrowserTab":
             return self.jumpBrowserTab(index=options["index"],option=options)
+        elif options["way"]=="sendDatas":
+            return self.pool.getResponse().setState(success=True,actName=actName.sendDatas,key_datas=options['key_datas'],datas=options['datas'],option=options)
         elif options["way"] == "closeCurrentBroswserTab":
             return self.closeCurrentBroswserTab(option=options)
-
+        elif options["way"] == "findCurrentUrl":
+            return self.get_current_url(key=options["key"],option=options)
+        elif options["way"]=="scroll_browser_top_to_button":
+            return self.scroll_top_to_button(option=options)
         # elif options["way"] =="select_option":
         #     return MyOption.select_option_apparent(driver, options["css"], options['text'],options["timeOut"],options["errProcessCase"])
         # elif options["way"] =="wait":
@@ -44,7 +49,7 @@ class MyOption:
         # elif options["way"] == "is_continue":
         #     pass
         elif options["way"]=="find":#查找信息
-            return self.find_message_apparent(cssStr=options["cssStr"],key=options["key"],mode=options['mode'],index=options['index'],option=options)
+            return self.find_message_apparent(timeOut=options["timeOut"],cssStr=options["cssStr"],key=options["key"],mode=options['mode'],index=options['index'],option=options)
         elif options["way"]=="get":
             return self.get_url(url=options["url"],option=options)
         elif options["way"]=="close":
@@ -106,6 +111,7 @@ class MyOption:
         return self.pool.getResponse().setState(success=True, actName=actName.jumpBrowserTab,index=index,option=option)
     def closeCurrentBroswserTab(self,option):
         self.driver.close()
+        self.driver.switch_to.window(self.driver.window_handles[-1])
         return  self.pool.getResponse().setState(success=True, actName=actName.closeCurrentBroswserTab,option=option)
     def select_option_apparent(self,cssStr,text,timeOut=3):
         if self._waitElement(cssStr,timeOut):
@@ -135,6 +141,36 @@ class MyOption:
             listener.join()
 ####################################################################################################################
     # 根据选择器，点击。点击完毕后，如果有添加新的页面，则会切换到新的页面
+    def scroll_top_to_button(self,option):
+        interval_step = 30
+        interval_time = 0.001
+        wait_time=3 #等待时间
+        interval_wait_time=0.5 #间隔甄别时间
+        _cycle_times=wait_time/interval_wait_time #循环次数
+        js = "return action=document.body.scrollHeight"
+        go_height = self.driver.execute_script(js)
+        current_height=0
+        _sign=1
+        while _sign==1:
+            for i in range(current_height, go_height,interval_step):
+                time.sleep(interval_time)
+                self.driver.execute_script('window.scrollTo('+str(current_height)+', %s)' % (i))
+            current_height=go_height
+            go_height = self.driver.execute_script(js)
+            _index = 0
+            while True:
+                if go_height == current_height:
+                    _index=_index+1
+                    time.sleep(0.5)
+                    go_height = self.driver.execute_script(js)
+                    if _index>=_cycle_times:
+                        _sign=0
+                        break
+                    continue
+                else:
+                    break
+        return self.pool.getResponse().setState(success=True, actName=actName.scroll_browser_top_to_button,option=option)
+
     def click_element_apparent(self,cssStr,timeOut=3,index=0,option={}):
         """
         根据css选择器，点击元素。点击完毕后，如果有添加或者删除新的页面，则会将句柄切换到新的页面。
@@ -147,10 +183,17 @@ class MyOption:
             "removeOldTag"关闭了原来的页面
         """
         if  self._waitElement(cssStr,timeOut) == True:
-            self._get_elements_by_css_selector(cssStr=cssStr,timeOut=timeOut)[index].click()
-            return self.pool.getResponse().setState(success=True, actName=actName.click, cssStr=cssStr,index=index,option=option)
+            element=self._get_elements_by_css_selector(cssStr=cssStr,timeOut=timeOut)[index]
+            elementName=element.text.strip()
+            try:
+                element.click()
+            except ElementClickInterceptedException: #该元素被遮挡,
+                self.driver.execute_script('window.scrollTo(0, %s)' % (0))
+                element.click()
+            return self.pool.getResponse().setState(success=True, actName=actName.click, cssStr=cssStr,index=index,option=option,datas=elementName)
         else:
             return self.pool.getResponse().setState(success=False, actName=actName.click, cssStr=cssStr,errType=responseErr.elementNotFind,index=index,option=option)
+
     def find_message_apparent(self, cssStr, key="", mode='single', timeOut=10,index=0,option={}):
         """
         爬取网站信息
@@ -236,35 +279,9 @@ class MyOption:
             return self.get_url(url=url).setState(actName=actName.initWeb,option=option)
         else:
             return self.pool.getResponse().setState(success=True, actName=actName.initWeb,option=option)
-    def scroll_top_to_button(self):
-        interval_step = 30
-        interval_time = 0.001
-        wait_time=3 #等待时间
-        interval_wait_time=0.5 #间隔甄别时间
-        _cycle_times=wait_time/interval_wait_time #循环次数
-        js = "return action=document.body.scrollHeight"
-        go_height = self.driver.execute_script(js)
-        current_height=0
-        _sign=1
-        while _sign==1:
-            for i in range(current_height, go_height,interval_step):
-                time.sleep(interval_time)
-                self.driver.execute_script('window.scrollTo('+str(current_height)+', %s)' % (i))
-            current_height=go_height
-            go_height = self.driver.execute_script(js)
-            _index = 0
-            while True:
-                if go_height == current_height:
-                    _index=_index+1
-                    time.sleep(0.5)
-                    go_height = self.driver.execute_script(js)
-                    if _index>=_cycle_times:
-                        print('结束了')
-                        _sign=0
-                        break
-                    continue
-                else:
-                    break
+    def get_current_url(self,key,option):
+        return self.pool.getResponse().setState(success=True, actName=actName.findCurrentUrl, option=option,datas=self.driver.current_url,key_datas=key)
+
     def _execute_js(self,line):
         return self.driver.execute_script(line)
     def get_url(self,url,option={}):
@@ -299,12 +316,13 @@ class MyOption:
         """
         self.driver.close()
         self.driver.switch_to.window(self.driver.window_handles[-1])
-
+    def suof(self):
+        self.driver.execute_script("document.body.style.zoom='0.25'")
 if __name__ == '__main__':
-    driver=ChormeDiver().driver
+    # driver=ChormeDiver().driver
     # a=MyOption().get_url('https://www.baidu.com/')
-    a=MyOption().scroll_top_to_button()
-
+    # a=MyOption().scroll_top_to_button()
+    MyOption().suof()
 
     # a=MyOption(driver).wait(cssStr='#hotsearch-content-wrapper > li:nth-child(3) > a > span.title-content-title>span',timeOut=0)
     # print(a)

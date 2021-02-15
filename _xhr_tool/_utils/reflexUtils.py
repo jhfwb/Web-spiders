@@ -8,6 +8,7 @@ class ReflexUtils:
         pass
     def excuteAllDecorator(self, obj={}, decoratorName="", args=[]):
         funcs = self.getFuncByDecoratorName(className=obj.__class__, decoratorName=decoratorName)
+        results=None
         for func in funcs:
             results = func(obj, *args)
         return results

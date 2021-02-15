@@ -9,10 +9,17 @@ class Action:
     # 1. 将方法中的参数变成一个对象。
     # 2. 将对象只行推站处理
     """
-    def __init__(self,memo="请输入备注信息",callBackFunc=lambda x:x):
+    def __init__(self,memo="请输入备注信息",callBackFunc=lambda x:x,packItems=True):
         self.acts=Queue()
         self._bufferActs=[]
         self._callBackFunc=callBackFunc
+    def findCurrentUrl(self,key="current_url",catchDate=True,func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
+        """
+        获得当前页面的url
+        :return:
+        """
+        self._args()
+        return self
     def connectLastBackFunction(self,func="",func_args=[]):
         """
         连接到上一个方法的回调函数的返回值。该返回值会作为参数传入并传入次此方法。(比较难理解)
@@ -37,7 +44,7 @@ class Action:
         #添加回调方法
         valueDict.setdefault('way',methodName)
         self._bufferActs.append(valueDict)
-    def _before_excute(self):
+    def _before_excute(self,save=False):
         """
         在执行Action之前所进行的动作。
         1.将缓存bufferActs中的动作推入到执行栈中
@@ -45,20 +52,29 @@ class Action:
         """
         while len(self._bufferActs)!=0:
             self.acts.put(self._bufferActs.pop(0))
+        if save:
+            self.acts.put({'way':'save'})
     def excuteActionlater(self):
         self.acts.put(self.buffer)
         self.acts.get()
         MyPipelineThread().readyAction.put(self)
         return self
-    def putActionToReadyAct(self):
+    def putActionToReadyAct(self,immediately=True,save=False):
         """
         将action放入准备栈中。当该action被执行的时候，会优先执行该方法
         建议每次使用该方法的时候，建议创建一个新的Action
         :return:
         """
-        self._before_excute()
-        for i in range(self.acts.qsize()):
-            MyPipelineThread().readyAct.put(self.acts.get())
+        #启动保存
+
+        self._before_excute(save=save)
+        if immediately:
+            _size=len(MyPipelineThread().readyAct)
+            for i in range(self.acts.qsize()):
+                MyPipelineThread().readyAct.insert(_size,self.acts.get())
+        else:
+            for i in range(self.acts.qsize()):
+                MyPipelineThread().readyAct.insert(0,self.acts.get())
         return self
     def excute(self):
         #调用解释器，解释动作。
@@ -89,20 +105,20 @@ class Action:
         return self
 
     # =============================================================================
-    def jumpBrowserTab(self,index=-1,func=lambda x:x,func_args=[]):
+    def jumpBrowserTab(self,index=-1,func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
         self._args()
         return self
-    def closeCurrentBroswserTab(self,func=lambda x:x,func_args=[]):
+    def closeCurrentBroswserTab(self,func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
         self._args()
         return self
-    def get(self,url="",func=lambda x:x,func_args=[]):
+    def get(self,url="",func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
         """
         :param url: 访问的网站地址
         :return: 返回action丢向
         """
         self._args()
         return self
-    def key_input(self,text="",cssStr="",isClear=True,func=lambda x:x,func_args=[]):
+    def key_input(self,text="",cssStr="",isClear=True,func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
         """
         在输入框输入内容。(小技巧:可以输入回车。让text=Keys.ENTER就可以)
         :param text:  {str} 输入框输入的内容，可以输入键值：如Keys.ENTER，则输入回车
@@ -121,7 +137,7 @@ class Action:
         #                })
         self._args()
         return self
-    def click(self,cssStr="",index=0,func=lambda x:x,func_args=[]):
+    def click(self,cssStr="",index=0,func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
         """
         根据css点击css的位置
         :param cssStr:  {str} 输入框的select选择器。
@@ -142,7 +158,13 @@ class Action:
         #                'index': index,
         #                     })  # 点
         return self
-    def find(self,cssStr="",key="请为key赋值",mode="single" or "multiple",index=0,func=lambda x:x,catchDate=True,func_args=[]):
+    def scroll_browser_top_to_button(self,func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
+        self._args()
+        return self
+    def sendDatas(self,key_datas="请为key赋值",datas='请为key_datas赋值',func=lambda x:x,catchDate=True,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
+        self._args()
+        return self
+    def find(self,cssStr="",key="请为key赋值",mode="single" or "multiple",index=0,func=lambda x:x,catchDate=True,func_args=[],timeOut=3):
         """
         根据css点击css的位置
         :param cssStr: {str} 输入框的select选择器。
@@ -161,7 +183,7 @@ class Action:
         #                     'index':index
         #                })
         return self
-    def initWeb(self, url="",func=lambda x:x,func_args=[]):
+    def initWeb(self, url="",func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
         """
         初始化便签。将其他标签关闭。只留下一个标签那
         :return:
@@ -169,4 +191,8 @@ class Action:
         self._args()
         return self
 if __name__ == '__main__':
-    Action().get(1222,func='')
+    arr=[]
+    arr.insert(0,1)
+    arr.insert(0,2)
+    arr.insert(0,3)
+    print(arr)

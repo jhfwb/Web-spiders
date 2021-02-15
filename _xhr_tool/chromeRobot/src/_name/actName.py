@@ -15,3 +15,9 @@ class actName:
     """行为:跳转标签卡"""
     closeCurrentBroswserTab='closeCurrentBroswserTab'
     """行为:关闭当前标签"""
+    findCurrentUrl='findCurrentUrl'
+    """行为:获取当前的url"""
+    sendDatas="sendDatas"
+    """行为:发送数据"""
+    scroll_browser_top_to_button="scroll_browser_top_to_button"
+    """行为:滚动浏览器"""

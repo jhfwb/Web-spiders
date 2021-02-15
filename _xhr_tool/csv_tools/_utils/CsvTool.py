@@ -9,6 +9,17 @@ class CsvTool:
     交互csv文件的工具。
     1.读取，存储csv文件
     """
+    def getCsvDatasByKey(self,path='',encoding='utf-8',key='',isCreateFile=False):
+        """
+        获得csv的整列的数据，该列的列名为key
+        :param path:
+        :param encoding:
+        :param key:
+        :param isCreateFile:
+        :return:
+        """
+        datas=self.optionCsv(path=path,encoding=encoding,mode='r',isCreateFile=isCreateFile)
+        return list(map(lambda x:x.get(key),datas))
     def getCsvHeader(self,path='',encoding='utf-8'):
         """获得csv文件的行
         :param path: 需要读取的csv文件的路径。
@@ -113,6 +124,8 @@ class CsvTool:
                 writer.writeheader()
                 writer.writerows(datas)
         if mode=='a':#弹性添加
+            if type(datas)==type({}):
+                datas=[datas]
             #判断文件存不存在
             if os.path.exists(path):
                 #判断是否有header
@@ -129,7 +142,7 @@ class CsvTool:
             pass
         pass
 if __name__ == '__main__':
-
-    print(CsvTool().popLastData(path='test.csv',isPop=True))
+    CsvTool().optionCsv(mode='a', path='test.csv', datas=[{'name':'张三','age':19}], isCreateFile=True)
+    # print(CsvTool().getCsvDatasByKey(path='水带厂家.csv',key='公司名称'))
     # CsvTool().optionCsv(path='test.csv', mode='a', datas=[{'name': '李四', 'age': '121'}], encoding='utf-8')
     # ExcelTool().optionCsv(path='test.csv',datas=[{'name':'张三','age':333},{'name1':'oso','age':233}])
