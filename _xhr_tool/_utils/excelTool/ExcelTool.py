@@ -1,13 +1,9 @@
 import os
 import re
-
 import openpyxl
 from openpyxl.styles import Font
-
 from _xhr_tool._utils.CsvTool import CsvTool
 from _xhr_tool._utils.excelTool.csvFileOptionTool import csvFileTool
-
-
 class ExcelTool:
     def __init__(self):
         pass

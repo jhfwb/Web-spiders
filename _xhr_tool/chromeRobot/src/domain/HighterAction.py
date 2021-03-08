@@ -7,6 +7,9 @@ class HigherAction(Action):
     def __init__(self,memo="请输入备注信息",callBackFunc=lambda x:x):
         super().__init__(memo="请输入备注信息",callBackFunc=lambda x:x)
 
+    def find(self,cssStr="",key="请为key赋值",mode="single" or "multiple",index=0,func=lambda x:x,catchDate=True,func_args=[],timeOut=3):
+
+        self.find(cssStr=cssStr,key=key,mode=mode,index=index,func=func,func_args=func_args,timeOut=timeOut)
     def click_all(self, cssStr="",before_click_func=lambda x:True,before_click_func_args=[], func=lambda x: x, func_args=[], click_order='random' or 'sequential'):
         """
         点击所有被选中的选择器。在每次点击完毕后，会执行回调方法。点击的时候会默认打乱顺序。

@@ -1,10 +1,8 @@
 from _xhr_tool._utils import relpath
 from _xhr_tool._utils.CsvTool import CsvTool
-from _xhr_tool.chromeRobot.src._chromeRobot_tool import DataUtils
 from _xhr_tool.chromeRobot.src._decorator._decorator import chrome_robot_excute, chrome_datas_catch
-from _xhr_tool.chromeRobot.src.domain.Action import Action
+from _xhr_tool.chromeRobot.src.domain.Action2 import Action
 from _xhr_tool.chromeRobot.src.domain.ChromeFactory import ChromeFactory
-
 from _xhr_tool.chromeRobot.src.domain.ExcuteResponse import ExcuteResponse
 from _xhr_tool.chromeRobot.src.domain.HighterAction import HigherAction
 
@@ -21,7 +19,7 @@ class TestC:
             excute()
             # click(cssStr="td[align='right'] a:nth-child(2)"). \
 
-    @chrome_robot_excute(times=280)
+    # @chrome_robot_excute(times=280)
     def 循环点击下一页(self):
         def test2(response:ExcuteResponse):
             if response.datas=='下一页':

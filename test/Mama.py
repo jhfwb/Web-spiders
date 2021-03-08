@@ -1,20 +1,24 @@
-from time import ctime, sleep
+class Animal():
+    name = "candy"
+
+    def __init__(self, age,height=111111):
+        self.age = age
+
+        self.height = height
 
 
-def timefun(func):
-    def wrapped_func(a, b):
-        print("%s called at %s" % (func.__name__, ctime()))
-        print(a, b)
-        func(a, b)
+class Dog(Animal):
+    hand = "have"
 
-    return wrapped_func
+    def __init__(self, colour):
+        self.colour = colour
 
+        self.length = 19
 
-@timefun
-def foo(a, b):
-    print(a + b)
+        super().__init__(age=11)
 
+if __name__ == '__main__':
 
-foo(3, 5)
-sleep(2)
-foo(2, 4)
+    dog = Dog("yellow")
+
+    print(dog.colour, dog.height, dog.age, dog.length, dog.name, dog.hand)

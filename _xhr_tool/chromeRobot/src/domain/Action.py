@@ -161,7 +161,7 @@ class Action:
     def scroll_browser_top_to_button(self,func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
         self._args()
         return self
-    def sendDatas(self,key_datas="请为key赋值",datas='请为key_datas赋值',func=lambda x:x,catchDate=True,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
+    def sendDatas(self,key_datas="请为key赋值",datas='请为key_datas赋值',func=lambda x:x,func_args=[],pre_func=lambda x:True,pre_func_args=[]):
         self._args()
         return self
     def find(self,cssStr="",key="请为key赋值",mode="single" or "multiple",index=0,func=lambda x:x,catchDate=True,func_args=[],timeOut=3):

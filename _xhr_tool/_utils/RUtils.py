@@ -3,6 +3,7 @@ import sys
 import threading
 import time
 from selenium.webdriver.support.color import Color, Colors
+import os
 class tool:
     """
     存放自定义的基础工具包
@@ -41,7 +42,7 @@ class tool:
         print('\033[0;' + line + 'm', s,end=end)
         glock.release()
         return line
-    def print(self,s,fontColor='blue',timeStrColor="red",siteColor="pink",):
+    def print(self,s,fontColor='blue',timeStrColor="red",siteColor="pink",path=None):
         """
         默认字体为红色。背景色为白色
         能够按照颜色在控制台打印出来。可以自定义背景色和字体颜色。下划线等
@@ -80,6 +81,11 @@ class tool:
         # 3.打印位置
         self.printColor(s=line,fontColor=siteColor,end="")
         self.printColor()
+        if path!=None:
+            if os.path.isfile(path):
+                pass
+            else:
+                raise ValueError('保存路径异常:'+str(path)+'.不存在该文件!')
 
     @staticmethod
     def isBaseType(variate):

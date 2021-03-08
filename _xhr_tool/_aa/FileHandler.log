@@ -1,0 +1,119 @@
+2021-03-02 13:54:48,867-root-WARNING-logger warning message
+2021-03-02 13:54:48,868-root-ERROR-logger error message
+2021-03-02 13:54:48,868-root-CRITICAL-logger critical message
+2021-03-02 13:54:48,868-myselflogging-INFO-loggera info message
+2021-03-02 13:54:48,868-myselflogging-WARNING-loggera warning message
+2021-03-02 13:54:48,868-myselflogging-ERROR-loggera error message
+2021-03-02 13:54:48,868-myselflogging-CRITICAL-loggera critical message
+2021-03-02 13:54:48,868-myselflogging-INFO-loggerb info message
+2021-03-02 13:54:48,868-myselflogging-WARNING-loggerb warning message
+2021-03-02 13:54:48,868-myselflogging-ERROR-loggerb error message
+2021-03-02 13:54:48,869-myselflogging-CRITICAL-loggerb critical message
+2021-03-02 13:54:48,869-myselflogging.a-WARNING-loggerc warning message
+2021-03-02 13:54:48,869-myselflogging.a-ERROR-loggerc error message
+2021-03-02 13:54:48,869-myselflogging.a-CRITICAL-loggerc critical message
+2021-03-02 13:54:48,869-myselflogging.a.a-ERROR-loggerd error message
+2021-03-02 13:54:48,869-myselflogging.a.a-CRITICAL-loggerd critical message
+2021-03-02 13:54:48,869-myselflogging.a.a.a-CRITICAL-loggere critical message
+2021-03-02 13:58:33,996 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:36] - WARNING: logger warning message
+2021-03-02 13:58:33,996 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:37] - ERROR: logger error message
+2021-03-02 13:58:33,996 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:38] - CRITICAL: logger critical message
+2021-03-02 13:58:33,996 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:42] - INFO: loggera info message
+2021-03-02 13:58:33,996 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:43] - WARNING: loggera warning message
+2021-03-02 13:58:33,997 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:44] - ERROR: loggera error message
+2021-03-02 13:58:33,997 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:45] - CRITICAL: loggera critical message
+2021-03-02 13:58:33,997 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:49] - INFO: loggerb info message
+2021-03-02 13:58:33,997 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:50] - WARNING: loggerb warning message
+2021-03-02 13:58:33,997 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:51] - ERROR: loggerb error message
+2021-03-02 13:58:33,997 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:52] - CRITICAL: loggerb critical message
+2021-03-02 13:58:33,997 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:57] - WARNING: loggerc warning message
+2021-03-02 13:58:33,997 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:58] - ERROR: loggerc error message
+2021-03-02 13:58:33,998 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:59] - CRITICAL: loggerc critical message
+2021-03-02 13:58:33,998 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:65] - ERROR: loggerd error message
+2021-03-02 13:58:33,998 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:66] - CRITICAL: loggerd critical message
+2021-03-02 13:58:33,998 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:73] - CRITICAL: loggere critical message
+2021-03-02 13:58:59,200 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - WARNING: logger warning message-[line:36]
+2021-03-02 13:58:59,200 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: logger error message-[line:37]
+2021-03-02 13:58:59,200 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: logger critical message-[line:38]
+2021-03-02 13:58:59,200 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - INFO: loggera info message-[line:42]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - WARNING: loggera warning message-[line:43]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: loggera error message-[line:44]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggera critical message-[line:45]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - INFO: loggerb info message-[line:49]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - WARNING: loggerb warning message-[line:50]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: loggerb error message-[line:51]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggerb critical message-[line:52]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - WARNING: loggerc warning message-[line:57]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: loggerc error message-[line:58]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggerc critical message-[line:59]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: loggerd error message-[line:65]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggerd critical message-[line:66]
+2021-03-02 13:58:59,201 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggere critical message-[line:73]
+2021-03-02 13:59:13,043 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - WARNING: logger warning message-[line:36]
+2021-03-02 13:59:13,043 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: logger error message-[line:37]
+2021-03-02 13:59:13,043 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: logger critical message-[line:38]
+2021-03-02 13:59:13,043 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - INFO: loggera info message-[line:42]
+2021-03-02 13:59:13,043 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - WARNING: loggera warning message-[line:43]
+2021-03-02 13:59:13,043 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: loggera error message-[line:44]
+2021-03-02 13:59:13,043 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggera critical message-[line:45]
+2021-03-02 13:59:13,043 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - INFO: loggerb info message-[line:49]
+2021-03-02 13:59:13,044 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - WARNING: loggerb warning message-[line:50]
+2021-03-02 13:59:13,044 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: loggerb error message-[line:51]
+2021-03-02 13:59:13,044 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggerb critical message-[line:52]
+2021-03-02 13:59:13,044 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - WARNING: loggerc warning message-[line:57]
+2021-03-02 13:59:13,044 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: loggerc error message-[line:58]
+2021-03-02 13:59:13,044 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggerc critical message-[line:59]
+2021-03-02 13:59:13,044 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - ERROR: loggerd error message-[line:65]
+2021-03-02 13:59:13,044 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggerd critical message-[line:66]
+2021-03-02 13:59:13,044 - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py - CRITICAL: loggere critical message-[line:73]
+2021-03-02 14:00:08,529  - WARNING: logger warning message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:36]
+2021-03-02 14:00:08,529  - ERROR: logger error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:37]
+2021-03-02 14:00:08,529  - CRITICAL: logger critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:38]
+2021-03-02 14:00:08,529  - INFO: loggera info message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:42]
+2021-03-02 14:00:08,530  - WARNING: loggera warning message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:43]
+2021-03-02 14:00:08,530  - ERROR: loggera error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:44]
+2021-03-02 14:00:08,530  - CRITICAL: loggera critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:45]
+2021-03-02 14:00:08,530  - INFO: loggerb info message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:49]
+2021-03-02 14:00:08,530  - WARNING: loggerb warning message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:50]
+2021-03-02 14:00:08,530  - ERROR: loggerb error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:51]
+2021-03-02 14:00:08,530  - CRITICAL: loggerb critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:52]
+2021-03-02 14:00:08,530  - WARNING: loggerc warning message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:57]
+2021-03-02 14:00:08,530  - ERROR: loggerc error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:58]
+2021-03-02 14:00:08,530  - CRITICAL: loggerc critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:59]
+2021-03-02 14:00:08,530  - ERROR: loggerd error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:65]
+2021-03-02 14:00:08,530  - CRITICAL: loggerd critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:66]
+2021-03-02 14:00:08,531  - CRITICAL: loggere critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:73]
+2021-03-02 14:01:35,625
+2021-03-02 14:01:35,625
+2021-03-02 14:01:35,625
+2021-03-02 14:01:35,625
+2021-03-02 14:01:35,626
+2021-03-02 14:01:35,626
+2021-03-02 14:01:35,626
+2021-03-02 14:01:35,626
+2021-03-02 14:01:35,626
+2021-03-02 14:01:35,626
+2021-03-02 14:01:35,626
+2021-03-02 14:01:35,627
+2021-03-02 14:01:35,627
+2021-03-02 14:01:35,627
+2021-03-02 14:01:35,627
+2021-03-02 14:01:35,627
+2021-03-02 14:01:35,627
+2021-03-02 14:02:02,186  - WARNING: logger warning message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:36]
+2021-03-02 14:02:02,186  - ERROR: logger error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:37]
+2021-03-02 14:02:02,186  - CRITICAL: logger critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:38]
+2021-03-02 14:02:02,186  - INFO: loggera info message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:42]
+2021-03-02 14:02:02,187  - WARNING: loggera warning message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:43]
+2021-03-02 14:02:02,187  - ERROR: loggera error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:44]
+2021-03-02 14:02:02,187  - CRITICAL: loggera critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:45]
+2021-03-02 14:02:02,187  - INFO: loggerb info message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:49]
+2021-03-02 14:02:02,187  - WARNING: loggerb warning message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:50]
+2021-03-02 14:02:02,188  - ERROR: loggerb error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:51]
+2021-03-02 14:02:02,188  - CRITICAL: loggerb critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:52]
+2021-03-02 14:02:02,189  - WARNING: loggerc warning message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:57]
+2021-03-02 14:02:02,189  - ERROR: loggerc error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:58]
+2021-03-02 14:02:02,189  - CRITICAL: loggerc critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:59]
+2021-03-02 14:02:02,189  - ERROR: loggerd error message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:65]
+2021-03-02 14:02:02,189  - CRITICAL: loggerd critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:66]
+2021-03-02 14:02:02,189  - CRITICAL: loggere critical message - C:/Users/1234567/Desktop/git¿â´æ´¢/Web-spiders/_xhr_tool/_aa/test.py[line:73]

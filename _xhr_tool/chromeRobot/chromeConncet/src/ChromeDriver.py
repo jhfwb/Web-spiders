@@ -6,8 +6,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 #谷歌驱动。都存放在这里。当执行这个
 from _xhr_tool.chromeRobot.chromeConncet.src.single_chrome_servlet import chrome_browser_open
-
-
 @singleObj
 class ChormeDiver:
     chromeDriverPath = relpath('../resource/chromedriver.exe')

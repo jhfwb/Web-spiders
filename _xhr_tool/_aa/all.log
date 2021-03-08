@@ -1,0 +1,5 @@
+2021-03-02 11:12:36,954 - C:/Users/1234567/Desktop/git库存储/Web-spiders/_xhr_tool/_aa/ttt.py[line:33] - DEBUG: debug
+2021-03-02 11:12:36,955 - C:/Users/1234567/Desktop/git库存储/Web-spiders/_xhr_tool/_aa/ttt.py[line:34] - INFO: info
+2021-03-02 11:12:36,955 - C:/Users/1234567/Desktop/git库存储/Web-spiders/_xhr_tool/_aa/ttt.py[line:35] - WARNING: 警告
+2021-03-02 11:12:36,955 - C:/Users/1234567/Desktop/git库存储/Web-spiders/_xhr_tool/_aa/ttt.py[line:36] - ERROR: 报错
+2021-03-02 11:12:36,955 - C:/Users/1234567/Desktop/git库存储/Web-spiders/_xhr_tool/_aa/ttt.py[line:37] - CRITICAL: 严重
