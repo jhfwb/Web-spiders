@@ -43,10 +43,10 @@ class MyOption:
     #组合键等待
 ####################################################################################################################
     # 根据选择器，点击。点击完毕后，如果有添加新的页面，则会切换到新的页面
-    def scroll_top_to_button(self):
+    def scroll_top_to_button(self,cssStr="",elemntName="",index=0,timeOut=5):
         interval_step = 30
         interval_time = 0.001
-        wait_time=3 #等待时间
+        wait_time=timeOut#等待时间
         interval_wait_time=0.5 #间隔甄别时间
         _cycle_times=wait_time/interval_wait_time #循环次数
         js = "return action=document.body.scrollHeight"
@@ -62,14 +62,21 @@ class MyOption:
             _index = 0
             while True:
                 if go_height == current_height:
-                    _index=_index+1
+                    if cssStr!="" and elemntName!="":
+                        if elemntName==self.driver.find_elements_by_css_selector(cssStr)[index].text.strip():
+                            _sign=0
+                            break
+                    _index = _index+1
                     time.sleep(0.5)
                     go_height = self.driver.execute_script(js)
                     if _index>=_cycle_times:
-                        _sign=0
-                        break
+                        _sign=0 #此处结束运行。
+                        if cssStr=="" and elemntName=="":
+                            break
+                        elif cssStr!="":
+                            return self.pool.get().setState(success=False, actName=actName.scroll_browser_top_to_button,errType=responseErr.elementNotFind,cssStr=cssStr)
                     continue
-                else:
+                else:#不等则继续运行
                     break
         return self.pool.get().setState(success=True, actName=actName.scroll_browser_top_to_button)
     def click_element_apparent(self,cssStr,loadNewPage=False,timeOut=3,index=0):

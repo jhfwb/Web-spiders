@@ -120,7 +120,6 @@ class HigherAction(Action):
         if action1 == self:
             raise ValueError("该参数action2指向的对象不允许是调用该方法的对象:请传入一个新创建Action")
         def _select(result):
-            print(result)
             if result.success:
                 if action1!=None:
 

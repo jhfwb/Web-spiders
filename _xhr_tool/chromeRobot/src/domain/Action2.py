@@ -42,6 +42,12 @@ class Action:
             return fuel.get_func_result()
         self._args()
         return self
+    def excuteBlock(self,isSave=False):
+        if isSave:
+            self._bufferActs.append(self.excuteEngine.getNewFuel().setFuel(meta={'act': 'save', 'id': self._uid}))
+        self.excuteEngine.put_excuteFuelCache(fuels=self._bufferActs)  # 将其
+        self.excuteEngine.excuteFuelCache()
+        self.excuteEngine.block()
     def excute(self,isSave=True):
         """
 
@@ -59,9 +65,6 @@ class Action:
             self._bufferActs.append(self.excuteEngine.getNewFuel().setFuel(meta={'act':'save', 'id': self._uid}))
         self.excuteEngine.put_excuteFuelCache(fuels=self._bufferActs) # 将其
         self.excuteEngine.excuteFuelCache(excuteOrder='first')
-
-
-
         return self
     # =============================================================================
     def _args(self):#对参数进行处理的中间方法
@@ -134,7 +137,7 @@ class Action:
         func = MyOption().click_element_apparent
         self._args()
         return self
-    def scroll_browser_top_to_button(self,ignoreErr=False,after_func=lambda x:x,after_func_args=[],before_func=lambda:True,before_func_args=[]):
+    def scroll_browser_top_to_button(self,cssStr="",index=0,timeOut=5,elemntName="",ignoreErr=False,after_func=lambda x:x,after_func_args=[],before_func=lambda:True,before_func_args=[]):
         func = MyOption().scroll_top_to_button
         self._args()
         return self

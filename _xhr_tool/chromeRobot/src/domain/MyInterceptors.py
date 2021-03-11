@@ -33,7 +33,6 @@ class SaveFindDatas(ExcuteInterceptor):# 保存find方法的。
             if fuel.get_meta().get('catchDate'):
                 if fuel.get_func_result().key_datas!=None or fuel.get_func_result().datas!=None:
                     self.saveObj.setdefault(fuel.get_func_result().key_datas,fuel.get_func_result().datas)
-
 class BackResponse(BackFuelInterceptor):
     """
     负责回收response对象。此打断器必须最后执行，否则此前的打断器会出现异常
@@ -56,8 +55,6 @@ class ExcuteInterval(ExcuteInterceptor):# 保存find方法的。
         if fuel.get_func()!=None:
             if fuel.get_func().__name__ in self.func_names:
                 time.sleep(5)#等待5秒钟
-
-
 class ActionIterceptor(ExcuteInterceptor):# 保存find方法的。
     """
     确保动作的连续性，当该动作失败的时候，不会再执行后面的动作,并且会将通知后续save打断器
@@ -77,4 +74,3 @@ class ActionIterceptor(ExcuteInterceptor):# 保存find方法的。
         elif fuel.get_meta().get('ignoreErr')==False:
             if response!=None and response.success==False:#当该动作执行失败的时候,则通知后续相关动作，不再执行
                 self.unexcuteIds.append(fuel.get_meta().get('id'))
-

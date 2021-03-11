@@ -11,8 +11,6 @@ import importlib
 # https://blog.csdn.net/weixin_40907382/article/details/79564209?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
 from _xhr_tool.excuteEngine.Component import ExcuteInterceptor, Interceptor, PutExcuteFuelInterceptor, \
     BackFuelInterceptor
-
-
 class ExcuteEngine(ExcuteEngine_abstract):
     _historyExcuteList=[]#历史执行记录表，末尾的数据为最新数据
     _excuteList=[] #执行栈。头部的方法先执行，尾部的方法后执行。
@@ -44,7 +42,7 @@ class ExcuteEngine(ExcuteEngine_abstract):
     @threadingRun
     def run(self):
         while True:
-            self.excute()
+            self._excute()
     #注册打断器
     #将放入缓冲板中
     def put_excuteFuelCache(self,fuels=[],excuteOrder='last' or 'first'):
@@ -59,7 +57,6 @@ class ExcuteEngine(ExcuteEngine_abstract):
     #执行缓冲板中的内容 要先执行还是后执行，由自己决定
     def excuteFuelCache(self,excuteOrder='last' or 'first'):
         #阻塞,当执行栈为空的时候，才会执行该方法。
-
         self.put_excuteFuels(fuels=self._cacheList,excuteOrder=excuteOrder)
         self._cacheList=[]#清空缓存版内容
     def getNewFuel(self):
@@ -70,7 +67,7 @@ class ExcuteEngine(ExcuteEngine_abstract):
     def clear_excuteList(self):#清空执行栈。
         self._excuteList.clear()
         pass
-    def put_excuteFuel(self,fuel,excuteOrder='last' or 'first' ): #在执行队列
+    def put_excuteFuel(self,fuel,excuteOrder='last' or 'first'): #在执行队列
         """
         将方法与参数存入执行栈中，准备执行。该fuel，放在执行栈末尾，前面执行完毕后再执行
         :param ExcuteFuel fuel: 执行燃料；内部存放需要执行的方法，以及该方法的参数
@@ -105,10 +102,68 @@ class ExcuteEngine(ExcuteEngine_abstract):
                 self.put_excuteFuel(fuels.pop(),excuteOrder)
         else:
             raise ValueError('未知参数excuteOrder:'+excuteOrder+';只允许excuteOrder为last或者first')
+    def block(self,timeOut=-1):
+        if timeOut < 0:
+            while True:
+                if self.state=='wait' and len(self._excuteList)==0:
+                    break
+                time.sleep(1)
+        else:
+            while True:
+                timeOut=timeOut-1
+                if self.state=='wait' and len(self._excuteList)==0:
+                    break
+                if timeOut<0:
+                    break
+                time.sleep(1)
+    def excuteFuel(self,fuel):
+        """
+        取出执行栈中的数据。然后执行该数据。
+        :return:
+        """
+        for interceptor in self._excute_interceptors:
+            interceptor.intercept_before_excute(fuel)
+        before_result = None
+        result = None
+        if fuel.get_before_func() != None:
+            before_result = fuel.get_before_func()(*fuel.get_before_func_args(), **fuel.get_before_func_kwargs())
+            fuel.set_before_func_result(before_result)
+            if type(before_result) != bool:
+                raise TypeError('类型错误:前置函数必须是bool类型。')
+        if (before_result == True or before_result == None) and fuel.get_func() != None:
+            try:
+                result = fuel.get_func()(*fuel.get_func_args(), **fuel.get_func_kwargs())
+            except Exception:
+                raise Exception('ExcuteEngine_Err:运行错误_:方法:'+str(fuel.get_func().__name__)+'|普通参数:'+str(fuel.get_func_args())+',关键字参数:'+str(fuel.get_func_kwargs()))
+            fuel.set_func_result(result)
+        if result:
+            if fuel.get_after_func() != None:
+                after_result = fuel.get_after_func()(result, *fuel.get_after_func_args(),
+                                                     **fuel.get_after_func_kwargs())
+                fuel.set_after_func_result(after_result)
+        for interceptor in self._excute_interceptors:
+            interceptor.intercept_after_excute(fuel)
+        return fuel
+        # 执行完毕，归还
+    def _excute(self):
+        self._condition.acquire()
+        if len(self._excuteList)==0:
+            self.state='wait'
+            self._condition.wait()
+            self.state='excuting'
+        fuel: ExcuteFuel = self._excuteList.pop(0)
+        self.excuteFuel(fuel)
+        # 引入一个执行池
+        self._historyExcuteList.insert(0, fuel)
+        if len(self._historyExcuteList) > self._historyExcuteNum:
+            needBackFuel = self._historyExcuteList.pop()
+            for interceptor in self._backFuel_interceptors:
+                interceptor.intercept_before_backFuel(needBackFuel)
+            ExcuteFuelPool().back(needBackFuel)
+            for interceptor in self._backFuel_interceptors:
+                interceptor.intercept_after_backFuel(needBackFuel)
 
-        
-        pass
-    def excute(self):#执行方法
+    def ___excute(self):#执行方法
         """
         取出执行栈中的数据。然后执行该数据。
         :return:
