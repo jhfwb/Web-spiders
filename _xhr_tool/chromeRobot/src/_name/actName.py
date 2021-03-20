@@ -1,4 +1,6 @@
 class actName:
+    mouseMove='mouseMove'
+    """行为:鼠标移动"""
     inputWord='inputWord'
     """行为:输入框键入"""
     findMessage='findMessage'

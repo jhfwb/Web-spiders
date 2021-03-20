@@ -1,5 +1,7 @@
 import sys
-from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, \
+    ElementNotInteractableException
+from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
@@ -79,6 +81,19 @@ class MyOption:
                 else:#不等则继续运行
                     break
         return self.pool.get().setState(success=True, actName=actName.scroll_browser_top_to_button)
+    def clickXY(self, x=0, y=0, left_click=True):
+        '''
+           dr:浏览器
+           x:页面x坐标
+           y:页面y坐标
+           left_click:True为鼠标左键点击，否则为右键点击
+        '''
+        if left_click:
+            ActionChains(self.driver).move_by_offset(x, y).click().perform()
+        else:
+            ActionChains(self.driver).move_by_offset(x, y).context_click().perform()
+        ActionChains(self.driver).move_by_offset(-x, -y).perform()  # 将鼠标位置恢复到移动前
+        return self.pool.get().setState(success=True, actName=actName.click,)
     def click_element_apparent(self,cssStr,loadNewPage=False,timeOut=3,index=0):
         """
         根据css选择器，点击元素。点击完毕后，如果有添加或者删除新的页面，则会将句柄切换到新的页面。
@@ -90,6 +105,7 @@ class MyOption:
             "addNewTag",打开了新的页面
             "removeOldTag"关闭了原来的页面
         """
+
         if  self._waitElement(cssStr,timeOut) == True:
             element=self._get_elements_by_css_selector(cssStr=cssStr,timeOut=timeOut)[index]
             elementName=element.text.strip()
@@ -110,8 +126,11 @@ class MyOption:
             except ElementClickInterceptedException: #该元素被遮挡,
                 self.driver.execute_script('window.scrollTo(0, %s)' % (0))
                 element.click()
+            except ElementNotInteractableException:
+                return self.pool.get().setState(success=False, actName=actName.click, cssStr=cssStr,errType=responseErr.elementClickFalse,index=index)
             return self.pool.get().setState(success=True, actName=actName.click, cssStr=cssStr,index=index,datas=elementName)
         else:
+
             return self.pool.get().setState(success=False, actName=actName.click, cssStr=cssStr,errType=responseErr.elementNotFind,index=index)
     def find_message_apparent(self, cssStr, key="", mode='single', timeOut=10,index=0):
         """
@@ -199,7 +218,12 @@ class MyOption:
         else:
             return self.pool.get().setState(success=True, actName=actName.initWeb)
     def get_current_url(self,key):
-        return self.pool.get().setState(success=True, actName=actName.findCurrentUrl,datas=self.driver.current_url,key_datas=key)
+        current_url=None
+        try:
+            current_url=self.driver.current_url
+        except TimeoutException:
+            return self.pool.get().setState(success=False, actName=actName.findCurrentUrl,errType=responseErr.timeOutErr,key_datas=key)
+        return self.pool.get().setState(success=True, actName=actName.findCurrentUrl,datas=current_url,key_datas=key)
 
     def _execute_js(self,line):
         return self.driver.execute_script(line)
@@ -240,8 +264,9 @@ class MyOption:
 if __name__ == '__main__':
     # driver=ChormeDiver().driver
     # a=MyOption().get_url('https://www.baidu.com/')
-    # a=MyOption().scroll_top_to_button()
-    MyOption().suof()
+    a=MyOption().moveXY()
+    print("技术")
+
 
     # a=MyOption(driver).wait(cssStr='#hotsearch-content-wrapper > li:nth-child(3) > a > span.title-content-title>span',timeOut=0)
     # print(a)

@@ -48,7 +48,7 @@ class Action:
         self.excuteEngine.put_excuteFuelCache(fuels=self._bufferActs)  # 将其
         self.excuteEngine.excuteFuelCache()
         self.excuteEngine.block()
-    def excute(self,isSave=True):
+    def excute(self,isSave=False):
         """
 
         :param isSave:
@@ -60,7 +60,7 @@ class Action:
         self.excuteEngine.put_excuteFuelCache(fuels=self._bufferActs) # 将其
         self.excuteEngine.excuteFuelCache()
         return self
-    def excuteRightNow(self,isSave=True):
+    def excuteRightNow(self,isSave=False):
         if isSave:
             self._bufferActs.append(self.excuteEngine.getNewFuel().setFuel(meta={'act':'save', 'id': self._uid}))
         self.excuteEngine.put_excuteFuelCache(fuels=self._bufferActs) # 将其
@@ -96,7 +96,11 @@ class Action:
             before_func=dict_func.get('before_func'),before_func_args=dict_func.get('before_func_args'),
             after_func=dict_func.get('after_func'),after_func_args=dict_func.get('after_func_args'),meta=dict_meta)
         )
+    def clickXY(self,x=0,y=0):
 
+        func = MyOption().clickXY
+        self._args()
+        return self
     def jumpBrowserTab(self,index=-1,ignoreErr=False,after_func=lambda x:x,after_func_args=[],before_func=lambda:True,before_func_args=[]):
         func=MyOption().jumpBrowserTab
         self._args()
@@ -137,7 +141,7 @@ class Action:
         func = MyOption().click_element_apparent
         self._args()
         return self
-    def scroll_browser_top_to_button(self,cssStr="",index=0,timeOut=5,elemntName="",ignoreErr=False,after_func=lambda x:x,after_func_args=[],before_func=lambda:True,before_func_args=[]):
+    def scroll_browser_top_to_button(self,ignoreErr=True,cssStr="",index=0,timeOut=5,elemntName="",after_func=lambda x:x,after_func_args=[],before_func=lambda:True,before_func_args=[]):
         func = MyOption().scroll_top_to_button
         self._args()
         return self

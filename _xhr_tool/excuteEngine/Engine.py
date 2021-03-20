@@ -3,6 +3,7 @@ import inspect
 import threading
 import time
 from _xhr_tool._annotate import threadingRun, singleObj
+from _xhr_tool._utils.RUtils import tool
 from _xhr_tool.chromeRobot.src._abstract_class.engine import ExcuteEngine_abstract
 from _xhr_tool.chromeRobot.src._base_class.Pool import ObjsPool
 import importlib
@@ -135,6 +136,7 @@ class ExcuteEngine(ExcuteEngine_abstract):
                 result = fuel.get_func()(*fuel.get_func_args(), **fuel.get_func_kwargs())
             except Exception:
                 raise Exception('ExcuteEngine_Err:运行错误_:方法:'+str(fuel.get_func().__name__)+'|普通参数:'+str(fuel.get_func_args())+',关键字参数:'+str(fuel.get_func_kwargs()))
+
             fuel.set_func_result(result)
         if result:
             if fuel.get_after_func() != None:
@@ -149,6 +151,7 @@ class ExcuteEngine(ExcuteEngine_abstract):
         self._condition.acquire()
         if len(self._excuteList)==0:
             self.state='wait'
+            tool().print('-----ExcuteEngine:excute waitting!!!-----')
             self._condition.wait()
             self.state='excuting'
         fuel: ExcuteFuel = self._excuteList.pop(0)

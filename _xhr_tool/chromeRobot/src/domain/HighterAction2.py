@@ -1,5 +1,10 @@
 import random
+
+from _xhr_tool.chromeRobot.src._name.errName import responseErr
 from _xhr_tool.chromeRobot.src.domain.Action2 import Action
+from _xhr_tool.excuteEngine.Engine import ExcuteFuel
+
+
 class HigherAction(Action):
     def __init__(self):
         super().__init__()
@@ -65,7 +70,7 @@ class HigherAction(Action):
         return self
     def click_byName(self,cssStr="",name='',loadNewPage=False,ignoreErr=True,before_func=lambda:True,before_func_args=[],after_func=lambda x:x,after_func_args=[]):
         """
-        根据列表的名称点击，对应的数据
+        根据列表的名称点击，对应的数据。
         :param cssStr:
         :param crapyedDatas:
         :param func:
@@ -74,18 +79,24 @@ class HigherAction(Action):
         """
         def _data(response):
             if response.success:
+                isClicked=False
                 arr=response.datas
                 for i in range(len(arr)):
                     if arr[i]==name:
+                        isClicked=True
                         Action().click(cssStr=cssStr,
                                    loadNewPage = loadNewPage,
                                    index=i,
                                    before_func=before_func,
                                    before_func_args=before_func_args,
                                    after_func=after_func,
-                                   after_func_args=after_func_args
+                                   after_func_args=after_func_args,
+                                   ignoreErr=ignoreErr
                                    ).excuteRightNow(isSave=False)
                         break
+                if isClicked==False:#当实际没有点击的时候，会将response的成功转成失败
+                    response.success=False
+                    response.errType=responseErr.elementAndNameErr
             else:
                 pass
         # 1.找到所有数据。
@@ -126,7 +137,10 @@ class HigherAction(Action):
                     action1.excuteRightNow(isSave=False)
             else:
                 if action2!= None:
+
                     action2.excuteRightNow(isSave=False)
+
+
         self.connectLastBackFunction(after_func=_select)
         return self
 if __name__ == '__main__':

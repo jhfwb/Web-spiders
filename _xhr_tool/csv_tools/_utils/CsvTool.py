@@ -12,10 +12,11 @@ class CsvTool:
     def getCsvDatasByKey(self,path='',encoding='utf-8',key='',isCreateFile=False):
         """
         获得csv的整列的数据，该列的列名为key
-        :param path:
-        :param encoding:
-        :param key:
-        :param isCreateFile:
+
+        :param path: 文件的路径
+        :param encoding: 文件的编码格式，默认为utf-8
+        :param key: 文件的列名字
+        :param isCreateFile: 如果该文件找不到，是否创建该文件（否则会报错）。默认不创建。
         :return:
         """
         datas=self.optionCsv(path=path,encoding=encoding,mode='r',isCreateFile=isCreateFile)
