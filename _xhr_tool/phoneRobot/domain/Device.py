@@ -32,6 +32,4 @@ if __name__ == '__main__':
     # Device().act.
     # device.act.base.startApp('com.android.gallery3d')
     tu=Device().act.higher.sendMessage(phone='13805980379',message='你好')
-
     # 写一个方法。将字符串写入到指定文本中。
-    print(tu)

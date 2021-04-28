@@ -25,9 +25,10 @@ class ChromeFactory:
         self.engine.registerInterceptors(ActionIterceptor,SaveFindDatas,ExcuteInterval,BackResponse)#注册自定义拦截器
         # 注册。。
         self.engine.start()
-    def register(self,className:type):
-        self.user=object.__new__(className)
+    def register(self,obj):
+        self.user=obj
         setattr(self.user,'store',Queue())
         DecoratorEngine().excuteAllDecorator(obj=self.user,decoratorName='@chrome_robot_excute')
+
     def getPassageway(self):
         return self._passageway

@@ -1,6 +1,13 @@
 import logging
 from logging import handlers
+from _xhr_tool._annotate import singleObj
+@singleObj
 class Logger(object):
+    DEBUG=logging.DEBUG
+    INFO=logging.INFO
+    WARNING=logging.WARNING
+    ERROR=logging.ERROR
+    CRITICAL=logging.CRITICAL
     level_relations = {
         'debug': logging.DEBUG,
         'info': logging.INFO,
@@ -31,5 +38,20 @@ class Logger(object):
         self.logger.addHandler(th)
     def getLogger(self):
         return self.logger
+    def setLevel(self,level=logging.INFO):
+        self.logger.setLevel(level)
+
+    def debug(self,message=''):
+        return self.logger.debug(message)
+    def info(self,message=''):
+        return self.logger.info(message)
+    def warning(self,message=''):
+        return self.logger.warning(message)
 if __name__ == '__main__':
-    Logger().logger.info('你好，我是初始信息')
+    FORMAT = '%(asctime)-15s %(clientip)s %(user)-8s %(message)s'
+    logging.basicConfig(format=FORMAT)
+    d = {'clientip': '192.168.0.1', 'user': 'fbloggs'}
+    logging.warning('Protocol problem: %s', 'connection reset', extra=d)
+    # l=Logger()
+    # l.setLevel(level=l.DEBUG)
+    # l.logger.debug('你好，我是初始信息')

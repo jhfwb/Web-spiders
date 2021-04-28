@@ -2,11 +2,8 @@ import time
 from queue import Queue
 
 from selenium.webdriver.common.keys import Keys
-
 from clientScrapySystem.chromeRobotSystem.Context import Context
 from clientScrapySystem.chromeRobotSystem.domain.Action import Action
-
-
 class 天眼查:
     #此处放入地址库
     def __init__(self):

@@ -3,16 +3,21 @@ import inspect
 import threading
 import time
 from _xhr_tool._annotate import threadingRun, singleObj
+from _xhr_tool._utils import relpath
 from _xhr_tool._utils.RUtils import tool
+from _xhr_tool._utils.xhr_logger import Logger
 from _xhr_tool.chromeRobot.src._abstract_class.engine import ExcuteEngine_abstract
 from _xhr_tool.chromeRobot.src._base_class.Pool import ObjsPool
 import importlib
-
 # 元类
 # https://blog.csdn.net/weixin_40907382/article/details/79564209?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
 from _xhr_tool.excuteEngine.Component import ExcuteInterceptor, Interceptor, PutExcuteFuelInterceptor, \
     BackFuelInterceptor
+from _xhr_tool.excuteEngine.Interceptors import LogInterceptor
+import configparser
 class ExcuteEngine(ExcuteEngine_abstract):
+    _state=0 or 1 or 2 or 3 #1.未启动  2.等待执行  3.执行中
+
     _historyExcuteList=[]#历史执行记录表，末尾的数据为最新数据
     _excuteList=[] #执行栈。头部的方法先执行，尾部的方法后执行。
     _cacheList=[]
@@ -21,16 +26,39 @@ class ExcuteEngine(ExcuteEngine_abstract):
     _excute_interceptors=[]
     _putExcuteFuel_interceptors=[]
     _backFuel_interceptors=[]
+    _config=None
     """执行队列,本质是一个list，从头部开始执行，执行到末尾"""
     state='unexecuted'or 'excuting' or 'wait'#1.执行中 2.等待执行中（阻塞） 3.未启动=0
     """1.excuting执行中 2.wait等待执行中（阻塞） 3.unexecuted未启动"""
-    def __init__(self,historyExcuteNum=10):
+    def __init__(self,historyExcuteNum=10,configFiltPath=''):
         self._historyExcuteNum=historyExcuteNum
-        self._excuteFuelPool=ExcuteFuelPool()#初始化线程池
+        self._excuteFuelPool=ExcuteFuelPool(excuteEngine=self)#初始化线程池
+        self._initInterceptors()
+        #初始化配置信息
+        # self._initConfig(configFiltPath)
+        #初始化日记系统
+        # self._logger=Logger(savePath=self._config['logger']['savePath'])
+    def _initConfig(self,configFiltPath):
+        if configFiltPath=='':
+            configFiltPath=relpath('config.ini')
+        config = configparser.ConfigParser()
+        config.read(filenames=configFiltPath)
+        self._config = config
+
+    def _initInterceptors(self):
+        self.registerInterceptors(LogInterceptor)
+
     def registerInterceptors(self,*interceptors):
+        """
+        :param interceptors: 类的类型即可，不可传入实例。
+        :return:
+        """
         for interceptor in interceptors:
-            if interceptor.__base__.__base__!=Interceptor:
-                raise ValueError('注册拦截器失败:该拦截器:'+str(interceptor)+'，类型错误。不是interceptor类型')
+            try:
+                if interceptor.__base__.__base__!=Interceptor:
+                    raise ValueError('注册拦截器失败:该拦截器:'+str(interceptor)+'，类型错误。不是interceptor类型')
+            except AttributeError:
+                raise ValueError('注册拦截器失败:该拦截器:'+str(interceptor)+'，错误，请传入一个类，而非一个对象。')
             #判断拦截器的类型，然后装入合适的地方
             interceptor.engine=self
             if interceptor.__base__==ExcuteInterceptor:
@@ -39,7 +67,6 @@ class ExcuteEngine(ExcuteEngine_abstract):
                 self._putExcuteFuel_interceptors.append(interceptor())
             if interceptor.__base__==BackFuelInterceptor:
                 self._backFuel_interceptors.append(interceptor())
-
     @threadingRun
     def run(self):
         while True:
@@ -151,7 +178,7 @@ class ExcuteEngine(ExcuteEngine_abstract):
         self._condition.acquire()
         if len(self._excuteList)==0:
             self.state='wait'
-            tool().print('-----ExcuteEngine:excute waitting!!!-----')
+            # tool().print('-----ExcuteEngine:excute waitting!!!-----')
             self._condition.wait()
             self.state='excuting'
         fuel: ExcuteFuel = self._excuteList.pop(0)
@@ -243,7 +270,8 @@ class ExcuteFuel:
     _after_func_result=None
     def __init__(self,func=None,func_args=[],func_kwargs={},
                  before_func=None,before_func_args=[],before_func_kwargs={},
-                 after_func=None,after_func_args=[],after_func_kwargs={}):
+                 after_func=None,after_func_args=[],after_func_kwargs={},excuteEngine=None):
+        self.excuteEngine=excuteEngine
         self.setFuel(func=func,func_args=func_args,func_kwargs=func_kwargs,
                      before_func=before_func,before_func_args=before_func_args,before_func_kwargs=before_func_kwargs,
                      after_func=after_func,after_func_args=after_func_args,after_func_kwargs=after_func_kwargs)
@@ -332,8 +360,8 @@ class ExcuteFuel:
 
         return "Excute_fuel(id="+str(id(self))+")"+s+",'excuteEngine':[...]}"
 class ExcuteFuelPool(ObjsPool):
-    def __init__(self):
-        super().__init__(obj_class=ExcuteFuel)  # 调用父类的方法，初始化10个ExcuteFuel
+    def __init__(self,excuteEngine=None):
+        super().__init__(obj_class=ExcuteFuel,kwargs={'excuteEngine':excuteEngine})  # 调用父类的方法，初始化10个ExcuteFuel
     def back(self,fuel:ExcuteFuel):
         super().back(fuel.setFuel())
     def get(self):
@@ -353,7 +381,7 @@ if __name__ == '__main__':
             # 导入模块
             pass
     e=ExcuteEngine()
-    e.registerInterceptors(m)
+    e.registerInterceptors(response)
     e.put_excuteFuels(fuels=[e.getNewFuel().setFuel(func=test,func_args=['我是大尾巴1'],func_kwargs={'tim':'啊啊啊啊'},before_func=test_befo),
                              e.getNewFuel().setFuel(func=test, func_args=['我是大尾巴2'],)
                              ])

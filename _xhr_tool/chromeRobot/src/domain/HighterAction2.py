@@ -35,6 +35,43 @@ class HigherAction(Action):
         self.find(cssStr=cssStr, mode='multiple', after_func=_data)
         return self
 
+    def click_all_except_crapyedDatas2(self, cssStr="",before_click_func=lambda x:True,func=lambda x: x, func_args=[],
+                                      click_order='random' or 'sequential'):
+        """
+        点击所有cssStr下的元素。
+        1.已经被点击过的，名字相同的元素不会点击。
+        2.crapyedDatas中的数据不会被点击
+        其中crapyedDatas代表已经爬虫过的数据。这些数据是不被点击的。
+        :param cssStr:
+        :param crapyedDatas:
+        :param func:
+        :param func_args:
+        :return:
+        """
+
+        def _data(response):
+            datas = response.datas
+            _action = HigherAction()
+            clicked_names = []  # 已经点过的数据也不会再点
+            if datas != None:
+                for i in range(len(datas)):
+                    if datas[i] not in clicked_names:
+                        if before_click_func(datas[i]):
+                            clicked_names.append(datas[i])
+                            _action.click(cssStr=cssStr, after_func_args=func_args, after_func=func, index=i)
+                if click_order == 'random':
+                    _action._randomBufferActs().excuteRightNow()
+                elif click_order == 'sequential':
+                    _action.excuteRightNow()
+                else:
+                    raise ValueError('click_orderd的值：' + click_order + '出现错误，只允许是random(随机的)或者sequential(顺序的);')
+            else:
+                pass
+
+        # 1.找到所有数据。
+        self.find(cssStr=cssStr, mode='multiple', after_func=_data)
+        # 2.比对数据
+        return self
     def click_all_except_crapyedDatas(self,cssStr="",crapyedDatas=[],func=lambda x:x,func_args=[],click_order='random' or 'sequential'):
         """
         点击所有cssStr下的元素。

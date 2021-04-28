@@ -45,7 +45,7 @@ class MyOption:
     #组合键等待
 ####################################################################################################################
     # 根据选择器，点击。点击完毕后，如果有添加新的页面，则会切换到新的页面
-    def scroll_top_to_button(self,cssStr="",elemntName="",index=0,timeOut=5):
+    def scroll_top_to_button(self,cssStr="",elemntName="",index=0,timeOut=20):
         interval_step = 30
         interval_time = 0.001
         wait_time=timeOut#等待时间
@@ -65,9 +65,10 @@ class MyOption:
             while True:
                 if go_height == current_height:
                     if cssStr!="" and elemntName!="":
-                        if elemntName==self.driver.find_elements_by_css_selector(cssStr)[index].text.strip():
-                            _sign=0
-                            break
+                        if len(self.driver.find_elements_by_css_selector(cssStr))!=0:
+                            if elemntName==self.driver.find_elements_by_css_selector(cssStr)[index].text.strip():
+                                _sign=0
+                                break
                     _index = _index+1
                     time.sleep(0.5)
                     go_height = self.driver.execute_script(js)
@@ -130,7 +131,6 @@ class MyOption:
                 return self.pool.get().setState(success=False, actName=actName.click, cssStr=cssStr,errType=responseErr.elementClickFalse,index=index)
             return self.pool.get().setState(success=True, actName=actName.click, cssStr=cssStr,index=index,datas=elementName)
         else:
-
             return self.pool.get().setState(success=False, actName=actName.click, cssStr=cssStr,errType=responseErr.elementNotFind,index=index)
     def find_message_apparent(self, cssStr, key="", mode='single', timeOut=10,index=0):
         """

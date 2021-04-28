@@ -1,4 +1,14 @@
-
+class A:
+    name='张三'
+    def __init__(self):
+        self.age=1
+    pass
+if __name__ == '__main__':
+    a=A()
+    b=A()
+    A.name='力达'
+    print(a.age)
+    print(b.age)
 
 # def test(a=1,b=2):
 #     print(a)

@@ -1,7 +1,5 @@
 import socket
-
 from selenium.common.exceptions import WebDriverException
-
 from _xhr_tool._annotate import singleObj
 from _xhr_tool._utils import relpath
 from selenium import webdriver
@@ -10,6 +8,9 @@ from selenium.webdriver.chrome.options import Options
 from _xhr_tool.chromeRobot.chromeConncet.src.downLoadChromeDriver import ChromeDriverDownloader, \
     MyChromeDriverDownloader
 from _xhr_tool.chromeRobot.chromeConncet.src.single_chrome_servlet import chrome_browser_open
+import configparser
+from subprocess import Popen
+import subprocess
 @singleObj
 class ChormeDiver:
     chromeDriverPath = relpath('../resource/chromedriver.exe')
@@ -18,11 +19,16 @@ class ChormeDiver:
         #判断浏览器是否打开，如果没有打开则关闭浏览
         #打开浏览器，并监听窗口，阻塞-+
         chrome_options = Options()
-
-        # chrome_options.add_argument('headless')#静默运行
-        # chrome_options.add_argument('--disable-gpu')
-        chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")#使用chrome的调试模式
-
+        config= configparser.ConfigParser()
+        config.read(filenames=relpath('../config.ini'))
+        mode=config["chrome_running_mode"]['mode']
+        if mode=='silence_running':
+            chrome_options.add_argument('headless')#静默运行
+            chrome_options.add_argument('--disable-gpu')
+        elif mode=='debug_running':
+            chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")#使用chrome的调试模式
+        else:
+            raise ValueError("配置文件的配置信息出错:未找到该模式————"+mode)
         chrome_driver =self.chromeDriverPath#用chrome的驱动
         driver=None
         try:
@@ -37,7 +43,6 @@ class ChormeDiver:
         self.driver=driver
     def get_driver(self):
         return self.driver
-
     def _net_is_used(self,port, ip='127.0.0.1'):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
@@ -49,8 +54,7 @@ class ChormeDiver:
             print('%s:%d is unused' % (ip, port))
             return False
     def openChrome(self):
-        # self.net_is_used(9222)
         chrome_browser_open()
 if __name__ == '__main__':
   d=ChormeDiver().get_driver()
-  print(d.current_url)
+  print(d.get('https://www.baidu.com/'))
