@@ -66,14 +66,7 @@ goto subfun
 
 
 :initfun
-echo 正在进行初始化中...
-set/p  name=  请输入name：
-   git config --global user.name "%name%"
-set/p  email=  请输入email：
-   git config --global user.email "%email%"
- git init
-set/p giturl= git初始化已经完成，请输入仓库地址：
-  git remote add origin %giturl%
-echo 初始化已完成
-cls  
+set/p giturl= 请输入github上的网址：(如：https://github.com/jhfwb/-.git)
+  git clone %giturl%
+echo 复制成功，请正常上传
 goto selectAll

@@ -22,7 +22,8 @@ class Aaicaigou:
 
     @chrome_robot_excute
     def web(self):
-        Action().initWeb(url='https://b2b.baidu.com/').\
+        HigherAction().initWeb(url='https://b2b.baidu.com/').\
+            click(cssStr='.ivu-icon.ivu-icon-ios-close',ignoreErr=True).\
             key_input(cssStr=".ivu-input", text=self.key_word, isClear=True). \
             click(cssStr=".search-btn"). \
             jumpBrowserTab(index=-1).excute()
@@ -68,7 +69,6 @@ class Aaicaigou:
         print('运行结束')
     @chrome_datas_catch
     def dataSave(self,datas):
-
         # 1.将此数据保存到爬虫配置文件中。
         obj={}
         for saveCsvHead in self.saveCsvHeads:
@@ -78,7 +78,7 @@ class Aaicaigou:
         obj1['公司']=obj.get('公司名')
         obj1['地址']=obj.get('地址')
         obj1['关键词']=self.key_word
-        obj1['爬虫网'] = '爱采购'
+        obj1['数据来源'] = '爱采购'
         obj1['reliability'] = 1
         if self.sqlOption.insert(table='company',objDict=obj1):
             tool().print('保存数据到表company_成功:'+str(obj1),fontColor='green')
@@ -102,7 +102,7 @@ class Aaicaigou:
             else:
                 tool().print('保存数据到表customers_失败:'+str(obj2),fontColor='red')
 if __name__ == '__main__':
-    arr=['高强涤纶','涤纶工业丝','胶管','吊装带','土工格栅','软管','特斯林','宠物带','安全带','安全绳','绳缆','涂层布','打包带','拖车带','消防水带','农用水带']
+    arr=['高强涤纶','缆绳','捆绑带','土工格杀','涤纶工业丝','胶管','吊装带','土工格栅','软管','特斯林','宠物带','安全带','安全绳','绳缆','涂层布','打包带','拖车带','消防水带','农用水带','打包带']
     chromeFactory = ChromeFactory()
     # chromeFactory.register(Aaicaigou('高强涤纶'))
     # map(lambda x:chromeFactory.register(Aaicaigou(x)),arr)

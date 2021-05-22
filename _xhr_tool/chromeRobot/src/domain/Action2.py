@@ -96,7 +96,6 @@ class Action:
             after_func=dict_func.get('after_func'),after_func_args=dict_func.get('after_func_args'),meta=dict_meta)
         )
     def clickXY(self,x=0,y=0):
-
         func = MyOption().clickXY
         self._args()
         return self

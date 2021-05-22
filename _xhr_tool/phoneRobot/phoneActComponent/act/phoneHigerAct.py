@@ -23,10 +23,9 @@ class PhoneHigherAct:
             pass
 
         pass
-    def sendMessage(self,phone='',message='',isSend=False):
+    def sendMessage(self,phone='',message='',isSend=False,sendedPhones=[]):
         # type:(str,str,bool) -> tuple
         """
-
         负责编辑短信，并发送短信。定制软件
         eg:
         :param phone: 发送短信的手机号
@@ -35,6 +34,9 @@ class PhoneHigherAct:
         :return: tuple 返回(电话,内容)
         """
         #判断phone与message是否合法。
+        if phone in sendedPhones:
+            tool().print(s='该手机号码:'+str(phone)+'已经发送过!')
+            return
         phone=str(phone)
         message=str(message)
         self._baseAct.press('home', note="点击home键")

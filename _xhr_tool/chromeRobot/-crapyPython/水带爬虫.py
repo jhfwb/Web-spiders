@@ -62,6 +62,9 @@ class Cccf_crapy:
 
 if __name__ == '__main__':
     chromeFactory = ChromeFactory()
-    chromeFactory.register(Cccf_crapy)
+    chromeFactory.register(Cccf_crapy())
+    # datas=CsvTool().optionCsv(path=Cccf_crapy.savePath, mode='r')
+    # for data in datas:
+    #     print(data['公司名称'])
 
 

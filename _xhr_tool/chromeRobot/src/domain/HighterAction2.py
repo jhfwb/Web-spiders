@@ -170,14 +170,10 @@ class HigherAction(Action):
         def _select(result):
             if result.success:
                 if action1!=None:
-
                     action1.excuteRightNow(isSave=False)
             else:
                 if action2!= None:
-
                     action2.excuteRightNow(isSave=False)
-
-
         self.connectLastBackFunction(after_func=_select)
         return self
 if __name__ == '__main__':

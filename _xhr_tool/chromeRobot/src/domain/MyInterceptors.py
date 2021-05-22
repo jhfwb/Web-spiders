@@ -22,12 +22,23 @@ class SaveFindDatas(ExcuteInterceptor):# 保存find方法的。
     def intercept_after_excute(self, fuel:ExcuteFuel):
         # 导入模块
         if fuel.get_meta().get('act')=='save':
-            if self.saveObj!={}:
-                if fuel.get_meta().get('err') != None and fuel.get_meta().get('err') == True:
-                    # 错误打印出来：
-                    tool().print('保存错误:该页面爬取失败:' +str(self.saveObj))#!!!xhr建议此处保存在错误日记中
-                else:
-                    DecoratorEngine().excuteDecorator(obj=self.chromeFactory.user,decoratorName='@chrome_datas_catch',args=[self.saveObj])
+            # print(self.saveObj)
+            DecoratorEngine().excuteDecorator(obj=self.chromeFactory.user, decoratorName='@chrome_datas_catch',
+                                              args=[self.saveObj])
+            if self.saveObj=={} or (fuel.get_meta().get('err') != None and fuel.get_meta().get('err') == True):
+                DecoratorEngine().excuteDecorator(obj=self.chromeFactory.user, decoratorName='@chrome_datas_catch',
+                                                  args=[{}])
+            else:
+                DecoratorEngine().excuteDecorator(obj=self.chromeFactory.user, decoratorName='@chrome_datas_catch',
+                                                  args=[self.saveObj])
+            # if self.saveObj!={}:
+            #     if fuel.get_meta().get('err') != None and fuel.get_meta().get('err') == True:
+            #         # 错误打印出来：
+            #         tool().print('保存错误:该页面爬取失败:' +str(self.saveObj))#!!!xhr建议此处保存在错误日记中
+            #     else:
+            #         DecoratorEngine().excuteDecorator(obj=self.chromeFactory.user,decoratorName='@chrome_datas_catch',args=[self.saveObj])
+            # else:
+
             self.saveObj={}
         if fuel.get_meta().get('catchDate') != None:
             if fuel.get_meta().get('catchDate'):
@@ -68,6 +79,9 @@ class ActionIterceptor(ExcuteInterceptor):# 保存find方法的。
                 else:
                     fuel.setFuel()#将次方法重置.重置之后，则不会再执行该方法
     def intercept_after_excute(self, fuel:ExcuteFuel):
+        # if fuel.get_func_kwargs().get('cssStr')=='.sup-ie-company-header-child-1 span:nth-child(4)':
+        #     print('抓到错误')
+        #     print(fuel)
         response=fuel.get_func_result()
         if fuel.get_meta().get('ignoreErr')==True:
             pass
