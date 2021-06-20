@@ -102,7 +102,11 @@ class Aaicaigou:
             else:
                 tool().print('保存数据到表customers_失败:'+str(obj2),fontColor='red')
 if __name__ == '__main__':
-    arr=['高强涤纶','缆绳','捆绑带','土工格杀','涤纶工业丝','胶管','吊装带','土工格栅','软管','特斯林','宠物带','安全带','安全绳','绳缆','涂层布','打包带','拖车带','消防水带','农用水带','打包带']
+    arr=['压膜带','高强涤纶','渔网','缆绳','捆绑带','滤布','土工布',
+         '涤纶工业丝','胶管','吊装带','土工格栅',
+         '软管','特斯林','宠物带','安全带','安全绳',
+         '绳缆','涂层布','打包带','拖车带','消防水带','农用水带','打包带'
+        ,'绳缆','箱包布','遮阳布','帘子线','高强缝纫线','蓬盖布']
     chromeFactory = ChromeFactory()
     # chromeFactory.register(Aaicaigou('高强涤纶'))
     # map(lambda x:chromeFactory.register(Aaicaigou(x)),arr)

@@ -23,6 +23,15 @@ class PhoneHigherAct:
             pass
 
         pass
+    def addWeiXinPhone(self,phone='',addMessage='',isAdd=False):
+        self._baseAct.press('home', note="点击home键")
+        self._baseAct.startApp('com.tencent.mm', note="点击微信")
+        self._baseAct.click(0.378, 0.069)
+        self._baseAct.click(0.936, 0.071)
+        self._baseAct.send_keys(0.936, 0.071,message='13805980379')
+
+
+
     def sendMessage(self,phone='',message='',isSend=False,sendedPhones=[]):
         # type:(str,str,bool) -> tuple
         """
@@ -64,7 +73,7 @@ class PhoneHigherAct:
 if __name__ == '__main__':
     print('——————————开始测试——————————')
     device=PhoneConnectAssistant().usbConncet()
-    device.send_keys("00000")
+    device.addWeiXinPhone()
     # PhoneAct.startApp(device,'com.android.gallery3d')# 打开app程序，打开图库
     #
     # PhoneAct.click(device,100,100)

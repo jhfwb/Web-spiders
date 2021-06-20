@@ -10,5 +10,5 @@ def log(func):
         if kwargs.get('note')!=None:
             tool().print(kwargs.get('note'))
             kwargs.pop('note')
-        func(*args, **kwargs)
+        return func(*args, **kwargs)
     return log1 # 返回需要执行的新的方法

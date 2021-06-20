@@ -20,7 +20,7 @@ class ChormeDiver:
         #打开浏览器，并监听窗口，阻塞-+
         chrome_options = Options()
         config= configparser.ConfigParser()
-        config.read(filenames=relpath('../config.ini'))
+        config.read(filenames=relpath('../config.ini'),encoding='utf-8')
         mode=config["chrome_running_mode"]['mode']
         if mode=='silence_running':
             chrome_options.add_argument('headless')#静默运行
@@ -37,7 +37,7 @@ class ChormeDiver:
             arr=str(e).split('Current browser version is ')
             print('当前谷歌浏览器版本号为:'+arr[1]+':与ChormeDriver版本号不匹配')
             print('...正在下载匹配的版本号...')
-            MyChromeDriverDownloader().downloadChromeDriverByVersion(versionID=arr[1],saveDirPath='../resource')
+            MyChromeDriverDownloader().downloadChromeDriverByVersion(versionID=arr[1],saveDirPath=relpath('../resource'))
             print('chromeDriver.exe下载并解压成功!正在重新运行谷歌连接器')
             driver = webdriver.Chrome(chrome_driver, chrome_options=chrome_options)
         self.driver=driver

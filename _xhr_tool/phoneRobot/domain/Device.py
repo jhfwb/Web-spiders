@@ -31,5 +31,6 @@ class _phoneAct:#动作域
 if __name__ == '__main__':
     # Device().act.
     # device.act.base.startApp('com.android.gallery3d')
-    tu=Device().act.higher.sendMessage(phone='13805980379',message='你好')
+    tu=Device().act.base.click_byName(name='添加到通讯录1')
+    print(tu)
     # 写一个方法。将字符串写入到指定文本中。

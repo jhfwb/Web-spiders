@@ -130,6 +130,7 @@ class Action:
         """
         根据css点击css的位置
         :param cssStr:  {str} 输入框的select选择器。
+        loadNewPage: 是否会产生新的页面，如果会，请选择是
         当发生错误的时候的执行方案:
         ignore: 无视错误，继续执行。
         reStart_method: 重新开始本方法

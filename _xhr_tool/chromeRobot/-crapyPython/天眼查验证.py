@@ -1,3 +1,4 @@
+import time
 from _utils.RUtils import tool
 
 from _xhr_tool._utils import relpath
@@ -28,10 +29,20 @@ class Tianyancha:
         # HigherAction().find(cssStr='.phone',key='电话',mode='multiple').excute(isSave=True)
     @chrome_robot_excute
     def web(self):
+        self._stopsign=-1
+        def _isStop(resp,self_stopsign):
+            if resp.datas=='我们只是确认一下你不是机器人，':
+                time.sleep(10)
+            else:
+                self_stopsign._stopsign=1
+        #判断是不是进入机器人状态
+        while self._stopsign==-1:
+            HigherAction().jumpBrowserTab(index=-1).find(cssStr='.captcha-title',catchDate=False,after_func=_isStop,after_func_args=[self]).\
+                excuteBlock(isSave=False)
         #取出所有公司名称，然后逐个验证
         HigherAction().jumpBrowserTab(index=-1).\
             key_input(cssStr="input[type='search']",text=self.company).\
-            click(cssStr='.input-group-btn').\
+            click(cssStr='.input-group-btn',loadNewPage=True).\
             jumpBrowserTab(index=-1).\
             click(cssStr='.search-result-single em',index=0,loadNewPage=True).\
             jumpBrowserTab(index=-1). \
@@ -86,12 +97,10 @@ class Tianyancha:
                 sqlOption.update_obj(table='company',obj =obj,uniqueCondition=[('公司',self.company)])
                 tool().print('保存数据成功:' + str(obj))
             except Exception:
-
                 obj = self.sqlOption.getTableDict(table='company')
                 obj['数据状态'] = 'bug'
                 sqlOption.update_obj(table='company', obj=obj, uniqueCondition=[('公司', self.company)])
                 tool().print('出现bug，已经重新定义该数据')
-
         else:#相似度不够
             obj=self.sqlOption.getTableDict(table='company')
             obj['数据状态']='天眼查已查证_相似度不足'

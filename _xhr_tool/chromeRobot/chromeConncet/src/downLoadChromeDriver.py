@@ -28,6 +28,8 @@ class ChromeDriverDownloader:
         :param saveDirPath: 被保存的文件夹路径，可以是绝对路径或者相对路径
         :return:
         """
+        print('以下是下载链接:')
+        print(download_url)
         file = requests.get(download_url)
         if saveDirPath!='':
             saveDirPath=relpath(saveDirPath)
@@ -83,6 +85,8 @@ class MyChromeDriverDownloader(ChromeDriverDownloader):
         selectVersionId_5=[]
         versionIDs=versionID.split('.')
         driverVersions=self.getVersionsDict(self.url)
+        if len(driverVersions)==0:
+            raise ValueError('无法从'+self.url+'爬取到当前谷歌版本号！请确认该网站可以正确登录！')
         for key,value in driverVersions.items():
             if len(versionIDs)>=1 and value.startswith(versionIDs[0]) :
                 selectVersionId_1.append(value)

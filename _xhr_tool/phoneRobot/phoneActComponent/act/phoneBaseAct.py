@@ -1,6 +1,8 @@
 import os
 import time
 from uiautomator2 import Device
+from uiautomator2.exceptions import XPathElementNotFoundError
+
 from _xhr_tool._utils.RUtils import tool
 from _xhr_tool.phoneRobot.phoneActComponent.logger import log
 
@@ -24,6 +26,7 @@ class PhoneBaseAct:#本身也属于设备
         """
         from _xhr_tool.phoneRobot import Device
         return Device(device=device)
+
 
     @log
     def startApp(self,name="",stop=False):
@@ -65,7 +68,25 @@ class PhoneBaseAct:#本身也属于设备
         self._device.click(x,y)
         self.delay(sleeptime)
 
-
+    @log
+    def click_byName(self, name="",sleeptime=0.1):
+        """
+        根据名称点击对应元素
+        :parma device 执行该操作的手机对象。通常是由usbConnect产生。
+        :parma name 其中name为app的名称，如果不知道app对应的name，可以通过调试debug()方法获取app软件的名称
+        具体方法是这样的：连接好weditor后，然后点击进入一个软件，软件中一个package。里面的值就是name的值
+        """
+        print('开始运行')
+        a=self._device.xpath('//*[@text="'+name+'"]')
+        # self.delay(sleeptime)
+        if a.exists==False:
+            return False
+        else:
+            try:
+                a.click()
+                return True
+            except XPathElementNotFoundError:
+                return False
     @log
     def press(self,key,sleeptime=0.1):
         self._device.press(key)
