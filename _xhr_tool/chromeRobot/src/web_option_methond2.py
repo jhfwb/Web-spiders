@@ -118,6 +118,7 @@ class MyOption:
                     i=0
                     while True:
                         if len(self.driver.window_handles) - num == 1:
+                            element.click()
                             break
                         i = i + 1
                         if i == timeOut:
