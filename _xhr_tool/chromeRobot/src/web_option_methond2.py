@@ -111,19 +111,20 @@ class MyOption:
         if  self._waitElement(cssStr,timeOut) == True:
             element=self._get_elements_by_css_selector(cssStr=cssStr,timeOut=timeOut)[index]
             elementName=element.text.strip()
+            _i=0
             try:
                 if loadNewPage:
                     num=len(self.driver.window_handles)
                     element.click()
-                    i=0
-                    while True:
-                        if len(self.driver.window_handles) - num == 1:
-                            element.click()
-                            break
-                        i = i + 1
-                        if i == timeOut:
+                    while len(self.driver.window_handles) - num==0:
+                        _i = _i + 1
+                        if _i == timeOut:
                             break
                         time.sleep(1)
+                        if len(self.driver.window_handles) - num == 0:
+                            element.click()
+                            break
+
                 else:
                     element.click()
             except ElementClickInterceptedException: #该元素被遮挡,

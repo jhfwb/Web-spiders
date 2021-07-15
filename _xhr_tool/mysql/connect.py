@@ -27,6 +27,7 @@ class MySqlOptions:
 
     def find_tables(self,table='',joinConditions=[],columns=[],conditions=[], sort='', limit=1, ):
         """
+        查找数据
         option.find_tables(table='messages',joinConditions=[('customers',('messages.客户id','customers.id')),],columns=[])
         :param table:
         :param joinConditions:[('tableName1',(主表属性,从表属性),...),('tableName2',(主表属性,从表属性),...)]
@@ -86,7 +87,7 @@ FROM `""" + table + """`
         except IndexError:
             raise ValueError('conditions参数异常：请确保如下方式进行__conditions=[(id,1),(name=张三)]')
         if columnsStr=="":
-            raise ZeroDivisionError("columnS参数为空,请务必赋值")
+            raise ZeroDivisionError("columns参数为空,请务必赋值")
         sql_where=""
         if conditionsStr.strip()!="":
             sql_where="WHERE "+conditionsStr
@@ -165,7 +166,9 @@ VALUE ("""+value+""");
         sql_where = ""
         if conditionsStr.strip() != "":
             sql_where = "WHERE " + conditionsStr
+
         a=self.find_tables(table=table,conditions=uniqueCondition)
+        print(a)
         if len(a)!=2:
             raise KeyError('uniqueCondition:'+str(uniqueCondition)+';该键值，不是个唯一值，或者该值不存在。')
         setStr='SET '

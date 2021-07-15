@@ -80,7 +80,8 @@ class tool:
             sys._getframe(1).f_code.co_name) + "_____LINE:" + str(sys._getframe(1).f_lineno)
         # 3.打印位置
         self.printColor(s=line,fontColor=siteColor,end="")
-        self.printColor()
+        print('\033[0m')
+        # self.printColor()
         if path!=None:
             if os.path.isfile(path):
                 pass

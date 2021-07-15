@@ -8,7 +8,13 @@ from _xhr_tool.excuteEngine.Engine import ExcuteFuel
 class HigherAction(Action):
     def __init__(self):
         super().__init__()
-
+    def endAction(self):
+        # 当上一个动作出错的时候，去终止整个Action
+        def _select(result):
+            if result.success:
+                return self.find(cssStr="@@#$%%", key="@@#$%%", catchDate=False, ignoreErr=False).excuteRightNow(isSave=False)
+        self.connectLastBackFunction(after_func=_select)
+        return self
     # 此方法！！！！
     def click_all(self, cssStr="",before_click_func=lambda x:True,before_click_func_args=[],func=lambda x:x,func_args=[], click_order='random' or 'sequential'):
         """
@@ -156,8 +162,31 @@ class HigherAction(Action):
         """
         random.shuffle(self._bufferActs)
         return self
+    def selcetAction_by_backFunc(self,action1:Action=None,action2:Action=None):
+        """
+        当上一个action执行成功时候执行action1，执行失败的时候执行action2
+        action1与action2
+        :param action1:
+        :param action2:
+        :return:
+        """
+        if action1 == self:
+            raise ValueError("该参数action1指向的对象不允许是调用该方法的对象:请传入一个新创建Action")
+        if action1 == self:
+            raise ValueError("该参数action2指向的对象不允许是调用该方法的对象:请传入一个新创建Action")
+
+        def _select(result):
+            if result.success:
+                if action1 != None:
+                    action1.excuteRightNow(isSave=False)
+            else:
+                if action2 != None:
+                    action2.excuteRightNow(isSave=False)
+        self.connectLastBackFunction(after_func=_select)
+        return self
     def selcetAction(self,action1:Action=None,action2:Action=None):
         """
+        当上一个action执行成功时候执行action1，执行失败的时候执行action2
         action1与action2
         :param action1:
         :param action2:

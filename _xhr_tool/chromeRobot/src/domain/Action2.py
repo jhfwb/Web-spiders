@@ -88,7 +88,6 @@ class Action:
             elif key in args_arr:
                 dict_args.setdefault(key,values)
             else:
-
                 dict_meta.setdefault(key,values)
         self._bufferActs.append(self.excuteEngine.getNewFuel().setFuel(
             func=dict_func.get('func'), func_kwargs=dict_args,
@@ -128,6 +127,7 @@ class Action:
         return self
     def click(self,cssStr="",index=0,loadNewPage=False,ignoreErr=False,after_func=lambda x:x,after_func_args=[],before_func=lambda:True,before_func_args=[]):
         """
+        1.页面跳转(url)
         根据css点击css的位置
         :param cssStr:  {str} 输入框的select选择器。
         loadNewPage: 是否会产生新的页面，如果会，请选择是
@@ -144,6 +144,7 @@ class Action:
         func = MyOption().scroll_top_to_button
         self._args()
         return self
+
     def find(self,ignoreErr=True,cssStr="",key="请为key赋值",mode="single" or "multiple",index=0,timeOut=3,catchDate=False,after_func=lambda x:x,after_func_args=[],before_func=lambda:True,before_func_args=[]):
         """
         根据css点击css的位置

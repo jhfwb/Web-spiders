@@ -29,7 +29,8 @@ class PhoneHigherAct:
         self._baseAct.click(0.378, 0.069)
         self._baseAct.click(0.936, 0.071)
         self._baseAct.send_keys(0.936, 0.071,message='13805980379')
-
+    def callPhone(self,phone='',isCall=True):
+        pass
 
 
     def sendMessage(self,phone='',message='',isSend=False,sendedPhones=[]):

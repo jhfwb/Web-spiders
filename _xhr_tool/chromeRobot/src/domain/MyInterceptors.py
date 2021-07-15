@@ -22,9 +22,8 @@ class SaveFindDatas(ExcuteInterceptor):# 保存find方法的。
     def intercept_after_excute(self, fuel:ExcuteFuel):
         # 导入模块
         if fuel.get_meta().get('act')=='save':
-            # print(self.saveObj)
-            DecoratorEngine().excuteDecorator(obj=self.chromeFactory.user, decoratorName='@chrome_datas_catch',
-                                              args=[self.saveObj])
+            # DecoratorEngine().excuteDecorator(obj=self.chromeFactory.user, decoratorName='@chrome_datas_catch',
+            #                                   args=[self.saveObj])
             if self.saveObj=={} or (fuel.get_meta().get('err') != None and fuel.get_meta().get('err') == True):
                 DecoratorEngine().excuteDecorator(obj=self.chromeFactory.user, decoratorName='@chrome_datas_catch',
                                                   args=[{}])
@@ -81,7 +80,7 @@ class ActionIterceptor(ExcuteInterceptor):# 保存find方法的。
     def intercept_after_excute(self, fuel:ExcuteFuel):
         # if fuel.get_func_kwargs().get('cssStr')=='.sup-ie-company-header-child-1 span:nth-child(4)':
         #     print('抓到错误')
-        #     print(fuel)
+        #     print(fuel)T
         response=fuel.get_func_result()
         if fuel.get_meta().get('ignoreErr')==True:
             pass

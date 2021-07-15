@@ -1,13 +1,15 @@
 import time
 from _utils.RUtils import tool
 
+import pymysql
+
 from _xhr_tool._utils import relpath
 from _xhr_tool._utils.arr_caculate import remove_repeat_arr_inner_dict
 from _xhr_tool.csv_tools._utils.CsvTool import CsvTool
 import difflib
 from _xhr_tool.chromeRobot.src._chromeRobot_tool.dataUtils import DataUtils
 from _xhr_tool.chromeRobot.src._chromeRobot_tool.decoratorUtils import DecoratorEngine
-from _xhr_tool.chromeRobot.src._decorator._decorator import chrome_robot_excute, chrome_datas_catch
+from _xhr_tool.chromeRobot.src._decorator import chrome_robot_excute, chrome_datas_catch
 from _xhr_tool.chromeRobot.src.domain.Action2 import Action
 from _xhr_tool.chromeRobot.src.domain.ChromeFactory import ChromeFactory
 from _xhr_tool.chromeRobot.src.domain.HighterAction2 import HigherAction
@@ -18,7 +20,7 @@ class Tianyancha:
     #初始化
     def __init__(self,company,sqlOption):
         self.company=company
-        self.sqlOption=sqlOption
+        self.sqlOption:MySqlOptions=sqlOption
         pass
     # @chrome_robot_excute
     def test(self):
@@ -30,6 +32,15 @@ class Tianyancha:
     @chrome_robot_excute
     def web(self):
         self._stopsign=-1
+        def _dataIsExist(resp):
+            a=self.sqlOption.find(table='company',columns=['公司','数据状态'],conditions=[('公司',resp.datas)])
+            if len(a)==0:
+                resp.success=True
+            if a[0]:
+                if a[0][1]=='天眼查已查证':
+                    resp.success=False
+                else:
+                    resp.success = True
         def _isStop(resp,self_stopsign):
             if resp.datas=='我们只是确认一下你不是机器人，':
                 time.sleep(10)
@@ -42,10 +53,11 @@ class Tianyancha:
         #取出所有公司名称，然后逐个验证
         HigherAction().jumpBrowserTab(index=-1).\
             key_input(cssStr="input[type='search']",text=self.company).\
-            click(cssStr='.input-group-btn',loadNewPage=True).\
+            click(cssStr='.input-group-btn').\
             jumpBrowserTab(index=-1).\
-            click(cssStr='.search-result-single em',index=0,loadNewPage=True).\
-            jumpBrowserTab(index=-1). \
+            find(cssStr="a.name", key="客户").\
+            click(cssStr='a.name',index=0,loadNewPage=True).\
+            jumpBrowserTab(index=-1).\
             find(cssStr=".name>.link-click", key="客户",catchDate=True,ignoreErr=False). \
             find(cssStr=".name", key="公司", catchDate=True). \
             find(cssStr=".auto-folder", key="地址",catchDate=True). \
@@ -96,11 +108,15 @@ class Tianyancha:
             try:
                 sqlOption.update_obj(table='company',obj =obj,uniqueCondition=[('公司',self.company)])
                 tool().print('保存数据成功:' + str(obj))
-            except Exception:
-                obj = self.sqlOption.getTableDict(table='company')
-                obj['数据状态'] = 'bug'
+            except pymysql.err.IntegrityError:#(错误重复数据:假设采集的公司名称为‘福建百宏’，但是在天眼查中查到的名称为‘百宏集团’。而'百宏集团已经被定义，则·会出现此错误')
+                obj['数据状态'] = 'del'
+                obj['公司']=self.company
                 sqlOption.update_obj(table='company', obj=obj, uniqueCondition=[('公司', self.company)])
-                tool().print('出现bug，已经重新定义该数据')
+                tool().print('此数据重复，已将该数据状态放置丢弃:' + str(obj),fontColor='red')
+            #     obj = self.sqlOption.getTableDict(table='company')
+            #     obj['数据状态'] = 'bug'
+            #     sqlOption.update_obj(table='company', obj=obj, uniqueCondition=[('公司', self.company)])
+            #     tool().print('出现bug，已经重新定义该数据')
         else:#相似度不够
             obj=self.sqlOption.getTableDict(table='company')
             obj['数据状态']='天眼查已查证_相似度不足'
@@ -111,6 +127,7 @@ if __name__ == '__main__':
     sqlOption = MySqlOptions(host='localhost', user='root', password='512124632', database='crapydatabase')
     print(sqlOption.getTableDict(table='company'))
     datas=sqlOption.find_tables(table='company',conditions=[('数据状态','未知数据')],columns=['公司'])
+    # datas=sqlOption.find_tables(table='company',conditions=[('公司','北京兴盛佳业幕布遮阳技术有限公司')],columns=['公司'])
     # 需天眼查查验
     for data in datas[1:]:
         chromeFactory.register(Tianyancha(data[0],sqlOption))
