@@ -10,6 +10,7 @@ from _xhr_tool.chromeRobot.src._abstract_class.engine import ExcuteEngine_abstra
 from _xhr_tool.chromeRobot.src._base_class.Pool import ObjsPool
 import importlib
 # 元类
+# 错误等级:重新执行方法，重新执行
 # https://blog.csdn.net/weixin_40907382/article/details/79564209?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
 from _xhr_tool.excuteEngine.Component import ExcuteInterceptor, Interceptor, PutExcuteFuelInterceptor, \
     BackFuelInterceptor
@@ -30,7 +31,8 @@ class ExcuteEngine(ExcuteEngine_abstract):
     """执行队列,本质是一个list，从头部开始执行，执行到末尾"""
     state='unexecuted'or 'excuting' or 'wait'#1.执行中 2.等待执行中（阻塞） 3.未启动=0
     """1.excuting执行中 2.wait等待执行中（阻塞） 3.unexecuted未启动"""
-    def __init__(self,historyExcuteNum=10,configFiltPath=''):
+    def __init__(self,historyExcuteNum=10,configFiltPath='',erro=''):
+        #当出现错误的时候,会有不同的应对方式，1.不做应对，抛出异常。2.重新执行此方法。3.清空执行栈的方法
         self._historyExcuteNum=historyExcuteNum
         self._excuteFuelPool=ExcuteFuelPool(excuteEngine=self)#初始化线程池
         self._initInterceptors()

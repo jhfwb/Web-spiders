@@ -135,7 +135,7 @@ VALUE ("""+value+""");
     def getTableDict(self,table=''):
         """
         获得表格的字典
-        :param table:
+        :param table: 数据库中表的名称
         :return:
         """
         self.cur.execute(query='DESC '+table+';')
@@ -154,9 +154,9 @@ VALUE ("""+value+""");
     def update_obj(self,table='',obj={},uniqueCondition=[]):
         """
         根据虚拟对象，更新数据库中的某一条数据。更新的时候需要传入uniqueID。该数据的唯一标识字段名
-        :param table:
-        :param obj:
-        :param uniqueID:
+        :param table: 数据库中表的名称
+        :param obj: 更新的表的对象
+        :param uniqueCondition: 筛选的唯一条件
         :return:
         """
         try:

@@ -46,6 +46,7 @@ class MyOption:
 ####################################################################################################################
     # 根据选择器，点击。点击完毕后，如果有添加新的页面，则会切换到新的页面
     def scroll_top_to_button(self,cssStr="",elemntName="",index=0,timeOut=20):
+        assert 1/0
         interval_step = 30
         interval_time = 0.001
         wait_time=timeOut#等待时间

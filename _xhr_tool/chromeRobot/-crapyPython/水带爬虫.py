@@ -8,11 +8,14 @@ from _xhr_tool.chromeRobot.src._decorator._decorator import chrome_robot_excute,
 from _xhr_tool.chromeRobot.src.domain.Action2 import Action
 from _xhr_tool.chromeRobot.src.domain.ChromeFactory import ChromeFactory
 from _xhr_tool.chromeRobot.src.domain.HighterAction2 import HigherAction
+from _xhr_tool.mysql.connect import MySqlOptions
+
 
 class Cccf_crapy:
     savePath=relpath('../datasStore/水带厂/cccf2.csv')
     cycleTimes=-1
     saveCsvHeads=['公司名','联系人','电话','地址', '城市', 'qq', '微信','邮箱','_url']
+    sqlOption = MySqlOptions(host='localhost', user='root', password='512124632', database='crapydatabase')
     #初始化
     @chrome_robot_excute
     def web(self):
@@ -33,6 +36,7 @@ class Cccf_crapy:
                     return True
                 else:
                     return False
+
             HigherAction().jumpBrowserTab(index=-1).\
                 find(cssStr="td[valign='top'] tbody tr:nth-child(2) table td>div>div:nth-child(3)>div:nth-child(4)",
                      key="公司名称", mode='multiple', catchDate=True). \
